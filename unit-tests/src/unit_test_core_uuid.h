@@ -1,0 +1,13 @@
+#ifndef UNIT_TEST_CORE_UUID_H
+#define UNIT_TEST_CORE_UUID_H
+
+#include <unit_tests.h>
+
+class UnitTestCoreUuid : public UnitTestBase {
+    public:
+        UnitTestCoreUuid();
+        virtual void init();
+        virtual bool run();
+};
+
+#endif // UNIT_TEST_CORE_UUID_H

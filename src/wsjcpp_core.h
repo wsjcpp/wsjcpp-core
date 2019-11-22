@@ -10,6 +10,17 @@
 
 class WSJCppCore {
     public:
+        static bool init(
+            int argc, char** argv, 
+            const std::string &sApplicationName,
+            const std::string &sApplicationVersion,
+            const std::string &sApplicationAuthor,
+            const std::string &sLibraryNameForExports
+        );
+
+        static std::string doNormalizePath(const std::string & sPath);
+        static std::string getCurrentDirectory();
+
         static long currentTime_milliseconds();
         static long currentTime_seconds();
         static std::string currentTime_forFilename();
