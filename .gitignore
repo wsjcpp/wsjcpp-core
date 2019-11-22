@@ -1,3 +1,6 @@
+tmp/*
+wsjcpp-core
+
 # Prerequisites
 *.d
 
