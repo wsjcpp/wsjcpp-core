@@ -1,5 +1,7 @@
 tmp/*
 wsjcpp-core
+.vscode/*
+*.log
 
 # Prerequisites
 *.d

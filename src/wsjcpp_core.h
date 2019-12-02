@@ -80,10 +80,12 @@ class WSJCppColorModifier {
 
 class WSJCppLog {
     public:
-        static std::string g_LOG_DIR;
-        static std::string g_PREFIX_LOG_FILE;
-        static std::string g_LOG_FILE;
-        static long g_LOG_START_TIME;
+        static std::string g_WSJCPP_LOG_DIR;
+        static std::string g_WSJCPP_LOG_PREFIX_FILE;
+        static std::string g_WSJCPP_LOG_FILE;
+        static long g_WSJCPP_LOG_START_TIME;
+        static std::mutex * g_WSJCPP_LOG_MUTEX;
+        static std::deque<std::string> * g_WSJCPP_LOG_LAST_MESSAGES;
         static void doLogRotateUpdateFilename(bool bForce = false);
 
         static void info(const std::string &sTag, const std::string &sMessage);
