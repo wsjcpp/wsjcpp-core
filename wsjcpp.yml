@@ -1,5 +1,5 @@
 
-wsjcpp: 1.0.0
+wsjcpp_version: v0.0.1
 cmake_cxx_standard: 11
 cmake_minimum_required: 3.0
 
