@@ -23,10 +23,13 @@ list (APPEND WSJCPP_INCLUDE_DIRS "src")
 list (APPEND WSJCPP_SOURCES "./src/main.cpp")
 list (APPEND WSJCPP_SOURCES "./src/unit_tests.h")
 list (APPEND WSJCPP_SOURCES "./src/unit_tests.cpp")
+list (APPEND WSJCPP_SOURCES "./src/unit_test_core_extract_filename.h")
+list (APPEND WSJCPP_SOURCES "./src/unit_test_core_extract_filename.cpp")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_normalize_path.h")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_normalize_path.cpp")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_uuid.h")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_uuid.cpp")
+
 
 include_directories(${WSJCPP_INCLUDE_DIRS})
 
