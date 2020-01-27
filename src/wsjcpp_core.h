@@ -48,8 +48,8 @@ class WSJCppCore {
 
         static void initRandom();
         static std::string createUuid();
-        static bool isIPv4(std::string& str);
-        static bool isIPv6(std::string& str);
+        static bool isIPv4(const std::string& str);
+        static bool isIPv6(const std::string& str);
 };
 
 

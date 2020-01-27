@@ -413,7 +413,7 @@ std::string WSJCppCore::createUuid() {
 
 // ---------------------------------------------------------------------
 
-bool WSJCppCore::isIPv4(std::string& str) {
+bool WSJCppCore::isIPv4(const std::string& str) {
     int n = 0;
     std::string s[4] = {"", "", "", ""};
     for (int i = 0; i < str.length(); i++) {
@@ -443,7 +443,7 @@ bool WSJCppCore::isIPv4(std::string& str) {
 
 // ---------------------------------------------------------------------
 
-bool WSJCppCore::isIPv6(std::string& str) {
+bool WSJCppCore::isIPv6(const std::string& str) {
     unsigned char buf[sizeof(struct in6_addr)];
     bool isValid = inet_pton(AF_INET6, str.c_str(), buf);
     return isValid;
