@@ -29,7 +29,10 @@ list (APPEND WSJCPP_SOURCES "./src/unit_test_core_normalize_path.h")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_normalize_path.cpp")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_uuid.h")
 list (APPEND WSJCPP_SOURCES "./src/unit_test_core_uuid.cpp")
-
+list (APPEND WSJCPP_SOURCES "./src/unit_test_ip_v4.h")
+list (APPEND WSJCPP_SOURCES "./src/unit_test_ip_v4.cpp")
+list (APPEND WSJCPP_SOURCES "./src/unit_test_ip_v6.h")
+list (APPEND WSJCPP_SOURCES "./src/unit_test_ip_v6.cpp")
 
 include_directories(${WSJCPP_INCLUDE_DIRS})
 

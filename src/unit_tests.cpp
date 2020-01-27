@@ -17,7 +17,7 @@ std::string UnitTestBase::name() {
 void UnitTestBase::compareS(bool &bTestSuccess, const std::string &sPoint,
     const std::string &sValue, const std::string &sExpected) {
     if (sValue != sExpected) {
-        WSJCppLog::err(TAG, sPoint + ", expeceted '" + sExpected + "', but got '" + sValue + "'");
+        WSJCppLog::err(TAG, " {" + sPoint + "} Expected '" + sExpected + "', but got '" + sValue + "'");
         bTestSuccess = false;
     }
 }
@@ -26,7 +26,7 @@ void UnitTestBase::compareS(bool &bTestSuccess, const std::string &sPoint,
 
 bool UnitTestBase::compareN(bool &bTestSuccess, const std::string &sPoint, int nValue, int nExpected) {
     if (nValue != nExpected) {
-        WSJCppLog::err(TAG, " {" + sPoint + "} Expeceted '" + std::to_string(nExpected) + "', but got '" + std::to_string(nValue) + "'");
+        WSJCppLog::err(TAG, " {" + sPoint + "} Expected '" + std::to_string(nExpected) + "', but got '" + std::to_string(nValue) + "'");
         bTestSuccess = false;
         return false;
     }
@@ -37,7 +37,7 @@ bool UnitTestBase::compareN(bool &bTestSuccess, const std::string &sPoint, int n
 
 bool UnitTestBase::compareD(bool &bTestSuccess, const std::string &sPoint, double nValue, double nExpected) {
     if (nValue != nExpected) {
-        WSJCppLog::err(TAG, " {" + sPoint + "} Expeceted '" + std::to_string(nExpected) + "', but got '" + std::to_string(nValue) + "'");
+        WSJCppLog::err(TAG, " {" + sPoint + "} Expected '" + std::to_string(nExpected) + "', but got '" + std::to_string(nValue) + "'");
         bTestSuccess = false;
         return false;
     }
@@ -48,7 +48,7 @@ bool UnitTestBase::compareD(bool &bTestSuccess, const std::string &sPoint, doubl
 
 void UnitTestBase::compareB(bool &bTestSuccess, const std::string &sPoint, bool bValue, bool bExpected) {
     if (bValue != bExpected) {
-        WSJCppLog::err(TAG, sPoint + ", expeceted '" + (bExpected ? "true" : "false") + "', but got '" + (bValue ? "true" : "false") + "'");
+        WSJCppLog::err(TAG, " {" + sPoint + "} Expected '" + (bExpected ? "true" : "false") + "', but got '" + (bValue ? "true" : "false") + "'");
         bTestSuccess = false;
     }
 }

@@ -3,7 +3,7 @@ cmake_cxx_standard: 11
 cmake_minimum_required: 3.0
 
 name: wsjcpp/wsjcpp-core
-version: v0.0.3
+version: v0.0.4
 description: Basic Utils for wsjcpp
 issues: https://github.com/wsjcpp/wsjcpp-core/issues
 repositories:
@@ -50,3 +50,7 @@ unit-tests:
       description: Check test generate uuid function
     - name: CoreExtractFilename
       description: Check function extract filenane from path
+    - name: IPv4
+      description: Check function isIPv4
+    - name: IPv6
+      description: Check function isIPv6
