@@ -6,7 +6,7 @@
 REGISTRY_UNIT_TEST(UnitTestCoreNormalizePath)
 
 UnitTestCoreNormalizePath::UnitTestCoreNormalizePath()
-    : UnitTestBase("UnitTestFallenNormalizePath") {
+    : UnitTestBase("UnitTestCoreNormalizePath") {
     //
 }
 

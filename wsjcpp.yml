@@ -29,10 +29,24 @@ distribution:
     target-file: wsjcpp_core.h
     sha1: "1d76447c6880f43f9afeca89111ec64d3574ccb7"
     type: "source-code"
+  - source-file: "src/unit_tests.cpp"
+    target-file: "unit_tests.cpp"
+    type: "unit-tests"
+    sha1: "a36d71646ddd6041346909c0481a59299f01f898"
+  - source-file: "src/unit_tests.h"
+    target-file: "unit_tests.h"
+    type: "unit-tests"
+    sha1: "a20248c9801c53519ad847aa19d80460289a5dd1"
+  - source-file: "src/unit_tests_main.cpp"
+    target-file: "unit_tests_main.cpp"
+    type: "unit-tests"
+    sha1: "81a2b3d7328575c0087fa43000b05a96e278da07"
 
 unit-tests:
-  folder: unit-tests # default
-  files:
-    - unit-tests/src/main.cpp
-    - unit-tests/src/unit_tests.h
-    - unit-tests/src/unit_tests.cpp
+  cases:
+    - name: CoreNormalizePath
+      description: Check function normalizePath
+    - name: CoreUuid
+      description: Check test generate uuid function
+    - name: CoreExtractFilename
+      description: Check function extract filenane from path
