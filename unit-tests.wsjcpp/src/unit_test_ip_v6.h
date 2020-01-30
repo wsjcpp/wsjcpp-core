@@ -1,7 +1,7 @@
 #ifndef UNIT_TEST_IP_V6_H
 #define UNIT_TEST_IP_V6_H
 
-#include <unit_tests.h>
+#include <wsjcpp_unit_tests.h>
 
 class UnitTestIPv6 : public UnitTestBase {
     public:

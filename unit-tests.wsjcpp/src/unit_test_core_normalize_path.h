@@ -1,7 +1,7 @@
 #ifndef UNIT_TEST_CORE_NORMALIZE_PATH_H
 #define UNIT_TEST_CORE_NORMALIZE_PATH_H
 
-#include <unit_tests.h>
+#include <wsjcpp_unit_tests.h>
 
 class UnitTestCoreNormalizePath : public UnitTestBase {
     public:
