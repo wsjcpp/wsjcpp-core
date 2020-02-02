@@ -28,7 +28,7 @@ distribution:
   - source-file: src/wsjcpp_core.h
     target-file: wsjcpp_core.h
     sha1: "a8a5197a0b6f6230cd8f75ee536bb590ed61125a"
-    type: "source-code"
+    type: "source-code" # todo must be header-file
   - source-file: "src/wsjcpp_unit_tests.cpp"
     target-file: "wsjcpp_unit_tests.cpp"
     type: "unit-tests"
@@ -56,3 +56,5 @@ unit-tests:
       description: Check function isIPv6
     - name: "ToUpper"
       description: "String to upper"
+    - name: "CreateUuid"
+      description: "Test generation uuids"
