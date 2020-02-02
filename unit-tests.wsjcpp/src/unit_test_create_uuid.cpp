@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestCreateUuid)
 
 UnitTestCreateUuid::UnitTestCreateUuid()
-    : UnitTestBase("UnitTestCreateUuid") {
+    : WSJCppUnitTestBase("UnitTestCreateUuid") {
 }
 
 // ---------------------------------------------------------------------

@@ -5,3 +5,7 @@
 Basic utils for wsjcpp
 
 *included helpers functions, logger and etc.*
+
+## List of function:
+
+* createUuid

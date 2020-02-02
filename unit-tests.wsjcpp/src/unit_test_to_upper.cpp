@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestToUpper)
 
 UnitTestToUpper::UnitTestToUpper()
-    : UnitTestBase("UnitTestToUpper") {
+    : WSJCppUnitTestBase("UnitTestToUpper") {
 }
 
 // ---------------------------------------------------------------------

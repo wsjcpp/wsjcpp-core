@@ -14,7 +14,7 @@ set (WSJCPP_LIBRARIES "")
 set (WSJCPP_INCLUDE_DIRS "")
 set (WSJCPP_SOURCES "")
 
-# wsjcpp-core:v0.0.4
+# wsjcpp-core:v0.0.5
 list (APPEND WSJCPP_INCLUDE_DIRS "../src")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_core.cpp")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_core.h")

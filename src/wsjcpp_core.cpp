@@ -458,6 +458,22 @@ bool WSJCppCore::isIPv6(const std::string& str) {
 }
 
 // ---------------------------------------------------------------------
+
+unsigned long WSJCppCore::convertVoidToULong(void *p) {
+    unsigned long ret = *(unsigned long *)p;
+    return ret;
+}
+
+// ---------------------------------------------------------------------
+
+std::string WSJCppCore::getPointerAsHex(void *p) {
+    std::uintptr_t i = reinterpret_cast<std::uintptr_t>(p);
+    std::stringstream stream;
+    stream << std::hex << i;
+    return "0x" + std::string(stream.str());
+}
+
+// ---------------------------------------------------------------------
 // WSJCppLog
 
 // Last log messages

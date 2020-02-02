@@ -6,7 +6,7 @@
 REGISTRY_UNIT_TEST(UnitTestCoreExtractFilename)
 
 UnitTestCoreExtractFilename::UnitTestCoreExtractFilename()
-    : UnitTestBase("UnitTestCoreExtractFilename") {
+    : WSJCppUnitTestBase("UnitTestCoreExtractFilename") {
     //
 }
 

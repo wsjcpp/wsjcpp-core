@@ -3,7 +3,7 @@
 
 #include <wsjcpp_unit_tests.h>
 
-class UnitTestCoreExtractFilename : public UnitTestBase {
+class UnitTestCoreExtractFilename : public WSJCppUnitTestBase {
     public:
         UnitTestCoreExtractFilename();
         virtual void init();

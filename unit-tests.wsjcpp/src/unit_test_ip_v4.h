@@ -3,7 +3,7 @@
 
 #include <wsjcpp_unit_tests.h>
 
-class UnitTestIPv4 : public UnitTestBase {
+class UnitTestIPv4 : public WSJCppUnitTestBase {
     public:
         UnitTestIPv4();
         virtual void init();

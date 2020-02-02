@@ -6,7 +6,7 @@
 REGISTRY_UNIT_TEST(UnitTestCoreNormalizePath)
 
 UnitTestCoreNormalizePath::UnitTestCoreNormalizePath()
-    : UnitTestBase("UnitTestCoreNormalizePath") {
+    : WSJCppUnitTestBase("UnitTestCoreNormalizePath") {
     //
 }
 

@@ -3,7 +3,7 @@
 
 #include <wsjcpp_unit_tests.h>
 
-class UnitTestCoreNormalizePath : public UnitTestBase {
+class UnitTestCoreNormalizePath : public WSJCppUnitTestBase {
     public:
         UnitTestCoreNormalizePath();
         virtual void init();

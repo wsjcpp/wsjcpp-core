@@ -7,7 +7,7 @@ REGISTRY_UNIT_TEST(UnitTestIPv4)
 
 
 UnitTestIPv4::UnitTestIPv4()
-: UnitTestBase("UnitTestIPv4") {
+: WSJCppUnitTestBase("UnitTestIPv4") {
     //
 }
 
