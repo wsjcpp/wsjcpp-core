@@ -50,10 +50,6 @@ unit-tests:
       description: Check test generate uuid function
     - name: CoreExtractFilename
       description: Check function extract filenane from path
-    - name: IpV4
-      description: Check function isIPv4
-    - name: IpV6
-      description: Check function isIPv6
     - name: "ToUpper"
       description: "String to upper"
     - name: "CreateUuid"
