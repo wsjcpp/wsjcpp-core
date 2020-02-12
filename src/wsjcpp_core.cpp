@@ -18,6 +18,7 @@
 #include <streambuf>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 
 // ---------------------------------------------------------------------
 
@@ -432,6 +433,18 @@ std::string WSJCppCore::getPointerAsHex(void *p) {
     std::stringstream stream;
     stream << std::hex << i;
     return "0x" + std::string(stream.str());
+}
+
+// ---------------------------------------------------------------------
+
+std::string WSJCppCore::extractURLProtocol(const std::string& sValue) {
+    std::string sRet = "";
+    int nPosProtocol = sValue.find("://");
+    if (nPosProtocol == std::string::npos) {
+        return sRet;
+    }
+    sRet = sValue.substr(0, nPosProtocol);
+    return sRet;
 }
 
 // ---------------------------------------------------------------------
