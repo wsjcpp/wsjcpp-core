@@ -19,4 +19,4 @@ script:
   - ./build_simple.sh
   - cd unit-tests.wsjcpp
   - ./build_simple.sh
-  - ./unit-tests
+  - ./run_unit-tests

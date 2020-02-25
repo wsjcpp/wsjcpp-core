@@ -448,6 +448,16 @@ std::string WSJCppCore::extractURLProtocol(const std::string& sValue) {
 }
 
 // ---------------------------------------------------------------------
+
+bool WSJCppCore::getEnv(const std::string& sName, std::string& sValue) {
+    if (const char* env_p = std::getenv(sName.c_str())) {
+        sValue = std::string(env_p);
+        return true;
+    }
+    return false;
+}
+
+// ---------------------------------------------------------------------
 // WSJCppLog
 
 // Last log messages

@@ -53,6 +53,7 @@ class WSJCppCore {
         static unsigned long convertVoidToULong(void *p);
         static std::string getPointerAsHex(void *p);
         static std::string extractURLProtocol(const std::string& sValue);
+        static bool getEnv(const std::string& sName, std::string& sValue);
 };
 
 
