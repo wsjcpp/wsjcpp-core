@@ -21,9 +21,9 @@ bool UnitTestCreateUuid::run() {
     std::vector<std::string> vUuids;
     for (int i = 0; i < 100; i++) {
         std::string sUuid = WSJCppCore::createUuid();
-        /*if (i < 3) {
-            Log::info(TAG, "sUuid: " + sUuid);
-        }*/
+        // if (i < 3) {
+        //    WSJCppLog::info(TAG, "sUuid: " + sUuid);
+        // }
         vUuids.push_back(sUuid);
     }
     for (int x = 0; x < 100; x++) {
