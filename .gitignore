@@ -1,5 +1,6 @@
 tmp/*
 wsjcpp-core
+.wsjcpp/*
 .vscode/*
 *.log
 
