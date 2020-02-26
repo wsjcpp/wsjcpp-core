@@ -4,7 +4,7 @@
 
 Basic utils for wsjcpp
 
-*included helpers functions, logger and etc.*
+*include helper functions, logger and etc.*
 
 ## Integrate to your project
 
@@ -19,13 +19,13 @@ Or include files:
 
 ## Logger (WSJCppLog)
 
-* Output will be collored for console, but for file color will be missing.
-* Functions is safe thread.
-* Logger have a log-rotate (every 51000 seconds / every day)
+* Output will be collored for console, but color will be missing for files.
+* Functions are safe thread.
+* Logger supports a log rotation (every 51000 seconds / every day)
 * WSJCppLog::throw_err - will be generate `throw std::runtime_error(sMessage);`
 * std::vector<std::string> WSJCppLog::getLastLogMessages() - last 50 records from log
 
-In main your need init logger first.
+In main() you need to init logger first.
 
 ```
 #include <wsjcpp_core.h>
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-And then in any place in code you can call static functions:
+And then you can call static functions anywhere in your code:
 
 ```
 #include <wsjcpp_core.h>
@@ -68,7 +68,7 @@ Example output
 
 ### doNormalizePath
 
-Normalize paths. for example: ".//../bin/some/../" -> "./../bin/"
+Normalize paths. For example: ".//../bin/some/../" -> "./../bin/"
 
 ```
 std::string sPath = WSJCppCore::doNormalizePath(".//../bin/some/../");
@@ -179,7 +179,7 @@ static bool writeFile(const std::string &sFilename, const char *pBuffer, const i
 
 ### readTextFile
 
-Reading text files to std::string
+Read text files into std::string
 ```
 std::string sContent;
 if (WSJCppCore::readTextFile("./file.txt", sContent)) {
@@ -213,10 +213,11 @@ static std::string& to_lower(std::string& str);
 
 ```
 static std::string toUpper(const std::string& str);
+```
 
 ### createUuid
 
-Generation uuid but before you need call once `WSJCppCore::initRandom();` (for example in main function)
+Generate uuid, but you need to call `WSJCppCore::initRandom();` before it (for example in main() function)
 
 ```
 WSJCppCore::initRandom(); // once in main on start
@@ -265,7 +266,7 @@ std::string sProtocol = WSJCppCore::extractURLProtocol("https://github.com/wsjcp
 
 ### getEnv
 
-Get system environments
+Get the value of a system environment variable
 ```
 std::string sValue;
 if (WSJCppCore::getEnv("PATH", sValue)) {
