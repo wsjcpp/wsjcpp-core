@@ -2,6 +2,7 @@ tmp/*
 logs/*
 unit-tests
 .wsjcpp/*
+data/empty.txt
 
 # Vim temp files
 *.swp

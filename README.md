@@ -195,6 +195,16 @@ if (WSJCppCore::removeFile("./file.txt")) {
 }
 ```
 
+### createEmptyFile
+
+Creating empty file. Will return true if file not exists and do created
+
+```
+if (WSJCppCore::createEmptyFile("./file.txt")) {
+    std::cout << "Empty file created" << std::endl;
+}
+```
+
 ### trim
 
 ```

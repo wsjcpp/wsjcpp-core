@@ -53,6 +53,8 @@ list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_uint2_hex_string
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_uint2_hex_string.cpp")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_split.h")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_split.cpp")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_create_empty_file.h")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_create_empty_file.cpp")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.user-custom.txt)
 

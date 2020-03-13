@@ -364,6 +364,21 @@ bool WSJCppCore::removeFile(const std::string &sFilename) {
 
 // ---------------------------------------------------------------------
 
+bool WSJCppCore::createEmptyFile(const std::string &sFilename) {
+    if (WSJCppCore::fileExists(sFilename)) {
+        return false;
+    }
+    std::ofstream f(sFilename, std::ios::out | std::ios::binary);
+    if (!f) {
+        std::cout << "FAILED could not create file to wtite " << sFilename << std::endl;
+        return false;
+    }
+    f.close();
+    return true;
+}
+
+// ---------------------------------------------------------------------
+
 std::string& WSJCppCore::ltrim(std::string& str, const std::string& chars) {
     str.erase(0, str.find_first_not_of(chars));
     return str;

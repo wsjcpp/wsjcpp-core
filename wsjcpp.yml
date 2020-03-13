@@ -60,3 +60,5 @@ unit-tests:
       description: "Test convert unsigned int to hex string"
     - name: "Split"
       description: "Test split function"
+    - name: "CreateEmptyFile"
+      description: "Test create empty file"
