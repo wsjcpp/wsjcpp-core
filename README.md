@@ -225,6 +225,26 @@ Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alph
 WSJCppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
 ```
 
+### replaceAll
+
+```
+std::string sWhat = "|1a|2b|3c|4d|";
+std::vector<std::string> vSplitted = WSJCppCore::split(sWhat, "|");
+for (int i = 0; i < vSplitted.size(); i++) {
+    std::cout << vSplitted[i] << std::endl;
+}
+```
+
+Example output:
+```
+
+1a
+2b
+3c
+4d
+
+```
+
 ### createUuid
 
 Generate uuid, but you need to call `WSJCppCore::initRandom();` before it (for example in main() function)

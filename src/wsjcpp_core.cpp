@@ -383,14 +383,6 @@ std::string& WSJCppCore::trim(std::string& str, const std::string& chars) {
 }
 
 // ---------------------------------------------------------------------
-
-std::string& WSJCppCore::to_lower(std::string& str) {
-    WSJCppLog::warn("WSJCppCore::to_lower", "Deprecated function, please use ");
-    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-    return str;
-}
-
-// ---------------------------------------------------------------------
 // will worked only with latin
 
 std::string WSJCppCore::toLower(const std::string& str) {
@@ -419,6 +411,31 @@ void WSJCppCore::replaceAll(std::string& str, const std::string& sFrom, const st
         str.replace(start_pos, sFrom.length(), sTo);
         start_pos += sTo.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
     }
+}
+
+// ---------------------------------------------------------------------
+
+std::vector<std::string> WSJCppCore::split(const std::string& sWhat, const std::string& sDelim) {
+    std::vector<std::string> vRet;
+    int nPos = 0;
+    int nLen = sWhat.length();
+    int nDelimLen = sDelim.length();
+    while (nPos < nLen) {
+        std::size_t nFoundPos = sWhat.find(sDelim, nPos);
+        if (nFoundPos != std::string::npos) {
+            std::string sToken = sWhat.substr(nPos, nFoundPos - nPos);
+            vRet.push_back(sToken);
+            nPos = nFoundPos + nDelimLen;
+            if (nFoundPos + nDelimLen == nLen) { // last delimiter
+                vRet.push_back("");
+            }
+        } else {
+            std::string sToken = sWhat.substr(nPos, nLen - nPos);
+            vRet.push_back(sToken);
+            break;
+        }
+    }
+    return vRet;
 }
 
 // ---------------------------------------------------------------------

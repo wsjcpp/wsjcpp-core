@@ -18,6 +18,7 @@ addons:
 script:
   - mkdir -p tmp
   - cd tmp
+  - cmake ..
   - make
   - cd ../unit-tests.wsjcpp
   - ./build_simple.sh

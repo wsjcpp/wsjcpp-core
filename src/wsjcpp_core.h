@@ -44,10 +44,10 @@ class WSJCppCore {
         static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
         static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
         static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
-        static std::string& to_lower(std::string& str); // deprecated
         static std::string toLower(const std::string &str);
         static std::string toUpper(const std::string& str);
         static void replaceAll(std::string& str, const std::string& from, const std::string& to);
+        static std::vector<std::string> split(const std::string& sWhat, const std::string& sDelim);
 
         static void initRandom();
         static std::string createUuid();
