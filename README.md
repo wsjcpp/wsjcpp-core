@@ -203,16 +203,26 @@ static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f
 static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
 ```
 
-### to_lower
+### toLower
 
 ```
-static std::string& to_lower(std::string& str);
+static std::string toLower(const std::string& str);
 ```
+
+Convert text to lower charaters, like "ABc" -> "abc". Worked only with latin alphabet.
 
 ### toUpper
 
 ```
 static std::string toUpper(const std::string& str);
+```
+
+Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alphabet.
+
+### replaceAll
+
+```
+WSJCppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
 ```
 
 ### createUuid
@@ -231,6 +241,21 @@ Example output:
 b49d92ae-f11c-f8bc-3a94-e7519e341927
 ```
 
+### uint2hexString
+`unsigned int` to hex string (lowercase)
+
+```
+std::cout << WSJCppCore::uint2hexString(1) << std::endl;
+std::cout << WSJCppCore::uint2hexString(3000) << std::endl;
+std::cout << WSJCppCore::uint2hexString(4123123123) << std::endl;
+```
+
+Example output
+```
+00000001
+00000bb8
+f5c1ddb3
+```
 ### convertVoidToULong
 
 ```
@@ -277,4 +302,20 @@ if (WSJCppCore::getEnv("PATH", sValue)) {
 Example output:
 ```
 /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
+
+### encodeUriComponent
+
+Simular a js function `encodeURIComponent`
+
+```
+static std::string encodeUriComponent(const std::string& sValue);
+```
+
+### decodeUriComponent
+
+Simular a js function `decodeURIComponent`
+
+```
+static std::string decodeUriComponent(const std::string& sValue);
 ```

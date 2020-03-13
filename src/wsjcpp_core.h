@@ -44,16 +44,21 @@ class WSJCppCore {
         static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
         static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
         static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
-        static std::string& to_lower(std::string& str);
+        static std::string& to_lower(std::string& str); // deprecated
+        static std::string toLower(const std::string &str);
         static std::string toUpper(const std::string& str);
+        static void replaceAll(std::string& str, const std::string& from, const std::string& to);
 
         static void initRandom();
         static std::string createUuid();
-
+        static std::string uint2hexString(unsigned int n);
         static unsigned long convertVoidToULong(void *p);
         static std::string getPointerAsHex(void *p);
         static std::string extractURLProtocol(const std::string& sValue);
         static bool getEnv(const std::string& sName, std::string& sValue);
+
+        static std::string encodeUriComponent(const std::string& sValue);
+        static std::string decodeUriComponent(const std::string& sValue);
 };
 
 

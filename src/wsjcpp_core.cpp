@@ -385,8 +385,18 @@ std::string& WSJCppCore::trim(std::string& str, const std::string& chars) {
 // ---------------------------------------------------------------------
 
 std::string& WSJCppCore::to_lower(std::string& str) {
+    WSJCppLog::warn("WSJCppCore::to_lower", "Deprecated function, please use ");
     std::transform(str.begin(), str.end(), str.begin(), ::tolower);
     return str;
+}
+
+// ---------------------------------------------------------------------
+// will worked only with latin
+
+std::string WSJCppCore::toLower(const std::string& str) {
+    std::string sRet = str;
+    std::transform(sRet.begin(), sRet.end(), sRet.begin(), ::tolower);
+    return sRet;
 }
 
 // ---------------------------------------------------------------------
@@ -396,6 +406,19 @@ std::string WSJCppCore::toUpper(const std::string& str) {
     std::string sRet = str;
     std::transform(sRet.begin(), sRet.end(), sRet.begin(), ::toupper);
     return sRet;
+}
+
+// ---------------------------------------------------------------------
+
+void WSJCppCore::replaceAll(std::string& str, const std::string& sFrom, const std::string& sTo) {
+    if (sFrom.empty()) {
+        return;
+    }
+    size_t start_pos = 0;
+    while ((start_pos = str.find(sFrom, start_pos)) != std::string::npos) {
+        str.replace(start_pos, sFrom.length(), sTo);
+        start_pos += sTo.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
+    }
 }
 
 // ---------------------------------------------------------------------
@@ -417,6 +440,17 @@ std::string WSJCppCore::createUuid() {
     }
     // Fallen::initRandom();
     return sRet;
+}
+
+// ---------------------------------------------------------------------
+
+std::string WSJCppCore::uint2hexString(unsigned int n) {
+    std::string sRet;
+    for (int i = 0; i < 8; i++) {
+        sRet += "0123456789abcdef"[n % 16];
+        n >>= 4;
+    }
+    return std::string(sRet.rbegin(), sRet.rend());
 }
 
 // ---------------------------------------------------------------------
@@ -455,6 +489,51 @@ bool WSJCppCore::getEnv(const std::string& sName, std::string& sValue) {
         return true;
     }
     return false;
+}
+
+// ---------------------------------------------------------------------
+
+std::string WSJCppCore::encodeUriComponent(const std::string& sValue) {
+    std::stringstream ssRet;
+    for (int i = 0; i < sValue.length(); i++) {
+        char c = sValue[i];
+        if (
+            c == '-' || c == '_' || c == '.' || c == '!'
+            || c == '~' || c == '*' || c == '\'' 
+            || c == '(' || c == ')' || (c >= '0' && c <= '9') 
+            || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+        ) {
+            ssRet << c;
+        } else {
+            ssRet << '%' << std::uppercase << std::hex << (int)c;
+        }
+    }
+    return ssRet.str();
+}
+
+// ---------------------------------------------------------------------
+
+std::string WSJCppCore::decodeUriComponent(const std::string& sValue) {
+    std::string sRet = "";
+    std::string sHex = "";
+    int nLen = sValue.length();
+    for (int i = 0; i < sValue.length(); i++) {
+        char c = sValue[i];
+        if (c == '%') {
+            if (i+2 >= nLen) {
+                WSJCppLog::throw_err("WSJCppCore::decodeUriElement", "Wrong format of string");
+            }
+            sHex = "0x";
+            sHex += sValue[i+1];
+            sHex += sValue[i+2];
+            i = i + 2;
+            char c1 = std::stoul(sHex, nullptr, 16);
+            sRet += c1;
+        } else {
+            sRet += c;
+        }
+    }
+    return sRet;
 }
 
 // ---------------------------------------------------------------------
