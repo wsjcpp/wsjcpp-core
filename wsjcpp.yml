@@ -62,3 +62,5 @@ unit-tests:
       description: "Test split function"
     - name: "CreateEmptyFile"
       description: "Test create empty file"
+    - name: "ReadFileToBuffer"
+      description: "test for readFileToBuffer"

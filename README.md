@@ -187,6 +187,18 @@ if (WSJCppCore::readTextFile("./file.txt", sContent)) {
 }
 ```
 
+### readFileToBuffer
+
+Read file binary content to buffer
+
+```
+char *pBuffer = nullptr;
+int nBufferSize = 0;
+if (WSJCppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBufferSize)) {
+    // your can work with buffer here
+}
+```
+
 ### removeFile
 
 ```

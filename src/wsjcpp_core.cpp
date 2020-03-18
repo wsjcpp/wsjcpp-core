@@ -345,6 +345,33 @@ bool WSJCppCore::readTextFile(const std::string &sFilename, std::string &sConten
 
 // ---------------------------------------------------------------------
 
+bool WSJCppCore::readFileToBuffer(const std::string &sFilename, char *pBuffer[], int &nBufferSize) {
+    std::ifstream f(sFilename, std::ifstream::binary);
+    if (!f) {
+        return false;
+    }
+
+    // get length of file:
+    f.seekg (0, f.end);
+    nBufferSize = f.tellg();
+    f.seekg (0, f.beg);
+
+    *pBuffer = new char [nBufferSize];
+
+    // read data as a block:
+    f.read (*pBuffer, nBufferSize);
+    if (!f) {
+        WSJCppLog::err("WSJCppCore::readFileToBuffer", "Only " + std::to_string(f.gcount()) + " could be read");
+        delete[] pBuffer;
+        f.close();
+        return false;
+    }
+    f.close();
+    return true;
+}
+
+// ---------------------------------------------------------------------
+
 bool WSJCppCore::writeFile(const std::string &sFilename, const char *pBuffer, const int nBufferSize) {
     std::ofstream f(sFilename, std::ios::out | std::ios::binary);
     if (!f) {

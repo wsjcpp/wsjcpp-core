@@ -38,6 +38,7 @@ class WSJCppCore {
         static bool makeDir(const std::string &sDirname);
         static bool writeFile(const std::string &sFilename, const std::string &sContent);
         static bool readTextFile(const std::string &sFilename, std::string &sOutputContent);
+        static bool readFileToBuffer(const std::string &sFilename, char *pBuffer[], int &nBufferSize);
         static bool writeFile(const std::string &sFilename, const char *pBuffer, const int nBufferSize);
         static bool removeFile(const std::string &sFilename);
         static bool createEmptyFile(const std::string &sFilename);
