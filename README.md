@@ -247,7 +247,7 @@ Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alph
 WsjcppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
 ```
 
-### replaceAll
+### split
 
 ```
 std::string sWhat = "|1a|2b|3c|4d|";
@@ -265,6 +265,23 @@ Example output:
 3c
 4d
 
+```
+
+### join
+
+```
+std::vector<std::string> vWhat;
+vJoin.push("1a");
+vJoin.push("2b");
+vJoin.push("3c");
+vJoin.push("4d");
+std::string sJoined = WsjcppCore::join(vWhat, ",");
+std::cout << sJoined << std::endl;
+```
+
+Example output:
+```
+1a,2b,3c,4d
 ```
 
 ### createUuid
