@@ -6,7 +6,7 @@
 REGISTRY_UNIT_TEST(UnitTestCoreNormalizePath)
 
 UnitTestCoreNormalizePath::UnitTestCoreNormalizePath()
-    : WSJCppUnitTestBase("UnitTestCoreNormalizePath") {
+    : WsjcppUnitTestBase("UnitTestCoreNormalizePath") {
     //
 }
 
@@ -40,10 +40,10 @@ bool UnitTestCoreNormalizePath::run() {
     for ( it = mapPaths.begin(); it != mapPaths.end(); it++ ) {
         std::string sSource = it->first;
         std::string sExpected = it->second;
-        std::string sGot = WSJCppCore::doNormalizePath(sSource);
+        std::string sGot = WsjcppCore::doNormalizePath(sSource);
         if (sGot != sExpected) {
             nCounter++;
-            WSJCppLog::err(TAG, "Wrong normalize path for: '" + sSource + "'.\n\t Got: '" + sGot + "', but expected: '" + sExpected + "'");
+            WsjcppLog::err(TAG, "Wrong normalize path for: '" + sSource + "'.\n\t Got: '" + sGot + "', but expected: '" + sExpected + "'");
         }
         
     }

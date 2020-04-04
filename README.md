@@ -17,13 +17,13 @@ Or include files:
 * `src/wsjcpp_core.h`
 * `src/wsjcpp_core.cpp`
 
-## Logger (WSJCppLog)
+## Logger (WsjcppLog)
 
 * Output will be collored for console, but color will be missing for files.
 * Functions are safe thread.
 * Logger supports a log rotation (every 51000 seconds / every day)
-* WSJCppLog::throw_err - will be generate `throw std::runtime_error(sMessage);`
-* std::vector<std::string> WSJCppLog::getLastLogMessages() - last 50 records from log
+* WsjcppLog::throw_err - will be generate `throw std::runtime_error(sMessage);`
+* std::vector<std::string> WsjcppLog::getLastLogMessages() - last 50 records from log
 
 In main() you need to init logger first.
 
@@ -32,11 +32,11 @@ In main() you need to init logger first.
 
 int main(int argc, char* argv[]) {
     std::string TAG = "MAIN";
-    if (!WSJCppCore::dirExists(".logs")) {
-        WSJCppCore::makeDir(".logs");
+    if (!WsjcppCore::dirExists(".logs")) {
+        WsjcppCore::makeDir(".logs");
     }
-    WSJCppLog::setLogDirectory(".logs");
-    WSJCppLog::setPrefixLogFile("app");
+    WsjcppLog::setLogDirectory(".logs");
+    WsjcppLog::setPrefixLogFile("app");
 
     // ... 
     return 0;
@@ -50,10 +50,10 @@ And then you can call static functions anywhere in your code:
 
 ...
 const std::string TAG = "MAIN";
-WSJCppLog::info(TAG, "Hello info");
-WSJCppLog::err(TAG, "Hello err");
-WSJCppLog::warn(TAG, "Hello warn");
-WSJCppLog::ok(TAG, "Hello ok");
+WsjcppLog::info(TAG, "Hello info");
+WsjcppLog::err(TAG, "Hello err");
+WsjcppLog::warn(TAG, "Hello warn");
+WsjcppLog::ok(TAG, "Hello ok");
 ```
 
 Example output
@@ -64,14 +64,14 @@ Example output
 2020-02-25 16:56:07.376, 0x0x10ac51dc0 [OK] MAIN: Hello ok
 ```
 
-## List of static function (WSJCppCore):
+## List of static function (WsjcppCore):
 
 ### doNormalizePath
 
 Normalize paths. For example: ".//../bin/some/../" -> "./../bin/"
 
 ```
-std::string sPath = WSJCppCore::doNormalizePath(".//../bin/some/../");
+std::string sPath = WsjcppCore::doNormalizePath(".//../bin/some/../");
 ```
 
 ### extractFilename
@@ -79,7 +79,7 @@ std::string sPath = WSJCppCore::doNormalizePath(".//../bin/some/../");
 Extract base filename from fullpath.
 
 ```
-std::string sFilename = WSJCppCore::doNormalizePath(".//../bin/some/../file.txt");
+std::string sFilename = WsjcppCore::doNormalizePath(".//../bin/some/../file.txt");
 ```
 
 ### getCurrentDirectory
@@ -165,7 +165,7 @@ static std::vector<std::string> listOfFiles(const std::string &sDirname);
 Create a new directory
 ```
 std::string sDirname = ".logs";
-if (WSJCppCore::makeDir(sDirname)) {
+if (WsjcppCore::makeDir(sDirname)) {
     std::cout << " Created '" << sDirname << "'" << std::endl;
 }
 ```
@@ -182,7 +182,7 @@ static bool writeFile(const std::string &sFilename, const char *pBuffer, const i
 Read text files into std::string
 ```
 std::string sContent;
-if (WSJCppCore::readTextFile("./file.txt", sContent)) {
+if (WsjcppCore::readTextFile("./file.txt", sContent)) {
     std::cout << sContent;
 }
 ```
@@ -194,7 +194,7 @@ Read file binary content to buffer
 ```
 char *pBuffer = nullptr;
 int nBufferSize = 0;
-if (WSJCppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBufferSize)) {
+if (WsjcppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBufferSize)) {
     // your can work with buffer here
 }
 ```
@@ -202,7 +202,7 @@ if (WSJCppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBuffe
 ### removeFile
 
 ```
-if (WSJCppCore::removeFile("./file.txt")) {
+if (WsjcppCore::removeFile("./file.txt")) {
     std::cout << "File removed" << std::endl;
 }
 ```
@@ -212,7 +212,7 @@ if (WSJCppCore::removeFile("./file.txt")) {
 Creating empty file. Will return true if file not exists and do created
 
 ```
-if (WSJCppCore::createEmptyFile("./file.txt")) {
+if (WsjcppCore::createEmptyFile("./file.txt")) {
     std::cout << "Empty file created" << std::endl;
 }
 ```
@@ -244,14 +244,14 @@ Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alph
 ### replaceAll
 
 ```
-WSJCppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
+WsjcppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
 ```
 
 ### replaceAll
 
 ```
 std::string sWhat = "|1a|2b|3c|4d|";
-std::vector<std::string> vSplitted = WSJCppCore::split(sWhat, "|");
+std::vector<std::string> vSplitted = WsjcppCore::split(sWhat, "|");
 for (int i = 0; i < vSplitted.size(); i++) {
     std::cout << vSplitted[i] << std::endl;
 }
@@ -269,11 +269,11 @@ Example output:
 
 ### createUuid
 
-Generate uuid, but you need to call `WSJCppCore::initRandom();` before it (for example in main() function)
+Generate uuid, but you need to call `WsjcppCore::initRandom();` before it (for example in main() function)
 
 ```
-WSJCppCore::initRandom(); // once in main on start
-std::string sUuid = WSJCppCore::createUuid();
+WsjcppCore::initRandom(); // once in main on start
+std::string sUuid = WsjcppCore::createUuid();
 std::cout << sUuid << std::endl;
 ```
 
@@ -287,9 +287,9 @@ b49d92ae-f11c-f8bc-3a94-e7519e341927
 `unsigned int` to hex string (lowercase)
 
 ```
-std::cout << WSJCppCore::uint2hexString(1) << std::endl;
-std::cout << WSJCppCore::uint2hexString(3000) << std::endl;
-std::cout << WSJCppCore::uint2hexString(4123123123) << std::endl;
+std::cout << WsjcppCore::uint2hexString(1) << std::endl;
+std::cout << WsjcppCore::uint2hexString(3000) << std::endl;
+std::cout << WsjcppCore::uint2hexString(4123123123) << std::endl;
 ```
 
 Example output
@@ -302,7 +302,7 @@ f5c1ddb3
 
 ```
 std::string s = "dddd";
-unsigned long nPointer = WSJCppCore::convertVoidToULong((void *)&s);
+unsigned long nPointer = WsjcppCore::convertVoidToULong((void *)&s);
 std::cout << sPointerHex << std::endl;
 static unsigned long convertVoidToULong(void *p);
 ```
@@ -316,7 +316,7 @@ Example output:
 
 ```
 std::string s = "dddd";
-std::string sPointerHex = WSJCppCore::getPointerAsHex((void *)&s);
+std::string sPointerHex = WsjcppCore::getPointerAsHex((void *)&s);
 std::cout << sPointerHex << std::endl;
 ```
 
@@ -328,7 +328,7 @@ Example output:
 ### extractURLProtocol
 
 ```
-std::string sProtocol = WSJCppCore::extractURLProtocol("https://github.com/wsjcpp");
+std::string sProtocol = WsjcppCore::extractURLProtocol("https://github.com/wsjcpp");
 ```
 
 ### getEnv
@@ -336,7 +336,7 @@ std::string sProtocol = WSJCppCore::extractURLProtocol("https://github.com/wsjcp
 Get the value of a system environment variable
 ```
 std::string sValue;
-if (WSJCppCore::getEnv("PATH", sValue)) {
+if (WsjcppCore::getEnv("PATH", sValue)) {
     std::cout << sValue << std::endl;
 }
 ```

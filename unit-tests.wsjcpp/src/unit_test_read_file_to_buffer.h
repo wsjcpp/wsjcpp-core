@@ -4,7 +4,7 @@
 #include <wsjcpp_unit_tests.h>
 
 // Description: TODO
-class UnitTestReadFileToBuffer : public WSJCppUnitTestBase {
+class UnitTestReadFileToBuffer : public WsjcppUnitTestBase {
     public:
         UnitTestReadFileToBuffer();
         virtual void init();

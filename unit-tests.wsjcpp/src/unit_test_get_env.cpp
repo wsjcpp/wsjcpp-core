@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestGetEnv)
 
 UnitTestGetEnv::UnitTestGetEnv()
-    : WSJCppUnitTestBase("UnitTestGetEnv") {
+    : WsjcppUnitTestBase("UnitTestGetEnv") {
 }
 
 // ---------------------------------------------------------------------
@@ -39,7 +39,7 @@ bool UnitTestGetEnv::run() {
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
         std::string sValue;
-        bool bResult = WSJCppCore::getEnv(test.sName, sValue);
+        bool bResult = WsjcppCore::getEnv(test.sName, sValue);
         std::string testBaseName = "test#" + std::to_string(i) + " (" + test.sName + ")";
         compareB(bTestSuccess,  testBaseName + "-result", bResult, test.bExpectedResult);
         compareS(bTestSuccess, testBaseName + "-value", sValue, test.sExpectedValue);

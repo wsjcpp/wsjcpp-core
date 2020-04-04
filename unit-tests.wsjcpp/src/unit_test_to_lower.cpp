@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestToLower)
 
 UnitTestToLower::UnitTestToLower()
-    : WSJCppUnitTestBase("UnitTestToLower") {
+    : WsjcppUnitTestBase("UnitTestToLower") {
 }
 
 // ---------------------------------------------------------------------
@@ -18,7 +18,7 @@ void UnitTestToLower::init() {
 
 bool UnitTestToLower::run() {
     bool bTestSuccess = true;
-    compareS(bTestSuccess, "str1", "abc_def", WSJCppCore::toLower("ABC_DEF"));
+    compareS(bTestSuccess, "str1", "abc_def", WsjcppCore::toLower("ABC_DEF"));
     return bTestSuccess;
 }
 

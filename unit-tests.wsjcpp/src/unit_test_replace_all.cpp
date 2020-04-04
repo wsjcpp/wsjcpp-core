@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestReplaceAll)
 
 UnitTestReplaceAll::UnitTestReplaceAll()
-    : WSJCppUnitTestBase("UnitTestReplaceAll") {
+    : WsjcppUnitTestBase("UnitTestReplaceAll") {
 }
 
 // ---------------------------------------------------------------------
@@ -43,7 +43,7 @@ bool UnitTestReplaceAll::run() {
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
         std::string sStr = test.sStr;
-        WSJCppCore::replaceAll(sStr, test.sFrom, test.sTo);
+        WsjcppCore::replaceAll(sStr, test.sFrom, test.sTo);
         compareS(bTestSuccess, "test" + std::to_string(i), sStr, test.sExpectedStr);
     }
     

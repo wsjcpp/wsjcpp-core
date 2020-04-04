@@ -6,7 +6,7 @@
 REGISTRY_UNIT_TEST(UnitTestCoreExtractFilename)
 
 UnitTestCoreExtractFilename::UnitTestCoreExtractFilename()
-    : WSJCppUnitTestBase("UnitTestCoreExtractFilename") {
+    : WsjcppUnitTestBase("UnitTestCoreExtractFilename") {
     //
 }
 
@@ -40,10 +40,10 @@ bool UnitTestCoreExtractFilename::run() {
     for ( it = mapPaths.begin(); it != mapPaths.end(); it++ ) {
         std::string sSource = it->first;
         std::string sExpected = it->second;
-        std::string sGot = WSJCppCore::extractFilename(sSource);
+        std::string sGot = WsjcppCore::extractFilename(sSource);
         if (sGot != sExpected) {
             nCounter++;
-            WSJCppLog::err(TAG, "Wrong extract filename for: '" + sSource + "'.\n\t Got: '" + sGot + "', but expected: '" + sExpected + "'");
+            WsjcppLog::err(TAG, "Wrong extract filename for: '" + sSource + "'.\n\t Got: '" + sGot + "', but expected: '" + sExpected + "'");
         }
         
     }

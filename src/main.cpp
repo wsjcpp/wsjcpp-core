@@ -8,18 +8,18 @@ int main(int argc, char* argv[]) {
     std::string appName = std::string(WSJCPP_NAME);
     std::string appVersion = std::string(WSJCPP_VERSION);
 
-    if (!WSJCppCore::dirExists(".logs")) {
-        WSJCppCore::makeDir(".logs");
+    if (!WsjcppCore::dirExists(".logs")) {
+        WsjcppCore::makeDir(".logs");
     }
-    WSJCppLog::setLogDirectory(".logs");
-    WSJCppLog::setPrefixLogFile("wsjcpp_core");
+    WsjcppLog::setLogDirectory(".logs");
+    WsjcppLog::setPrefixLogFile("wsjcpp_core");
 
-    WSJCppLog::info(TAG, "Hello info");
-    WSJCppLog::err(TAG, "Hello err");
-    WSJCppLog::warn(TAG, "Hello warn");
-    WSJCppLog::ok(TAG, "Hello ok");
+    WsjcppLog::info(TAG, "Hello info");
+    WsjcppLog::err(TAG, "Hello err");
+    WsjcppLog::warn(TAG, "Hello warn");
+    WsjcppLog::ok(TAG, "Hello ok");
 
-    WSJCppCore::init(
+    WsjcppCore::init(
         argc, argv, 
         std::string(WSJCPP_NAME),
         std::string(WSJCPP_VERSION),

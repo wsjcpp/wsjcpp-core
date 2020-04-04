@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestCreateUuid)
 
 UnitTestCreateUuid::UnitTestCreateUuid()
-    : WSJCppUnitTestBase("UnitTestCreateUuid") {
+    : WsjcppUnitTestBase("UnitTestCreateUuid") {
 }
 
 // ---------------------------------------------------------------------
@@ -20,9 +20,9 @@ bool UnitTestCreateUuid::run() {
     bool bTestSuccess = true;
     std::vector<std::string> vUuids;
     for (int i = 0; i < 100; i++) {
-        std::string sUuid = WSJCppCore::createUuid();
+        std::string sUuid = WsjcppCore::createUuid();
         // if (i < 3) {
-        //    WSJCppLog::info(TAG, "sUuid: " + sUuid);
+        //    WsjcppLog::info(TAG, "sUuid: " + sUuid);
         // }
         vUuids.push_back(sUuid);
     }
@@ -30,7 +30,7 @@ bool UnitTestCreateUuid::run() {
         for (int y = 0; y < 100; y++) {
             if (vUuids[x] == vUuids[y] && x != y) {
                 bTestSuccess = false;
-                WSJCppLog::err(TAG, "Wrong generation random uuids: \nvUuids[" + std::to_string(x)+ "] == vUuids[" + std::to_string(y) + "] == '" + vUuids[x] + "'");
+                WsjcppLog::err(TAG, "Wrong generation random uuids: \nvUuids[" + std::to_string(x)+ "] == vUuids[" + std::to_string(y) + "] == '" + vUuids[x] + "'");
             }
         } 
     }

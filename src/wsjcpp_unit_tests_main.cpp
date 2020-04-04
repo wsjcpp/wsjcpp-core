@@ -3,21 +3,21 @@
 #include <wsjcpp_unit_tests.h>
 
 int main(int argc, char** argv) {
-    WSJCppCore::initRandom();
+    WsjcppCore::initRandom();
     std::string TAG = "UnitTests";
-    WSJCppLog::setPrefixLogFile("unit-tests");
+    WsjcppLog::setPrefixLogFile("unit-tests");
     std::string sLogDir = "./logs"; 
-    if (!WSJCppCore::dirExists(sLogDir)) {
-        WSJCppCore::makeDir(sLogDir);
+    if (!WsjcppCore::dirExists(sLogDir)) {
+        WsjcppCore::makeDir(sLogDir);
     }
-    WSJCppLog::setLogDirectory(sLogDir);
-    if (!WSJCppCore::dirExists(sLogDir)) {
-        WSJCppLog::err(TAG, "Directory '" + sLogDir + "' did'not exists");
+    WsjcppLog::setLogDirectory(sLogDir);
+    if (!WsjcppCore::dirExists(sLogDir)) {
+        WsjcppLog::err(TAG, "Directory '" + sLogDir + "' did'not exists");
         return -1;
     }
 
-    if (!WSJCppUnitTests::runUnitTests()) {
-        WSJCppLog::err(TAG, "Some unit tests failed");
+    if (!WsjcppUnitTests::runUnitTests()) {
+        WsjcppLog::err(TAG, "Some unit tests failed");
         return -1;
     }
     return 0;

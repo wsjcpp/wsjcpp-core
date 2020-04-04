@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestSplit)
 
 UnitTestSplit::UnitTestSplit()
-    : WSJCppUnitTestBase("UnitTestSplit") {
+    : WsjcppUnitTestBase("UnitTestSplit") {
 }
 
 // ---------------------------------------------------------------------
@@ -43,7 +43,7 @@ bool bTestSuccess = true;
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
         std::string sPrefix = "test" + std::to_string(i) + "(\"" + test.sStr + "\")";
-        std::vector<std::string> vSplitted = WSJCppCore::split(test.sStr, test.sDelim);
+        std::vector<std::string> vSplitted = WsjcppCore::split(test.sStr, test.sDelim);
         compareN(bTestSuccess, sPrefix + ": size", vSplitted.size(), test.vExpectedVector.size());
         int nMin = std::min(vSplitted.size(), test.vExpectedVector.size());
         for (int n = 0; n < nMin; n++) {

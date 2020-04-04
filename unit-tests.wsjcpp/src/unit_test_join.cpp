@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestJoin)
 
 UnitTestJoin::UnitTestJoin()
-    : WSJCppUnitTestBase("UnitTestJoin") {
+    : WsjcppUnitTestBase("UnitTestJoin") {
 }
 
 // ---------------------------------------------------------------------
@@ -23,7 +23,7 @@ bool UnitTestJoin::run() {
     vTest.push_back("1");
     vTest.push_back("2");
     vTest.push_back("abc");
-    std::string sRet = WSJCppCore::join(vTest, ", ");
+    std::string sRet = WsjcppCore::join(vTest, ", ");
     compareS(bTestSuccess, "join", sRet, ", 1, 2, abc");
     return bTestSuccess;
 }

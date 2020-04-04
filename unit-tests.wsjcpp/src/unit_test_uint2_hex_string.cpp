@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestUint2HexString)
 
 UnitTestUint2HexString::UnitTestUint2HexString()
-    : WSJCppUnitTestBase("UnitTestUint2HexString") {
+    : WsjcppUnitTestBase("UnitTestUint2HexString") {
 }
 
 // ---------------------------------------------------------------------
@@ -37,7 +37,7 @@ bool UnitTestUint2HexString::run() {
 
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
-        std::string sStr = WSJCppCore::uint2hexString(test.nNumber);
+        std::string sStr = WsjcppCore::uint2hexString(test.nNumber);
         compareS(bTestSuccess, "test" + std::to_string(i), sStr, test.sExpectedStr);
     }
 

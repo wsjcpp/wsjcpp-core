@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestToUpper)
 
 UnitTestToUpper::UnitTestToUpper()
-    : WSJCppUnitTestBase("UnitTestToUpper") {
+    : WsjcppUnitTestBase("UnitTestToUpper") {
 }
 
 // ---------------------------------------------------------------------
@@ -18,7 +18,7 @@ void UnitTestToUpper::init() {
 
 bool UnitTestToUpper::run() {
     bool bTestSuccess = true;
-    compareS(bTestSuccess, "str1", "ABC_DEF", WSJCppCore::toUpper("abc_def"));
+    compareS(bTestSuccess, "str1", "ABC_DEF", WsjcppCore::toUpper("abc_def"));
     return bTestSuccess;
 }
 

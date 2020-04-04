@@ -3,7 +3,7 @@
 
 #include <wsjcpp_unit_tests.h>
 
-class UnitTestCoreUuid : public WSJCppUnitTestBase {
+class UnitTestCoreUuid : public WsjcppUnitTestBase {
     public:
         UnitTestCoreUuid();
         virtual void init();

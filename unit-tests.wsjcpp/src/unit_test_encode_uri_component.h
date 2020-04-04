@@ -4,7 +4,7 @@
 #include <wsjcpp_unit_tests.h>
 
 // Description: TODO
-class UnitTestEncodeUriComponent : public WSJCppUnitTestBase {
+class UnitTestEncodeUriComponent : public WsjcppUnitTestBase {
     public:
         UnitTestEncodeUriComponent();
         virtual void init();

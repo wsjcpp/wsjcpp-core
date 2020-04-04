@@ -4,7 +4,7 @@
 #include <wsjcpp_unit_tests.h>
 
 // Description: TODO
-class UnitTestUint2HexString : public WSJCppUnitTestBase {
+class UnitTestUint2HexString : public WsjcppUnitTestBase {
     public:
         UnitTestUint2HexString();
         virtual void init();

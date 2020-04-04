@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestEncodeUriComponent)
 
 UnitTestEncodeUriComponent::UnitTestEncodeUriComponent()
-    : WSJCppUnitTestBase("UnitTestEncodeUriComponent") {
+    : WsjcppUnitTestBase("UnitTestEncodeUriComponent") {
 }
 
 // ---------------------------------------------------------------------
@@ -37,7 +37,7 @@ bool UnitTestEncodeUriComponent::run() {
 
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
-        std::string sStr = WSJCppCore::encodeUriComponent(test.sStr);
+        std::string sStr = WsjcppCore::encodeUriComponent(test.sStr);
         compareS(bTestSuccess, "test" + std::to_string(i), sStr, test.sExpectedStr);
     }
 

@@ -6,7 +6,7 @@
 REGISTRY_UNIT_TEST(UnitTestReadFileToBuffer)
 
 UnitTestReadFileToBuffer::UnitTestReadFileToBuffer()
-    : WSJCppUnitTestBase("UnitTestReadFileToBuffer") {
+    : WsjcppUnitTestBase("UnitTestReadFileToBuffer") {
 }
 
 // ---------------------------------------------------------------------
@@ -22,7 +22,7 @@ bool UnitTestReadFileToBuffer::run() {
     std::string sExpected = "1234567890\nqwerty123456";
     char *pBuffer = nullptr;
     int nBufferSize = 0;
-    WSJCppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBufferSize);
+    WsjcppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBufferSize);
     compareN(bTestSuccess, "Size of readed", nBufferSize, sExpected.length());
     int nMin = std::min(nBufferSize, (int)sExpected.length());
     for (int i = 0; i < nMin; i++) {

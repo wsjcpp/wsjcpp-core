@@ -5,7 +5,7 @@
 REGISTRY_UNIT_TEST(UnitTestCreateEmptyFile)
 
 UnitTestCreateEmptyFile::UnitTestCreateEmptyFile()
-    : WSJCppUnitTestBase("UnitTestCreateEmptyFile") {
+    : WsjcppUnitTestBase("UnitTestCreateEmptyFile") {
 }
 
 // ---------------------------------------------------------------------
@@ -18,15 +18,15 @@ void UnitTestCreateEmptyFile::init() {
 
 bool UnitTestCreateEmptyFile::run() {
     bool bTestSuccess = true;
-    compareB(bTestSuccess, "./data/", WSJCppCore::dirExists("./data/"), true);
+    compareB(bTestSuccess, "./data/", WsjcppCore::dirExists("./data/"), true);
     std::string sFilename = "./data/empty.txt";
-    if (WSJCppCore::fileExists(sFilename)) {
-        WSJCppCore::removeFile(sFilename);
+    if (WsjcppCore::fileExists(sFilename)) {
+        WsjcppCore::removeFile(sFilename);
     }
-    compareB(bTestSuccess, "fileExists 1: " + sFilename, WSJCppCore::fileExists(sFilename), false);
-    compareB(bTestSuccess, "createEmptyFile 1: " + sFilename, WSJCppCore::createEmptyFile(sFilename), true);
-    compareB(bTestSuccess, "createEmptyFile 2: " + sFilename, WSJCppCore::createEmptyFile(sFilename), false);
-    compareB(bTestSuccess, "fileExists 2: " + sFilename, WSJCppCore::fileExists(sFilename), true);
+    compareB(bTestSuccess, "fileExists 1: " + sFilename, WsjcppCore::fileExists(sFilename), false);
+    compareB(bTestSuccess, "createEmptyFile 1: " + sFilename, WsjcppCore::createEmptyFile(sFilename), true);
+    compareB(bTestSuccess, "createEmptyFile 2: " + sFilename, WsjcppCore::createEmptyFile(sFilename), false);
+    compareB(bTestSuccess, "fileExists 2: " + sFilename, WsjcppCore::fileExists(sFilename), true);
     return bTestSuccess;
 }
 
