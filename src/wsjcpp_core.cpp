@@ -612,26 +612,26 @@ std::string WsjcppCore::decodeUriComponent(const std::string& sValue) {
 // ---------------------------------------------------------------------
 
 std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
-    if (nValue == 0) {
+    if (nBytes == 0) {
         return "0B";
     }
     std::string arrPrefix[] = {"B", "KB", "MB", "GB", "TB", "PB"};
-    long n0 = nValue;
+    long n0 = nBytes;
     long n1 = 0;
     for (int i = 0; i < 6; i++) {
         if (n0 >= 1 && n0 < 1000) {
             return std::to_string(n0) + arrPrefix[i];
         }        
-        n0 = nValue / 1000;
-        n1 = nValue - n0 * 1000;
+        n0 = nBytes / 1000;
+        n1 = nBytes - n0 * 1000;
         n0 += n1 >= 500 ? 1 : 0;
 
-        nValue = nValue / 1000;
+        nBytes = nBytes / 1000;
         if (n0 == 0 && n1 == 0) {
             return "fuck"; 
         }
     }
-    return std::to_string(nValue) + "PB";
+    return std::to_string(nBytes) + "PB";
 }
 
 // ---------------------------------------------------------------------
