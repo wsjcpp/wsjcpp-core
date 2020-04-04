@@ -64,3 +64,5 @@ unit-tests:
       description: "Test create empty file"
     - name: "ReadFileToBuffer"
       description: "test for readFileToBuffer"
+    - name: "Join"
+      description: "Test join function"

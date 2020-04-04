@@ -50,6 +50,7 @@ class WSJCppCore {
         static std::string toUpper(const std::string& str);
         static void replaceAll(std::string& str, const std::string& from, const std::string& to);
         static std::vector<std::string> split(const std::string& sWhat, const std::string& sDelim);
+        static std::string join(const std::vector<std::string> &vWhat, const std::string& sDelim);
 
         static void initRandom();
         static std::string createUuid();

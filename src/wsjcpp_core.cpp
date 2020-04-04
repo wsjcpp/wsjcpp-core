@@ -482,6 +482,19 @@ std::vector<std::string> WSJCppCore::split(const std::string& sWhat, const std::
 
 // ---------------------------------------------------------------------
 
+std::string WSJCppCore::join(const std::vector<std::string> &vWhat, const std::string& sDelim) {
+    std::string sRet;
+    for (int i = 0; i < vWhat.size(); i++) {
+        if (i != 0) {
+            sRet += sDelim;
+        }
+        sRet += vWhat[i];
+    }
+    return sRet;
+}
+
+// ---------------------------------------------------------------------
+
 void WSJCppCore::initRandom() {
     std::srand(std::rand() + std::time(0));
 }

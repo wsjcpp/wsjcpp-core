@@ -57,6 +57,8 @@ list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_create_empty_fil
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_create_empty_file.cpp")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_read_file_to_buffer.h")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_read_file_to_buffer.cpp")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_join.h")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_join.cpp")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.user-custom.txt)
 
