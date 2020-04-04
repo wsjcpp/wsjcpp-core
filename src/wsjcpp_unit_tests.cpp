@@ -55,12 +55,12 @@ void WsjcppUnitTestBase::compareB(bool &bTestSuccess, const std::string &sPoint,
 
 // ---------------------------------------------------------------------
 
-std::vector<WsjcppUnitTestBase*> *g_pUnitTests = NULL;
+std::vector<WsjcppUnitTestBase*> *g_pWsjcppUnitTests = nullptr;
 
 void WsjcppUnitTests::initGlobalVariables() {
-    if (g_pUnitTests == NULL) {
+    if (g_pWsjcppUnitTests == nullptr) {
         // WsjcppLog::info(std::string(), "Create handlers map");
-        g_pUnitTests = new std::vector<WsjcppUnitTestBase*>();
+        g_pWsjcppUnitTests = new std::vector<WsjcppUnitTestBase*>();
     }
 }
 
@@ -69,8 +69,8 @@ void WsjcppUnitTests::initGlobalVariables() {
 void WsjcppUnitTests::addUnitTest(const std::string &sTestName, WsjcppUnitTestBase* pUnitTest) {
     WsjcppUnitTests::initGlobalVariables();
     bool bFound = false;
-    for (int i = 0; i < g_pUnitTests->size(); i++) {
-        WsjcppUnitTestBase* p = g_pUnitTests->at(i);
+    for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
+        WsjcppUnitTestBase* p = g_pWsjcppUnitTests->at(i);
         if (p->name() == sTestName) {
             bFound = true;
         }
@@ -79,31 +79,9 @@ void WsjcppUnitTests::addUnitTest(const std::string &sTestName, WsjcppUnitTestBa
     if (bFound) {
         WsjcppLog::err(sTestName, "Already registered");
     } else {
-        g_pUnitTests->push_back(pUnitTest);
+        g_pWsjcppUnitTests->push_back(pUnitTest);
         // Log::info(sCmd, "Registered");
     }
-}
-
-// ---------------------------------------------------------------------
-
-bool WsjcppUnitTests::runUnitTests() {
-    WsjcppUnitTests::initGlobalVariables();
-    int nAll = g_pUnitTests->size();
-    WsjcppLog::info("runUnitTests",  "All tests count " + std::to_string(nAll));
-    int nSuccess = 0;
-    for (int i = 0; i < g_pUnitTests->size(); i++) {
-        WsjcppUnitTestBase* pUnitTest = g_pUnitTests->at(i);
-        std::string sTestName = pUnitTest->name();
-        WsjcppLog::info("runUnitTests",  "Run test " + sTestName);
-        if (pUnitTest->run()) {
-            WsjcppLog::ok(sTestName,  "Test passed");
-            nSuccess++;
-        } else {
-            WsjcppLog::err(sTestName,  "Test failed");
-        }
-    }
-    WsjcppLog::info("WsjcppUnitTests::runUnitTests",  "Passed tests " + std::to_string(nSuccess) + " / " + std::to_string(nAll));
-    return nSuccess == nAll;
 }
 
 // ---------------------------------------------------------------------

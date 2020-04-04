@@ -378,3 +378,17 @@ Simular a js function `decodeURIComponent`
 ```
 static std::string decodeUriComponent(const std::string& sValue);
 ```
+
+### getHumanSizeBytes
+
+Human size for sizes in bytes
+
+```
+std::string sResult = WsjcppCore::getHumanSizeBytes(12012);
+std::cout << "Size: " << sResult << std::endl;
+```
+
+Example output:
+```
+Size: 12K
+```

@@ -23,13 +23,12 @@ class WsjcppUnitTestBase {
         std::string m_sTestName;
 };
 
-extern std::vector<WsjcppUnitTestBase*> *g_pUnitTests;
+extern std::vector<WsjcppUnitTestBase*> *g_pWsjcppUnitTests;
 
 class WsjcppUnitTests {
     public:
         static void initGlobalVariables();
-        static void addUnitTest(const std::string &sTestName, WsjcppUnitTestBase* pCmdHandler);
-        static bool runUnitTests();
+        static void addUnitTest(const std::string &sTestName, WsjcppUnitTestBase* pUnitTest);
 };
 
 // RegistryCmdHandler

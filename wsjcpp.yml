@@ -66,3 +66,5 @@ unit-tests:
       description: "test for readFileToBuffer"
     - name: "Join"
       description: "Test join function"
+    - name: "getHumanSizeBytes"
+      description: "Test function get human size in bytes"

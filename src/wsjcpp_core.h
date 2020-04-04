@@ -63,7 +63,7 @@ class WsjcppCore {
         static std::string encodeUriComponent(const std::string& sValue);
         static std::string decodeUriComponent(const std::string& sValue);
 
-        
+        static std::string getHumanSizeBytes(long nBytes);
 };
 
 
