@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <wsjcpp_core.h>
 
-REGISTRY_UNIT_TEST(UnitTestReadFileToBuffer)
+REGISTRY_WSJCPP_UNIT_TEST(UnitTestReadFileToBuffer)
 
 UnitTestReadFileToBuffer::UnitTestReadFileToBuffer()
     : WsjcppUnitTestBase("UnitTestReadFileToBuffer") {

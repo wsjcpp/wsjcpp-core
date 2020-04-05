@@ -2,7 +2,7 @@
 #include <vector>
 #include <wsjcpp_core.h>
 
-REGISTRY_UNIT_TEST(UnitTestUint2HexString)
+REGISTRY_WSJCPP_UNIT_TEST(UnitTestUint2HexString)
 
 UnitTestUint2HexString::UnitTestUint2HexString()
     : WsjcppUnitTestBase("UnitTestUint2HexString") {

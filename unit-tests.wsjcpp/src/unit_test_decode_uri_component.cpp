@@ -2,7 +2,7 @@
 #include <vector>
 #include <wsjcpp_core.h>
 
-REGISTRY_UNIT_TEST(UnitTestDecodeUriComponent)
+REGISTRY_WSJCPP_UNIT_TEST(UnitTestDecodeUriComponent)
 
 UnitTestDecodeUriComponent::UnitTestDecodeUriComponent()
     : WsjcppUnitTestBase("UnitTestDecodeUriComponent") {

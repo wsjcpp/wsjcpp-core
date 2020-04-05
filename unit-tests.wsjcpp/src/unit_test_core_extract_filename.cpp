@@ -3,7 +3,7 @@
 #include <iostream>
 #include <wsjcpp_core.h>
 
-REGISTRY_UNIT_TEST(UnitTestCoreExtractFilename)
+REGISTRY_WSJCPP_UNIT_TEST(UnitTestCoreExtractFilename)
 
 UnitTestCoreExtractFilename::UnitTestCoreExtractFilename()
     : WsjcppUnitTestBase("UnitTestCoreExtractFilename") {

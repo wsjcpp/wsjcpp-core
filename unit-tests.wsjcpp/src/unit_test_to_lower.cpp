@@ -2,7 +2,7 @@
 #include <vector>
 #include <wsjcpp_core.h>
 
-REGISTRY_UNIT_TEST(UnitTestToLower)
+REGISTRY_WSJCPP_UNIT_TEST(UnitTestToLower)
 
 UnitTestToLower::UnitTestToLower()
     : WsjcppUnitTestBase("UnitTestToLower") {

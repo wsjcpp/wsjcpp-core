@@ -3,7 +3,7 @@
 #include <iostream>
 #include <wsjcpp_core.h>
 
-REGISTRY_UNIT_TEST(UnitTestCoreNormalizePath)
+REGISTRY_WSJCPP_UNIT_TEST(UnitTestCoreNormalizePath)
 
 UnitTestCoreNormalizePath::UnitTestCoreNormalizePath()
     : WsjcppUnitTestBase("UnitTestCoreNormalizePath") {
