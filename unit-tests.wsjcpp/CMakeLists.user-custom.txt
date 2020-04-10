@@ -1,2 +1,5 @@
 ## You can here write some custom includes
 
+list (APPEND WSJCPP_INCLUDE_DIRS "./src/resources.wsjcpp")
+list (APPEND WSJCPP_SOURCES "./src/resources.wsjcpp/html_images_points_svg_path_835d61.cpp")
+list (APPEND WSJCPP_SOURCES "./src/resources.wsjcpp/html_images_points_svg_path_835d61.h")

@@ -17,6 +17,9 @@ list (APPEND WSJCPP_INCLUDE_DIRS "src")
 
 list (APPEND WSJCPP_SOURCES "src/wsjcpp_core.h")
 list (APPEND WSJCPP_SOURCES "src/wsjcpp_core.cpp")
+list (APPEND WSJCPP_SOURCES "src/wsjcpp_resources_manager.h")
+list (APPEND WSJCPP_SOURCES "src/wsjcpp_resources_manager.cpp")
+
 list (APPEND WSJCPP_SOURCES "src/main.cpp")
 
 include_directories(${WSJCPP_INCLUDE_DIRS})

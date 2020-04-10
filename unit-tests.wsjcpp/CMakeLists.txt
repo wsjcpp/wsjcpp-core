@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(unit-tests C CXX)
-add_definitions(-DWSJCPP_VERSION="ut-v0.1.2")
+add_definitions(-DWSJCPP_VERSION="ut-v0.1.3")
 add_definitions(-DWSJCPP_NAME="unit-tests-wsjcpp-core")
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -19,13 +19,15 @@ set (WSJCPP_SOURCES "")
 find_package(Threads REQUIRED)
 list (APPEND WSJCPP_LIBRARIES ${CMAKE_THREAD_LIBS_INIT})
 
-# wsjcpp-core:v0.1.2
+# wsjcpp-core:v0.1.3
 list (APPEND WSJCPP_INCLUDE_DIRS "../src")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_core.cpp")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_core.h")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_unit_tests.cpp")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_unit_tests.h")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_unit_tests_main.cpp")
+list (APPEND WSJCPP_SOURCES "../src/wsjcpp_resources_manager.h")
+list (APPEND WSJCPP_SOURCES "../src/wsjcpp_resources_manager.cpp")
 
 # unit-tests
 list (APPEND WSJCPP_INCLUDE_DIRS "src")
@@ -61,6 +63,8 @@ list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_join.h")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_join.cpp")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_get_human_size_bytes.h")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_get_human_size_bytes.cpp")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_test_resources.h")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_test_resources.cpp")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.user-custom.txt)
 
