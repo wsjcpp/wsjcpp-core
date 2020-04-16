@@ -7,6 +7,11 @@ const std::string &RES_html_images_points_svg::getFilename() {
     return s;
 }
 
+const std::string &RES_html_images_points_svg::getPackAs() {
+    static const std::string s = "text";
+    return s;
+}
+
 const int RES_html_images_points_svg::getBufferSize() {
     return 2979;
 }
