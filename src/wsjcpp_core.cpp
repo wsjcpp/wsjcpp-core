@@ -32,8 +32,8 @@ bool WsjcppCore::init(
     const std::string &sLibraryNameForExports
 ) {
     // init random
-    std::srand(std::rand() + std::time(0));
-    // WsjcppCore::initRandom();
+    // std::srand(std::time(0));
+    WsjcppCore::initRandom();
     return true;
 }
 
@@ -498,7 +498,7 @@ std::string WsjcppCore::join(const std::vector<std::string> &vWhat, const std::s
 // ---------------------------------------------------------------------
 
 void WsjcppCore::initRandom() {
-    std::srand(std::rand() + std::time(0));
+    std::srand(std::time(0));
 }
 
 // ---------------------------------------------------------------------
@@ -506,10 +506,9 @@ void WsjcppCore::initRandom() {
 std::string WsjcppCore::createUuid() {
     std::string sRet = "00000000-0000-0000-0000-000000000000";
     const std::string sAlphabet = "0123456789abcdef";
-    // unsigned t = std::time(0);
     for (int i = 0; i < 36; i++) {
         if (i != 8 && i != 13 && i != 18 && i != 23) {
-            sRet[i] = sAlphabet[std::rand() % sAlphabet.length()];
+            sRet[i] = sAlphabet[rand() % sAlphabet.length()];
         }
     }
     return sRet;

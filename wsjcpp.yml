@@ -47,8 +47,6 @@ unit-tests:
   cases:
     - name: CoreNormalizePath
       description: Check function normalizePath
-    - name: CoreUuid
-      description: Check test generate uuid function
     - name: CoreExtractFilename
       description: Check function extract filenane from path
     - name: "ToUpper"
