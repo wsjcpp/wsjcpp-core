@@ -260,17 +260,20 @@ std::vector<std::string> WsjcppCore::listOfDirs(const std::string &sDirname) {
         return vDirs;
     }
     DIR *dir = opendir(sDirname.c_str());
-    struct dirent *entry = readdir(dir);
-    while (entry != NULL) {
-        if (entry->d_type == DT_DIR) {
-            std::string sDir(entry->d_name);
-            if (sDir != "." && sDir != "..") {
-                vDirs.push_back(sDir);
+    if (dir != NULL) {
+        struct dirent *entry = readdir(dir);
+        while (entry != NULL) {
+            if (entry->d_type == DT_DIR) {
+                std::string sDir(entry->d_name);
+                if (sDir != "." && sDir != "..") {
+                    vDirs.push_back(sDir);
+                }
             }
+            entry = readdir(dir);
         }
-        entry = readdir(dir);
+        closedir(dir);
     }
-    closedir(dir);
+    std::sort(vDirs.begin(), vDirs.end());
     return vDirs;
 }
 
