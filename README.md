@@ -411,3 +411,15 @@ if (WsjcppCore::recoursiveCopyFiles("./folder1", "./folder2")) {
     // everything ok
 }
 ```
+
+
+### recoursiveRemoveDir
+
+Recoursive remove dir (+ subdirs) and files
+*Please will be careful*
+
+```
+if (WsjcppCore::recoursiveRemoveDir("./folder2")) {
+    // everything removed
+}
+```

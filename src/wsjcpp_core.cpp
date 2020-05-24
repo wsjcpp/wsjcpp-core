@@ -711,6 +711,38 @@ bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::s
     return true;
 }
 
+
+
+// ---------------------------------------------------------------------
+
+bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
+    if (!WsjcppCore::dirExists(sDir)) {
+        WsjcppLog::err("recoursiveCopyFiles", "Dir '" + sDir + "' did not exists");
+        return false;
+    }
+
+    std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(sDir);
+    for (int i = 0; i < vFiles.size(); i++) {
+        std::string sFile = sDir + "/" + vFiles[i];
+        if (!WsjcppCore::removeFile(sFile)) {
+            return false;
+        }
+    }
+
+    std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(sDir);
+    for (int i = 0; i < vDirs.size(); i++) {
+        std::string sDir2 = sDir + "/" + vDirs[i];
+        if (!WsjcppCore::recoursiveRemoveDir(sDir2)) {
+            return false;
+        }
+    }
+
+    if (!WsjcppCore::removeFile(sDir)) {
+        return false;
+    }
+    return true;
+}
+
 // ---------------------------------------------------------------------
 // WsjcppLog
 

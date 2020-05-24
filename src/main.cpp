@@ -26,7 +26,11 @@ int main(int argc, char* argv[]) {
         "Evgenii Sopov",
         ""
     );
+    if (WsjcppCore::dirExists("./tmp2")) {
+        WsjcppCore::recoursiveRemoveDir("./tmp2");
+    }
     WsjcppCore::recoursiveCopyFiles("./tmp", "./tmp2");
+    WsjcppCore::recoursiveRemoveDir("./tmp2");
 
     return 0;
 }

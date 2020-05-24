@@ -70,6 +70,7 @@ class WsjcppCore {
         static std::string getHumanSizeBytes(long nBytes);
 
         static bool recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir);
+        static bool recoursiveRemoveDir(const std::string& sDir);
 };
 
 
