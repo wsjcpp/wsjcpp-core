@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <random>
 
 // ---------------------------------------------------------------------
 // WsjcppCore
@@ -511,7 +512,6 @@ std::string WsjcppCore::createUuid() {
             sRet[i] = sAlphabet[std::rand() % sAlphabet.length()];
         }
     }
-    // Fallen::initRandom();
     return sRet;
 }
 
