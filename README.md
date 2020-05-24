@@ -207,6 +207,14 @@ if (WsjcppCore::removeFile("./file.txt")) {
 }
 ```
 
+### copyFile
+
+```
+if (WsjcppCore::copyFile("./file.txt", "./file1.txt")) {
+    std::cout << "File copied!" << std::endl;
+}
+```
+
 ### createEmptyFile
 
 Creating empty file. Will return true if file not exists and do created
@@ -391,4 +399,15 @@ std::cout << "Size: " << sResult << std::endl;
 Example output:
 ```
 Size: 12K
+```
+
+### recoursiveCopyFiles
+
+Recoursive copy files
+*If target folders does not exists then it will be created*
+
+```
+if (WsjcppCore::recoursiveCopyFiles("./folder1", "./folder2")) {
+    // everything ok
+}
 ```

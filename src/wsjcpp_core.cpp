@@ -255,6 +255,13 @@ bool WsjcppCore::dirExists(const std::string &sDirname) {
 // ---------------------------------------------------------------------
 
 std::vector<std::string> WsjcppCore::listOfDirs(const std::string &sDirname) {
+    WsjcppLog::warn("listOfDirs", "Deprecated. Use a WsjcppCore::getListOfDirs");
+    return WsjcppCore::getListOfDirs(sDirname);
+}
+
+// ---------------------------------------------------------------------
+
+std::vector<std::string> WsjcppCore::getListOfDirs(const std::string &sDirname) {
     std::vector<std::string> vDirs;
     if (!WsjcppCore::dirExists(sDirname)) {
         return vDirs;
@@ -280,6 +287,13 @@ std::vector<std::string> WsjcppCore::listOfDirs(const std::string &sDirname) {
 // ---------------------------------------------------------------------
 
 std::vector<std::string> WsjcppCore::listOfFiles(const std::string &sDirname) {
+    WsjcppLog::warn("listOfFiles", "Deprecated. Use a WsjcppCore::getListOfFiles");
+    return WsjcppCore::getListOfFiles(sDirname);
+}
+
+// ---------------------------------------------------------------------
+
+std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname) {
     std::vector<std::string> vFiles;
     if (!WsjcppCore::dirExists(sDirname)) {
         return vFiles;
@@ -392,6 +406,25 @@ bool WsjcppCore::writeFile(const std::string &sFilename, const char *pBuffer, co
 
 bool WsjcppCore::removeFile(const std::string &sFilename) {
     return remove(sFilename.c_str()) == 0;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename) {
+    if (!WsjcppCore::fileExists(sSourceFilename)) {
+        WsjcppLog::err("copyFile", "File '" + sSourceFilename + "' did not exists");
+        return false;
+    }
+
+    if (WsjcppCore::fileExists(sTargetFilename)) {
+        WsjcppLog::err("copyFile", "File '" + sTargetFilename + "' already exists");
+        return false;
+    }
+
+    std::ifstream  src(sSourceFilename, std::ios::binary);
+    std::ofstream  dst(sTargetFilename, std::ios::binary);
+    dst << src.rdbuf();
+    return true;
 }
 
 // ---------------------------------------------------------------------
@@ -634,6 +667,48 @@ std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
         }
     }
     return std::to_string(nBytes) + "PB";
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir) {
+    if (!WsjcppCore::dirExists(sSourceDir)) {
+        WsjcppLog::err("recoursiveCopyFiles", "Source Dir '" + sSourceDir + "' did not exists");
+        return false;
+    }
+
+    if (!WsjcppCore::dirExists(sTargetDir)) {
+        if (!WsjcppCore::makeDir(sTargetDir)) {
+            WsjcppLog::err("recoursiveCopyFiles", "Could not create target dir '" + sTargetDir + "'");
+            return false;
+        }
+    }
+
+    std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(sSourceDir);
+    for (int i = 0; i < vFiles.size(); i++) {
+        std::string sSourceFile = sSourceDir + "/" + vFiles[i];
+        std::string sTargetFile = sTargetDir + "/" + vFiles[i];
+        if (!WsjcppCore::copyFile(sSourceFile, sTargetFile)) {
+            return false;
+        }
+    }
+
+    std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(sSourceDir);
+    for (int i = 0; i < vDirs.size(); i++) {
+        std::string sSourceDir2 = sSourceDir + "/" + vDirs[i];
+        std::string sTargetDir2 = sTargetDir + "/" + vDirs[i];
+        if (!WsjcppCore::dirExists(sTargetDir2)) {
+            if (!WsjcppCore::makeDir(sTargetDir2)) {
+                WsjcppLog::err("recoursiveCopyFiles", "Could not create target subdir '" + sTargetDir2 + "'");
+                return false;
+            }
+        }
+
+        if (!WsjcppCore::recoursiveCopyFiles(sSourceDir2, sTargetDir2)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // ---------------------------------------------------------------------

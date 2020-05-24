@@ -34,13 +34,17 @@ class WsjcppCore {
         static bool dirExists(const std::string &sFilename);
         static bool fileExists(const std::string &sFilename);
         static std::vector<std::string> listOfDirs(const std::string &sDirname);
-        static std::vector<std::string> listOfFiles(const std::string &sDirname);     
+        static std::vector<std::string> getListOfDirs(const std::string &sDirname);
+        static std::vector<std::string> listOfFiles(const std::string &sDirname);
+        static std::vector<std::string> getListOfFiles(const std::string &sDirname);
         static bool makeDir(const std::string &sDirname);
         static bool writeFile(const std::string &sFilename, const std::string &sContent);
         static bool readTextFile(const std::string &sFilename, std::string &sOutputContent);
         static bool readFileToBuffer(const std::string &sFilename, char *pBuffer[], int &nBufferSize);
         static bool writeFile(const std::string &sFilename, const char *pBuffer, const int nBufferSize);
         static bool removeFile(const std::string &sFilename);
+        static bool copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename);
+
         static bool createEmptyFile(const std::string &sFilename);
 
         static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
@@ -64,6 +68,8 @@ class WsjcppCore {
         static std::string decodeUriComponent(const std::string& sValue);
 
         static std::string getHumanSizeBytes(long nBytes);
+
+        static bool recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir);
 };
 
 

@@ -19,7 +19,7 @@ void UnitTestListOfDirs::init() {
 
 bool UnitTestListOfDirs::run() {
     bool bTestSuccess = true;
-    std::vector<std::string> vDirs = WsjcppCore::listOfDirs("./data/list_of_dirs");
+    std::vector<std::string> vDirs = WsjcppCore::getListOfDirs("./data/list_of_dirs");
 
     compareN(bTestSuccess, "size", vDirs.size(), 4);
     if (vDirs.size() == 4) {

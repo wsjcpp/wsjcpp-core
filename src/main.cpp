@@ -26,5 +26,7 @@ int main(int argc, char* argv[]) {
         "Evgenii Sopov",
         ""
     );
+    WsjcppCore::recoursiveCopyFiles("./tmp", "./tmp2");
+
     return 0;
 }
