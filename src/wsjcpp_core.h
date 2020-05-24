@@ -116,6 +116,7 @@ class WsjcppLog {
         static void setPrefixLogFile(const std::string &sPrefixLogFile);
         static void setRotationPeriodInSec(long nRotationPeriodInSec);
         static void initGlobalVariables();
+        static void deinitGlobalVariables();
 
     private:
         static void add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage);

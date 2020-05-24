@@ -744,6 +744,13 @@ void WsjcppLog::initGlobalVariables() {
 
 // ---------------------------------------------------------------------
 
+void WsjcppLog::deinitGlobalVariables() {
+    delete WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES;
+    delete WsjcppLog::g_WSJCPP_LOG_MUTEX;
+}
+
+// ---------------------------------------------------------------------
+
 void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage) {
     WsjcppLog::initGlobalVariables();
     WsjcppLog::doLogRotateUpdateFilename();
