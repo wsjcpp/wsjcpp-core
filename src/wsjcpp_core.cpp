@@ -758,7 +758,16 @@ bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
 // ---------------------------------------------------------------------
 // WsjcppLog
 
-std::mutex * WsjcppLog::g_WSJCPP_LOG_MUTEX = nullptr;
+WsjcppLogGlobalConf::WsjcppLogGlobalConf() {
+    // 
+}
+
+WsjcppLogGlobalConf::~WsjcppLogGlobalConf() {
+    // 
+}
+
+WsjcppLogGlobalConf WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF;
+// std::mutex * WsjcppLog::g_WSJCPP_LOG_MUTEX = nullptr;
 std::string WsjcppLog::g_WSJCPP_LOG_DIR = "./";
 std::string WsjcppLog::g_WSJCPP_LOG_FILE = "";
 std::string WsjcppLog::g_WSJCPP_LOG_PREFIX_FILE = "";
@@ -822,7 +831,7 @@ void WsjcppLog::ok(const std::string &sTag, const std::string &sMessage) {
 
 std::vector<std::string> WsjcppLog::getLastLogMessages() {
     WsjcppLog::initGlobalVariables();
-    std::lock_guard<std::mutex> lock(*WsjcppLog::g_WSJCPP_LOG_MUTEX);
+    std::lock_guard<std::mutex> lock(WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logMutex);
     std::vector<std::string> vRet;
     for (int i = 0; i < g_WSJCPP_LOG_LAST_MESSAGES->size(); i++) {
         vRet.push_back(g_WSJCPP_LOG_LAST_MESSAGES->at(i));
@@ -869,18 +878,12 @@ void WsjcppLog::initGlobalVariables() {
         WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES = new std::deque<std::string>();
         // std::cout << WsjcppCore::currentTime_logformat() + ", " + WsjcppCore::threadId() + " Init last messages deque\r\n";
     }
-    // create mutex if not created
-    if (WsjcppLog::g_WSJCPP_LOG_MUTEX == nullptr) {
-        WsjcppLog::g_WSJCPP_LOG_MUTEX = new std::mutex();
-        // std::cout << WsjcppCore::currentTime_logformat() + ", " + WsjcppCore::threadId() + " Init mutex for log\r\n";
-    }
 }
 
 // ---------------------------------------------------------------------
 
 void WsjcppLog::deinitGlobalVariables() {
     delete WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES;
-    delete WsjcppLog::g_WSJCPP_LOG_MUTEX;
 }
 
 // ---------------------------------------------------------------------
@@ -889,7 +892,7 @@ void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const st
     WsjcppLog::initGlobalVariables();
     WsjcppLog::doLogRotateUpdateFilename();
 
-    std::lock_guard<std::mutex> lock(*WsjcppLog::g_WSJCPP_LOG_MUTEX);
+    std::lock_guard<std::mutex> lock(WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logMutex);
     WsjcppColorModifier def(WsjcppColorCode::FG_DEFAULT);
 
     std::string sLogMessage = WsjcppCore::currentTime_logformat() + ", " + WsjcppCore::threadId()
