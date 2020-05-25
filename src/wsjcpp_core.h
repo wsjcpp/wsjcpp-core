@@ -34,13 +34,17 @@ class WsjcppCore {
         static bool dirExists(const std::string &sFilename);
         static bool fileExists(const std::string &sFilename);
         static std::vector<std::string> listOfDirs(const std::string &sDirname);
-        static std::vector<std::string> listOfFiles(const std::string &sDirname);     
+        static std::vector<std::string> getListOfDirs(const std::string &sDirname);
+        static std::vector<std::string> listOfFiles(const std::string &sDirname);
+        static std::vector<std::string> getListOfFiles(const std::string &sDirname);
         static bool makeDir(const std::string &sDirname);
         static bool writeFile(const std::string &sFilename, const std::string &sContent);
         static bool readTextFile(const std::string &sFilename, std::string &sOutputContent);
         static bool readFileToBuffer(const std::string &sFilename, char *pBuffer[], int &nBufferSize);
         static bool writeFile(const std::string &sFilename, const char *pBuffer, const int nBufferSize);
         static bool removeFile(const std::string &sFilename);
+        static bool copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename);
+
         static bool createEmptyFile(const std::string &sFilename);
 
         static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
@@ -64,6 +68,9 @@ class WsjcppCore {
         static std::string decodeUriComponent(const std::string& sValue);
 
         static std::string getHumanSizeBytes(long nBytes);
+
+        static bool recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir);
+        static bool recoursiveRemoveDir(const std::string& sDir);
 };
 
 
@@ -100,6 +107,7 @@ class WsjcppLog {
         static std::string g_WSJCPP_LOG_DIR;
         static std::string g_WSJCPP_LOG_PREFIX_FILE;
         static std::string g_WSJCPP_LOG_FILE;
+        static bool g_WSJCPP_ENABLE_LOG_FILE;
         static long g_WSJCPP_LOG_START_TIME;
         static long g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS;
         static std::mutex * g_WSJCPP_LOG_MUTEX;
@@ -114,8 +122,10 @@ class WsjcppLog {
         static std::vector<std::string> getLastLogMessages();
         static void setLogDirectory(const std::string &sDirectoryPath);
         static void setPrefixLogFile(const std::string &sPrefixLogFile);
+        static void setEnableLogFile(bool bEnable);
         static void setRotationPeriodInSec(long nRotationPeriodInSec);
         static void initGlobalVariables();
+        static void deinitGlobalVariables();
 
     private:
         static void add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage);

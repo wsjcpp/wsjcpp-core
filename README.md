@@ -32,12 +32,10 @@ In main() you need to init logger first.
 
 int main(int argc, char* argv[]) {
     std::string TAG = "MAIN";
-    if (!WsjcppCore::dirExists(".logs")) {
-        WsjcppCore::makeDir(".logs");
-    }
     WsjcppLog::setLogDirectory(".logs");
     WsjcppLog::setPrefixLogFile("app");
-
+    // disable log file
+    // WsjcppLog::setEnableLogFile(false);
     // ... 
     return 0;
 }
@@ -204,6 +202,14 @@ if (WsjcppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBuffe
 ```
 if (WsjcppCore::removeFile("./file.txt")) {
     std::cout << "File removed" << std::endl;
+}
+```
+
+### copyFile
+
+```
+if (WsjcppCore::copyFile("./file.txt", "./file1.txt")) {
+    std::cout << "File copied!" << std::endl;
 }
 ```
 
@@ -391,4 +397,27 @@ std::cout << "Size: " << sResult << std::endl;
 Example output:
 ```
 Size: 12K
+```
+
+### recoursiveCopyFiles
+
+Recoursive copy files
+*If target folders does not exists then it will be created*
+
+```
+if (WsjcppCore::recoursiveCopyFiles("./folder1", "./folder2")) {
+    // everything ok
+}
+```
+
+
+### recoursiveRemoveDir
+
+Recoursive remove dir (+ subdirs) and files
+*Please will be careful*
+
+```
+if (WsjcppCore::recoursiveRemoveDir("./folder2")) {
+    // everything removed
+}
 ```

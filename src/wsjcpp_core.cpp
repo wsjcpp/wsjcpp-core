@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <random>
 
 // ---------------------------------------------------------------------
 // WsjcppCore
@@ -31,8 +32,8 @@ bool WsjcppCore::init(
     const std::string &sLibraryNameForExports
 ) {
     // init random
-    std::srand(std::rand() + std::time(0));
-    // WsjcppCore::initRandom();
+    // std::srand(std::time(0));
+    WsjcppCore::initRandom();
     return true;
 }
 
@@ -254,28 +255,45 @@ bool WsjcppCore::dirExists(const std::string &sDirname) {
 // ---------------------------------------------------------------------
 
 std::vector<std::string> WsjcppCore::listOfDirs(const std::string &sDirname) {
+    WsjcppLog::warn("listOfDirs", "Deprecated. Use a WsjcppCore::getListOfDirs");
+    return WsjcppCore::getListOfDirs(sDirname);
+}
+
+// ---------------------------------------------------------------------
+
+std::vector<std::string> WsjcppCore::getListOfDirs(const std::string &sDirname) {
     std::vector<std::string> vDirs;
     if (!WsjcppCore::dirExists(sDirname)) {
         return vDirs;
     }
     DIR *dir = opendir(sDirname.c_str());
-    struct dirent *entry = readdir(dir);
-    while (entry != NULL) {
-        if (entry->d_type == DT_DIR) {
-            std::string sDir(entry->d_name);
-            if (sDir != "." && sDir != "..") {
-                vDirs.push_back(sDir);
+    if (dir != NULL) {
+        struct dirent *entry = readdir(dir);
+        while (entry != NULL) {
+            if (entry->d_type == DT_DIR) {
+                std::string sDir(entry->d_name);
+                if (sDir != "." && sDir != "..") {
+                    vDirs.push_back(sDir);
+                }
             }
+            entry = readdir(dir);
         }
-        entry = readdir(dir);
+        closedir(dir);
     }
-    closedir(dir);
+    std::sort(vDirs.begin(), vDirs.end());
     return vDirs;
 }
 
 // ---------------------------------------------------------------------
 
 std::vector<std::string> WsjcppCore::listOfFiles(const std::string &sDirname) {
+    WsjcppLog::warn("listOfFiles", "Deprecated. Use a WsjcppCore::getListOfFiles");
+    return WsjcppCore::getListOfFiles(sDirname);
+}
+
+// ---------------------------------------------------------------------
+
+std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname) {
     std::vector<std::string> vFiles;
     if (!WsjcppCore::dirExists(sDirname)) {
         return vFiles;
@@ -392,6 +410,35 @@ bool WsjcppCore::removeFile(const std::string &sFilename) {
 
 // ---------------------------------------------------------------------
 
+bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename) {
+    if (!WsjcppCore::fileExists(sSourceFilename)) {
+        WsjcppLog::err("copyFile", "File '" + sSourceFilename + "' did not exists");
+        return false;
+    }
+
+    if (WsjcppCore::fileExists(sTargetFilename)) {
+        WsjcppLog::err("copyFile", "File '" + sTargetFilename + "' already exists");
+        return false;
+    }
+
+    std::ifstream src(sSourceFilename, std::ios::binary);
+    if (!src.is_open()) {
+        WsjcppLog::err("copyFile", "Could not open file '" + sSourceFilename + "' for read");
+        return false;
+    }
+
+    std::ofstream dst(sTargetFilename, std::ios::binary);
+    if (!dst.is_open()) {
+        WsjcppLog::err("copyFile", "Could not open file '" + sTargetFilename + "' for write");
+        return false;
+    }
+
+    dst << src.rdbuf();
+    return true;
+}
+
+// ---------------------------------------------------------------------
+
 bool WsjcppCore::createEmptyFile(const std::string &sFilename) {
     if (WsjcppCore::fileExists(sFilename)) {
         return false;
@@ -497,7 +544,7 @@ std::string WsjcppCore::join(const std::vector<std::string> &vWhat, const std::s
 // ---------------------------------------------------------------------
 
 void WsjcppCore::initRandom() {
-    std::srand(std::rand() + std::time(0));
+    std::srand(std::time(0));
 }
 
 // ---------------------------------------------------------------------
@@ -505,13 +552,11 @@ void WsjcppCore::initRandom() {
 std::string WsjcppCore::createUuid() {
     std::string sRet = "00000000-0000-0000-0000-000000000000";
     const std::string sAlphabet = "0123456789abcdef";
-    // unsigned t = std::time(0);
     for (int i = 0; i < 36; i++) {
         if (i != 8 && i != 13 && i != 18 && i != 23) {
-            sRet[i] = sAlphabet[std::rand() % sAlphabet.length()];
+            sRet[i] = sAlphabet[rand() % sAlphabet.length()];
         }
     }
-    // Fallen::initRandom();
     return sRet;
 }
 
@@ -635,16 +680,92 @@ std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
 }
 
 // ---------------------------------------------------------------------
+
+bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir) {
+    if (!WsjcppCore::dirExists(sSourceDir)) {
+        WsjcppLog::err("recoursiveCopyFiles", "Source Dir '" + sSourceDir + "' did not exists");
+        return false;
+    }
+
+    if (!WsjcppCore::dirExists(sTargetDir)) {
+        if (!WsjcppCore::makeDir(sTargetDir)) {
+            WsjcppLog::err("recoursiveCopyFiles", "Could not create target dir '" + sTargetDir + "'");
+            return false;
+        }
+    }
+
+    std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(sSourceDir);
+    for (int i = 0; i < vFiles.size(); i++) {
+        std::string sSourceFile = sSourceDir + "/" + vFiles[i];
+        std::string sTargetFile = sTargetDir + "/" + vFiles[i];
+        if (!WsjcppCore::copyFile(sSourceFile, sTargetFile)) {
+            return false;
+        }
+    }
+
+    std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(sSourceDir);
+    for (int i = 0; i < vDirs.size(); i++) {
+        std::string sSourceDir2 = sSourceDir + "/" + vDirs[i];
+        std::string sTargetDir2 = sTargetDir + "/" + vDirs[i];
+        if (!WsjcppCore::dirExists(sTargetDir2)) {
+            if (!WsjcppCore::makeDir(sTargetDir2)) {
+                WsjcppLog::err("recoursiveCopyFiles", "Could not create target subdir '" + sTargetDir2 + "'");
+                return false;
+            }
+        }
+
+        if (!WsjcppCore::recoursiveCopyFiles(sSourceDir2, sTargetDir2)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+// ---------------------------------------------------------------------
+
+bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
+    if (!WsjcppCore::dirExists(sDir)) {
+        WsjcppLog::err("recoursiveCopyFiles", "Dir '" + sDir + "' did not exists");
+        return false;
+    }
+
+    std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(sDir);
+    for (int i = 0; i < vFiles.size(); i++) {
+        std::string sFile = sDir + "/" + vFiles[i];
+        if (!WsjcppCore::removeFile(sFile)) {
+            return false;
+        }
+    }
+
+    std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(sDir);
+    for (int i = 0; i < vDirs.size(); i++) {
+        std::string sDir2 = sDir + "/" + vDirs[i];
+        if (!WsjcppCore::recoursiveRemoveDir(sDir2)) {
+            return false;
+        }
+    }
+
+    if (!WsjcppCore::removeFile(sDir)) {
+        return false;
+    }
+    return true;
+}
+
+// ---------------------------------------------------------------------
 // WsjcppLog
 
-// Last log messages
-std::deque<std::string> * WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES = nullptr;
 std::mutex * WsjcppLog::g_WSJCPP_LOG_MUTEX = nullptr;
 std::string WsjcppLog::g_WSJCPP_LOG_DIR = "./";
 std::string WsjcppLog::g_WSJCPP_LOG_FILE = "";
 std::string WsjcppLog::g_WSJCPP_LOG_PREFIX_FILE = "";
+bool WsjcppLog::g_WSJCPP_ENABLE_LOG_FILE = true;
 long WsjcppLog::g_WSJCPP_LOG_START_TIME = 0;
 long WsjcppLog::g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS = 51000;
+
+// Last log messages
+std::deque<std::string> * WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES = nullptr;
 
 // ---------------------------------------------------------------------
 
@@ -711,6 +832,11 @@ std::vector<std::string> WsjcppLog::getLastLogMessages() {
 
 void WsjcppLog::setLogDirectory(const std::string &sDirectoryPath) {
     WsjcppLog::g_WSJCPP_LOG_DIR = sDirectoryPath;
+    if (!WsjcppCore::dirExists(WsjcppLog::g_WSJCPP_LOG_DIR)) {
+        if (!WsjcppCore::makeDir(WsjcppLog::g_WSJCPP_LOG_DIR)) {
+            WsjcppLog::err("setLogDirectory", "Could not create log directory '" + sDirectoryPath + "'");
+        }
+    }
     WsjcppLog::doLogRotateUpdateFilename(true);
 }
 
@@ -723,9 +849,14 @@ void WsjcppLog::setPrefixLogFile(const std::string &sPrefixLogFile) {
 
 // ---------------------------------------------------------------------
 
+void WsjcppLog::setEnableLogFile(bool bEnable) {
+    WsjcppLog::g_WSJCPP_ENABLE_LOG_FILE = bEnable;
+}
+
+// ---------------------------------------------------------------------
+
 void WsjcppLog::setRotationPeriodInSec(long nRotationPeriodInSec) {
     WsjcppLog::g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS = nRotationPeriodInSec;
-
 }
 
 // ---------------------------------------------------------------------
@@ -745,6 +876,13 @@ void WsjcppLog::initGlobalVariables() {
 
 // ---------------------------------------------------------------------
 
+void WsjcppLog::deinitGlobalVariables() {
+    delete WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES;
+    delete WsjcppLog::g_WSJCPP_LOG_MUTEX;
+}
+
+// ---------------------------------------------------------------------
+
 void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage) {
     WsjcppLog::initGlobalVariables();
     WsjcppLog::doLogRotateUpdateFilename();
@@ -760,15 +898,18 @@ void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const st
     while (g_WSJCPP_LOG_LAST_MESSAGES->size() > 50) {
         g_WSJCPP_LOG_LAST_MESSAGES->pop_back();
     }
-    // TODO try create global variable
-    std::ofstream logFile(WsjcppLog::g_WSJCPP_LOG_FILE, std::ios::app);
-    if (!logFile) {
-        std::cout << "Error Opening File" << std::endl;
-        return;
-    }
 
-    logFile << sLogMessage << std::endl;
-    logFile.close();
+    // log file
+    if (WsjcppLog::g_WSJCPP_ENABLE_LOG_FILE) {
+        std::ofstream logFile(WsjcppLog::g_WSJCPP_LOG_FILE, std::ios::app);
+        if (!logFile) {
+            std::cout << "Error Opening File" << std::endl;
+            return;
+        }
+
+        logFile << sLogMessage << std::endl;
+        logFile.close();    
+    }
 }
 
 
