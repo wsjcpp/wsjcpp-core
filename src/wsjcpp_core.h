@@ -102,17 +102,23 @@ class WsjcppColorModifier {
 
 // ---------------------------------------------------------------------
 
+class WsjcppLogGlobalConf {
+    public:
+        WsjcppLogGlobalConf();
+        void doLogRotateUpdateFilename(bool bForce = false);
+        std::mutex logMutex;
+        std::string logDir;
+        std::string logPrefixFile;
+        std::string logFile;
+        bool enableLogFile;
+        long logStartTime;
+        long logRotationPeriodInSeconds;
+        std::deque<std::string> logLastMessages;
+};
+
 class WsjcppLog {
     public:
-        static std::string g_WSJCPP_LOG_DIR;
-        static std::string g_WSJCPP_LOG_PREFIX_FILE;
-        static std::string g_WSJCPP_LOG_FILE;
-        static bool g_WSJCPP_ENABLE_LOG_FILE;
-        static long g_WSJCPP_LOG_START_TIME;
-        static long g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS;
-        static std::mutex * g_WSJCPP_LOG_MUTEX;
-        static std::deque<std::string> * g_WSJCPP_LOG_LAST_MESSAGES;
-        static void doLogRotateUpdateFilename(bool bForce = false);
+        static WsjcppLogGlobalConf g_WSJCPP_LOG_GLOBAL_CONF;
 
         static void info(const std::string &sTag, const std::string &sMessage);
         static void err(const std::string &sTag, const std::string &sMessage);
@@ -124,8 +130,6 @@ class WsjcppLog {
         static void setPrefixLogFile(const std::string &sPrefixLogFile);
         static void setEnableLogFile(bool bEnable);
         static void setRotationPeriodInSec(long nRotationPeriodInSec);
-        static void initGlobalVariables();
-        static void deinitGlobalVariables();
 
     private:
         static void add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage);
