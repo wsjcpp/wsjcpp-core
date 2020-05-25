@@ -299,17 +299,19 @@ std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname)
         return vFiles;
     }
     DIR *dir = opendir(sDirname.c_str());
-    struct dirent *entry = readdir(dir);
-    while (entry != NULL) {
-        if (entry->d_type != DT_DIR) {
-            std::string sDir(entry->d_name);
-            if (sDir != "." && sDir != "..") {
-                vFiles.push_back(sDir);
+    if (dir != NULL) {
+        struct dirent *entry = readdir(dir);
+        while (entry != NULL) {
+            if (entry->d_type != DT_DIR) {
+                std::string sDir(entry->d_name);
+                if (sDir != "." && sDir != "..") {
+                    vFiles.push_back(sDir);
+                }
             }
+            entry = readdir(dir);
         }
-        entry = readdir(dir);
+        closedir(dir);
     }
-    closedir(dir);
     return vFiles;
 }
 
