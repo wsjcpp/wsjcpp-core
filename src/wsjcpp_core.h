@@ -107,6 +107,7 @@ class WsjcppLog {
         static std::string g_WSJCPP_LOG_DIR;
         static std::string g_WSJCPP_LOG_PREFIX_FILE;
         static std::string g_WSJCPP_LOG_FILE;
+        static bool g_WSJCPP_ENABLE_LOG_FILE;
         static long g_WSJCPP_LOG_START_TIME;
         static long g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS;
         static std::mutex * g_WSJCPP_LOG_MUTEX;
@@ -121,6 +122,7 @@ class WsjcppLog {
         static std::vector<std::string> getLastLogMessages();
         static void setLogDirectory(const std::string &sDirectoryPath);
         static void setPrefixLogFile(const std::string &sPrefixLogFile);
+        static void setEnableLogFile(bool bEnable);
         static void setRotationPeriodInSec(long nRotationPeriodInSec);
         static void initGlobalVariables();
         static void deinitGlobalVariables();

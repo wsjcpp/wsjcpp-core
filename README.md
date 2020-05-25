@@ -32,12 +32,10 @@ In main() you need to init logger first.
 
 int main(int argc, char* argv[]) {
     std::string TAG = "MAIN";
-    if (!WsjcppCore::dirExists(".logs")) {
-        WsjcppCore::makeDir(".logs");
-    }
     WsjcppLog::setLogDirectory(".logs");
     WsjcppLog::setPrefixLogFile("app");
-
+    // disable log file
+    // WsjcppLog::setEnableLogFile(false);
     // ... 
     return 0;
 }

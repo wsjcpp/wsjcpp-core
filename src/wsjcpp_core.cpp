@@ -746,14 +746,16 @@ bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
 // ---------------------------------------------------------------------
 // WsjcppLog
 
-// Last log messages
-std::deque<std::string> * WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES = nullptr;
 std::mutex * WsjcppLog::g_WSJCPP_LOG_MUTEX = nullptr;
 std::string WsjcppLog::g_WSJCPP_LOG_DIR = "./";
 std::string WsjcppLog::g_WSJCPP_LOG_FILE = "";
 std::string WsjcppLog::g_WSJCPP_LOG_PREFIX_FILE = "";
+bool WsjcppLog::g_WSJCPP_ENABLE_LOG_FILE = true;
 long WsjcppLog::g_WSJCPP_LOG_START_TIME = 0;
 long WsjcppLog::g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS = 51000;
+
+// Last log messages
+std::deque<std::string> * WsjcppLog::g_WSJCPP_LOG_LAST_MESSAGES = nullptr;
 
 // ---------------------------------------------------------------------
 
@@ -820,6 +822,11 @@ std::vector<std::string> WsjcppLog::getLastLogMessages() {
 
 void WsjcppLog::setLogDirectory(const std::string &sDirectoryPath) {
     WsjcppLog::g_WSJCPP_LOG_DIR = sDirectoryPath;
+    if (!WsjcppCore::dirExists(WsjcppLog::g_WSJCPP_LOG_DIR)) {
+        if (!WsjcppCore::makeDir(WsjcppLog::g_WSJCPP_LOG_DIR)) {
+            WsjcppLog::err("setLogDirectory", "Could not create log directory '" + sDirectoryPath + "'");
+        }
+    }
     WsjcppLog::doLogRotateUpdateFilename(true);
 }
 
@@ -832,9 +839,14 @@ void WsjcppLog::setPrefixLogFile(const std::string &sPrefixLogFile) {
 
 // ---------------------------------------------------------------------
 
+void WsjcppLog::setEnableLogFile(bool bEnable) {
+    WsjcppLog::g_WSJCPP_ENABLE_LOG_FILE = bEnable;
+}
+
+// ---------------------------------------------------------------------
+
 void WsjcppLog::setRotationPeriodInSec(long nRotationPeriodInSec) {
     WsjcppLog::g_WSJCPP_LOG_ROTATION_PERIOD_IN_SECONDS = nRotationPeriodInSec;
-
 }
 
 // ---------------------------------------------------------------------
@@ -876,15 +888,18 @@ void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const st
     while (g_WSJCPP_LOG_LAST_MESSAGES->size() > 50) {
         g_WSJCPP_LOG_LAST_MESSAGES->pop_back();
     }
-    // TODO try create global variable
-    std::ofstream logFile(WsjcppLog::g_WSJCPP_LOG_FILE, std::ios::app);
-    if (!logFile) {
-        std::cout << "Error Opening File" << std::endl;
-        return;
-    }
 
-    logFile << sLogMessage << std::endl;
-    logFile.close();
+    // log file
+    if (WsjcppLog::g_WSJCPP_ENABLE_LOG_FILE) {
+        std::ofstream logFile(WsjcppLog::g_WSJCPP_LOG_FILE, std::ios::app);
+        if (!logFile) {
+            std::cout << "Error Opening File" << std::endl;
+            return;
+        }
+
+        logFile << sLogMessage << std::endl;
+        logFile.close();    
+    }
 }
 
 

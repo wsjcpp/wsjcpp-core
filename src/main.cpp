@@ -8,9 +8,7 @@ int main(int argc, char* argv[]) {
     std::string appName = std::string(WSJCPP_APP_NAME);
     std::string appVersion = std::string(WSJCPP_APP_VERSION);
 
-    if (!WsjcppCore::dirExists(".logs")) {
-        WsjcppCore::makeDir(".logs");
-    }
+    // WsjcppLog::setEnableLogFile(false);
     WsjcppLog::setLogDirectory(".logs");
     WsjcppLog::setPrefixLogFile("wsjcpp_core");
 
