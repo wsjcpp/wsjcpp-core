@@ -421,8 +421,18 @@ bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string 
         return false;
     }
 
-    std::ifstream  src(sSourceFilename, std::ios::binary);
-    std::ofstream  dst(sTargetFilename, std::ios::binary);
+    std::ifstream src(sSourceFilename, std::ios::binary);
+    if (!src.is_open()) {
+        WsjcppLog::err("copyFile", "Could not open file '" + sSourceFilename + "' for read");
+        return false;
+    }
+
+    std::ofstream dst(sTargetFilename, std::ios::binary);
+    if (!dst.is_open()) {
+        WsjcppLog::err("copyFile", "Could not open file '" + sTargetFilename + "' for write");
+        return false;
+    }
+
     dst << src.rdbuf();
     return true;
 }
