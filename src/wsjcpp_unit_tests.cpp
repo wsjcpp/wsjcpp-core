@@ -1,4 +1,5 @@
 #include "wsjcpp_unit_tests.h"
+#include <cmath>
 
 WsjcppUnitTestBase::WsjcppUnitTestBase(const std::string &sTestName) {
     m_sTestName = sTestName;
@@ -36,7 +37,7 @@ bool WsjcppUnitTestBase::compareN(bool &bTestSuccess, const std::string &sPoint,
 // ---------------------------------------------------------------------
 
 bool WsjcppUnitTestBase::compareD(bool &bTestSuccess, const std::string &sPoint, double nValue, double nExpected) {
-    if (nValue != nExpected) {
+    if (abs(nValue - nExpected) > std::numeric_limits<double>::epsilon()) {
         WsjcppLog::err(TAG, " {" + sPoint + "} Expected '" + std::to_string(nExpected) + "', but got '" + std::to_string(nValue) + "'");
         bTestSuccess = false;
         return false;
