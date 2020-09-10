@@ -39,6 +39,8 @@ bool bTestSuccess = true;
     tests.push_back(LTest("|1f|2п|3%^|44354|5kdasjfdre|", "|", {"", "1f", "2п", "3%^", "44354", "5kdasjfdre", ""}));
     tests.push_back(LTest("some1 => some2 => some3", "=>", {"some1 ", " some2 ", " some3"}));
     tests.push_back(LTest("some1 => some2 => some3 =>", "=>", {"some1 ", " some2 ", " some3 ", ""}));
+    tests.push_back(LTest("./export-cli", "/", {".", "export-cli"}));
+    tests.push_back(LTest("./export-cli/", "/", {".", "export-cli", ""}));
 
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
