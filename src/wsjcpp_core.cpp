@@ -1,6 +1,7 @@
 #include "wsjcpp_core.h"
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -16,10 +17,236 @@
 #include <cstdint>
 #include <unistd.h>
 #include <streambuf>
-#include <sys/types.h>
-#include <sys/socket.h>
+// #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <random>
+
+// ---------------------------------------------------------------------
+// WsjcppFilePermissions
+
+WsjcppFilePermissions::WsjcppFilePermissions() {
+    // default permissions
+    m_bOwnerReadFlag = true;
+    m_bOwnerWriteFlag = true;
+    m_bOwnerExecuteFlag = false;
+    m_bGroupReadFlag = false;
+    m_bGroupWriteFlag = false;
+    m_bGroupExecuteFlag = false;
+    m_bOtherReadFlag = true;
+    m_bOtherWriteFlag = false;
+    m_bOtherExecuteFlag = false;
+}
+
+WsjcppFilePermissions::WsjcppFilePermissions(
+    bool bOwnerReadFlag, bool bOwnerWriteFlag, bool bOwnerExecuteFlag,
+    bool bGroupReadFlag, bool bGroupWriteFlag, bool bGroupExecuteFlag,
+    bool bOtherReadFlag, bool bOtherWriteFlag, bool bOtherExecuteFlag
+) {
+    m_bOwnerReadFlag = bOwnerReadFlag;
+    m_bOwnerWriteFlag = bOwnerWriteFlag;
+    m_bOwnerExecuteFlag = bOwnerExecuteFlag;
+    m_bGroupReadFlag = bGroupReadFlag;
+    m_bGroupWriteFlag = bGroupWriteFlag;
+    m_bGroupExecuteFlag = bGroupExecuteFlag;
+    m_bOtherReadFlag = bOtherReadFlag;
+    m_bOtherWriteFlag = bOtherWriteFlag;
+    m_bOtherExecuteFlag = bOtherExecuteFlag;
+}
+
+WsjcppFilePermissions::WsjcppFilePermissions(uint16_t nFilePermission) {
+    
+    // owner
+    m_bOwnerReadFlag = nFilePermission & 0x0400 != 0x0;
+    m_bOwnerWriteFlag = nFilePermission & 0x0200 != 0x0;
+    m_bOwnerExecuteFlag = nFilePermission & 0x0100 != 0x0;
+
+    // group
+    m_bGroupReadFlag = nFilePermission & 0x0040 != 0x0;
+    m_bGroupWriteFlag = nFilePermission & 0x0020 != 0x0;
+    m_bGroupExecuteFlag = nFilePermission & 0x0010 != 0x0;
+
+    // for other
+    m_bOtherReadFlag = nFilePermission & 0x0004 != 0x0;
+    m_bOtherWriteFlag = nFilePermission & 0x0002 != 0x0;
+    m_bOtherExecuteFlag = nFilePermission & 0x0001 != 0x0;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOwnerReadFlag(bool bOwnerReadFlag) {
+    m_bOwnerReadFlag = bOwnerReadFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getOwnerReadFlag() const {
+    return m_bOwnerReadFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOwnerWriteFlag(bool bOwnerWriteFlag) {
+    m_bOwnerWriteFlag = bOwnerWriteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getOwnerWriteFlag() const {
+    return m_bOwnerWriteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOwnerExecuteFlag(bool bOwnerExecuteFlag) {
+    m_bOwnerExecuteFlag = bOwnerExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getOwnerExecuteFlag() const {
+    return m_bOwnerExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOwnerFlags(bool bOwnerReadFlag, bool bOwnerWriteFlag, bool bOwnerExecuteFlag) {
+    m_bOwnerReadFlag = bOwnerReadFlag;
+    m_bOwnerWriteFlag = bOwnerWriteFlag;
+    m_bOwnerExecuteFlag = bOwnerExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setGroupReadFlag(bool bGroupReadFlag) {
+    m_bGroupReadFlag = bGroupReadFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getGroupReadFlag() const {
+    return m_bGroupReadFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setGroupWriteFlag(bool bGroupWriteFlag) {
+    m_bGroupWriteFlag = bGroupWriteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getGroupWriteFlag() const {
+    return m_bGroupWriteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setGroupExecuteFlag(bool bGroupExecuteFlag) {
+    m_bGroupExecuteFlag = bGroupExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getGroupExecuteFlag() const {
+    return m_bGroupExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setGroupFlags(bool bGroupReadFlag, bool bGroupWriteFlag, bool bGroupExecuteFlag) {
+    m_bGroupReadFlag = bGroupReadFlag;
+    m_bGroupWriteFlag = bGroupWriteFlag;
+    m_bGroupExecuteFlag = bGroupExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOtherReadFlag(bool bOtherReadFlag) {
+    m_bOtherReadFlag = bOtherReadFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getOtherReadFlag() const {
+    return m_bOtherReadFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOtherWriteFlag(bool bOtherWriteFlag) {
+    m_bOtherWriteFlag = bOtherWriteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getOtherWriteFlag() const {
+    return m_bOtherWriteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOtherExecuteFlag(bool bOtherExecuteFlag) {
+    m_bOtherExecuteFlag = bOtherExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppFilePermissions::getOtherExecuteFlag() const {
+    return m_bOtherExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+void WsjcppFilePermissions::setOtherFlags(bool bOtherReadFlag, bool bOtherWriteFlag, bool bOtherExecuteFlag) {
+    m_bOtherReadFlag = bOtherReadFlag;
+    m_bOtherWriteFlag = bOtherWriteFlag;
+    m_bOtherExecuteFlag = bOtherExecuteFlag;
+}
+
+// ---------------------------------------------------------------------
+
+std::string WsjcppFilePermissions::toString() const {
+    std::string sRet = "-";
+
+    // owner
+    sRet += m_bOwnerReadFlag ? "r" : "-";
+    sRet += m_bOwnerWriteFlag ? "w" : "-";
+    sRet += m_bOwnerExecuteFlag ? "x" : "-";
+
+    // group
+    sRet += m_bGroupReadFlag ? "r" : "-";
+    sRet += m_bGroupWriteFlag ? "w" : "-";
+    sRet += m_bGroupExecuteFlag ? "x" : "-";
+
+    // for other
+    sRet += m_bOtherReadFlag ? "r" : "-";
+    sRet += m_bOtherWriteFlag ? "w" : "-";
+    sRet += m_bOtherExecuteFlag ? "x" : "-";
+
+    return sRet;
+}
+
+// ---------------------------------------------------------------------
+
+uint16_t WsjcppFilePermissions::toUInt16() const {
+    uint16_t nRet = 0x0;
+    // owner
+    nRet |= m_bOwnerReadFlag ? 0x0400 : 0x0;
+    nRet |= m_bOwnerWriteFlag ? 0x0200 : 0x0;
+    nRet |= m_bOwnerExecuteFlag ? 0x0100 : 0x0;
+
+    // group
+    nRet += m_bGroupReadFlag ? 0x0040 : 0x0;
+    nRet += m_bGroupWriteFlag ? 0x0020 : 0x0;
+    nRet += m_bGroupExecuteFlag ? 0x0010 : 0x0;
+
+    // for other
+    nRet += m_bOtherReadFlag ? 0x0004 : 0x0;
+    nRet += m_bOtherWriteFlag ? 0x0002 : 0x0;
+    nRet += m_bOtherExecuteFlag ? 0x0001 : 0x0;
+    return nRet;
+}
+
 
 // ---------------------------------------------------------------------
 // WsjcppCore
@@ -723,8 +950,6 @@ bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::s
     return true;
 }
 
-
-
 // ---------------------------------------------------------------------
 
 bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
@@ -752,6 +977,71 @@ bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
     if (!WsjcppCore::removeFile(sDir)) {
         return false;
     }
+    return true;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError) {
+
+    mode_t m;
+
+    // owner
+    m |= filePermissions.getOwnerReadFlag() ? S_IRUSR : 0x0;
+    m |= filePermissions.getOwnerWriteFlag() & S_IWUSR != 0x0;
+    m |= filePermissions.getOwnerExecuteFlag() & S_IXUSR != 0x0;
+
+    // group
+    m |= filePermissions.getGroupReadFlag() ? S_IRGRP : 0x0;
+    m |= filePermissions.getGroupWriteFlag() ? S_IWGRP : 0x0;
+    m |= filePermissions.getGroupExecuteFlag() ? S_IXGRP : 0x0;
+
+    // for other
+    m |= filePermissions.getOtherReadFlag() ? S_IROTH : 0x0;
+    m |= filePermissions.getOtherWriteFlag() ? S_IWOTH : 0x0;
+    m |= filePermissions.getOtherExecuteFlag() ? S_IXOTH : 0x0;
+
+    if (chmod(sFilePath.c_str(), m) != 0) {
+        sError = "Could not change permissions for: '" + sFilePath + "'";
+        return false;
+    }
+    return true;
+}
+
+// ---------------------------------------------------------------------
+
+bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError) {
+    if (!WsjcppCore::fileExists(sFilePath)) {
+        sError = "File '" + sFilePath + "' - not found";
+        return false;
+    }
+
+    struct stat fileStat;
+    if (stat(sFilePath.c_str(), &fileStat) < 0) {
+        sError = "Could not get info about file '" + sFilePath + "'.";
+        return false;
+    }
+
+    mode_t m = fileStat.st_mode;
+
+    // S_ISDIR(fileStat.st_mode)) ? "d" : "-"
+
+    // owner
+    filePermissions.setOwnerReadFlag(m & S_IRUSR);
+    filePermissions.setOwnerWriteFlag(m & S_IWUSR);
+    filePermissions.setOwnerExecuteFlag(m & S_IXUSR);
+
+    
+    // group
+    filePermissions.setGroupReadFlag(m & S_IRGRP);
+    filePermissions.setGroupWriteFlag(m & S_IWGRP);
+    filePermissions.setGroupExecuteFlag(m & S_IXGRP);
+
+    // for other
+    filePermissions.setOtherReadFlag(m & S_IROTH);
+    filePermissions.setOtherWriteFlag(m & S_IWOTH);
+    filePermissions.setOtherExecuteFlag(m & S_IXOTH);
+
     return true;
 }
 

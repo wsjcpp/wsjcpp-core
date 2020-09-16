@@ -40,7 +40,13 @@ int main(int argc, char** argv) {
                 nSuccess++;
             }
         }
-        WsjcppLog::info(TAG,  "Passed tests " + std::to_string(nSuccess) + " / " + std::to_string(nAll));
+        if (nSuccess == nAll) {
+            WsjcppLog::ok(TAG, "All unit-tests passed" + std::to_string(nSuccess) + " / " + std::to_string(nAll));
+        } else {
+            WsjcppLog::warn(TAG, "Passed unit-tests " + std::to_string(nSuccess) + " / " + std::to_string(nAll));
+            WsjcppLog::err(TAG, std::to_string(nAll - nSuccess) + " unit-test(s) failed.");
+        }
+
         bool bResult = nSuccess == nAll;
         return bResult ? 0 : -1;
     } else if (argc == 2) {

@@ -79,3 +79,5 @@ unit-tests:
       description: "Test basic resources"
     - name: "ListOfDirs"
       description: "Check list of directories"
+    - name: "FilePermissions"
+      description: ""
