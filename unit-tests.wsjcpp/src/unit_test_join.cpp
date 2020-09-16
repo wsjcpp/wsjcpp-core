@@ -10,21 +10,26 @@ UnitTestJoin::UnitTestJoin()
 
 // ---------------------------------------------------------------------
 
-void UnitTestJoin::init() {
+bool UnitTestJoin::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestJoin::run() {
-    bool bTestSuccess = true;
+void UnitTestJoin::executeTest() {
     std::vector<std::string> vTest;
     vTest.push_back("");
     vTest.push_back("1");
     vTest.push_back("2");
     vTest.push_back("abc");
     std::string sRet = WsjcppCore::join(vTest, ", ");
-    compareS(bTestSuccess, "join", sRet, ", 1, 2, abc");
-    return bTestSuccess;
+    compareS("join", sRet, ", 1, 2, abc");
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestJoin::doAfterTest() {
+    // nothing
+    return true;
+}

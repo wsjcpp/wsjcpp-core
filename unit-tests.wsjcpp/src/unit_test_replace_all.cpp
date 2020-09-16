@@ -10,15 +10,14 @@ UnitTestReplaceAll::UnitTestReplaceAll()
 
 // ---------------------------------------------------------------------
 
-void UnitTestReplaceAll::init() {
+bool UnitTestReplaceAll::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestReplaceAll::run() {
-    bool bTestSuccess = true;
-    
+void UnitTestReplaceAll::executeTest() {
     struct LTest {
         LTest(
             const std::string &sStr,
@@ -44,9 +43,13 @@ bool UnitTestReplaceAll::run() {
         LTest test = tests[i];
         std::string sStr = test.sStr;
         WsjcppCore::replaceAll(sStr, test.sFrom, test.sTo);
-        compareS(bTestSuccess, "test" + std::to_string(i), sStr, test.sExpectedStr);
+        compareS("test" + std::to_string(i), sStr, test.sExpectedStr);
     }
-    
-    return bTestSuccess;
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestReplaceAll::doAfterTest() {
+    // nothing
+    return true;
+}

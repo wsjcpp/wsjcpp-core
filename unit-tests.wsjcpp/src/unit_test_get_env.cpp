@@ -10,15 +10,14 @@ UnitTestGetEnv::UnitTestGetEnv()
 
 // ---------------------------------------------------------------------
 
-void UnitTestGetEnv::init() {
+bool UnitTestGetEnv::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestGetEnv::run() {
-    bool bTestSuccess = true;
-    
+void UnitTestGetEnv::executeTest() {
     struct LTest {
         LTest(const std::string &sName, bool bExpectedResult, const std::string &sExpectedValue) {
             this->sName = sName;
@@ -41,9 +40,14 @@ bool UnitTestGetEnv::run() {
         std::string sValue;
         bool bResult = WsjcppCore::getEnv(test.sName, sValue);
         std::string testBaseName = "test#" + std::to_string(i) + " (" + test.sName + ")";
-        compareB(bTestSuccess,  testBaseName + "-result", bResult, test.bExpectedResult);
-        compareS(bTestSuccess, testBaseName + "-value", sValue, test.sExpectedValue);
+        compareB(testBaseName + "-result", bResult, test.bExpectedResult);
+        compareS(testBaseName + "-value", sValue, test.sExpectedValue);
     }
-    return bTestSuccess;
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestGetEnv::doAfterTest() {
+    // nothing
+    return true;
+}

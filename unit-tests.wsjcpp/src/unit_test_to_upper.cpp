@@ -10,15 +10,20 @@ UnitTestToUpper::UnitTestToUpper()
 
 // ---------------------------------------------------------------------
 
-void UnitTestToUpper::init() {
+bool UnitTestToUpper::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestToUpper::run() {
-    bool bTestSuccess = true;
-    compareS(bTestSuccess, "str1", "ABC_DEF", WsjcppCore::toUpper("abc_def"));
-    return bTestSuccess;
+void UnitTestToUpper::executeTest() {
+    compare("str1", "ABC_DEF", WsjcppCore::toUpper("abc_def"));
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestToUpper::doAfterTest() {
+    // nothing
+    return true;
+}

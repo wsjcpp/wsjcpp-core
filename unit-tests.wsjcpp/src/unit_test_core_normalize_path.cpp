@@ -12,13 +12,14 @@ UnitTestCoreNormalizePath::UnitTestCoreNormalizePath()
 
 // ---------------------------------------------------------------------
 
-void UnitTestCoreNormalizePath::init() {
+bool UnitTestCoreNormalizePath::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestCoreNormalizePath::run() {
+void UnitTestCoreNormalizePath::executeTest() {
     std::map<std::string, std::string> mapPaths;
     mapPaths.insert(std::pair<std::string, std::string>("",""));
     mapPaths.insert(std::pair<std::string, std::string>("/usr/local/bin/some","/usr/local/bin/some"));
@@ -36,16 +37,17 @@ bool UnitTestCoreNormalizePath::run() {
     mapPaths.insert(std::pair<std::string, std::string>(".//","./"));
     std::map<std::string, std::string>::iterator it;
 
-    int nCounter = 0;
     for ( it = mapPaths.begin(); it != mapPaths.end(); it++ ) {
         std::string sSource = it->first;
         std::string sExpected = it->second;
         std::string sGot = WsjcppCore::doNormalizePath(sSource);
-        if (sGot != sExpected) {
-            nCounter++;
-            WsjcppLog::err(TAG, "Wrong normalize path for: '" + sSource + "'.\n\t Got: '" + sGot + "', but expected: '" + sExpected + "'");
-        }
-        
+        compare(sSource, sGot, sExpected);
     }
-    return nCounter == 0;
+}
+
+// ---------------------------------------------------------------------
+
+bool UnitTestCoreNormalizePath::doAfterTest() {
+    // nothing
+    return true;
 }

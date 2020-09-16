@@ -10,15 +10,14 @@ UnitTestDecodeUriComponent::UnitTestDecodeUriComponent()
 
 // ---------------------------------------------------------------------
 
-void UnitTestDecodeUriComponent::init() {
+bool UnitTestDecodeUriComponent::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestDecodeUriComponent::run() {
-    bool bTestSuccess = true;
-
+void UnitTestDecodeUriComponent::executeTest() {
      struct LTest {
         LTest(
             const std::string &sStr,
@@ -38,9 +37,13 @@ bool UnitTestDecodeUriComponent::run() {
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
         std::string sStr = WsjcppCore::decodeUriComponent(test.sStr);
-        compareS(bTestSuccess, "test" + std::to_string(i), sStr, test.sExpectedStr);
+        compareS("test" + std::to_string(i), sStr, test.sExpectedStr);
     }
-
-    return bTestSuccess;
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestDecodeUriComponent::doAfterTest() {
+    // nothing
+    return true;
+}

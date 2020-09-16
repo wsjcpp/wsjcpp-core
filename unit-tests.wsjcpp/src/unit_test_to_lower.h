@@ -7,8 +7,9 @@
 class UnitTestToLower : public WsjcppUnitTestBase {
     public:
         UnitTestToLower();
-        virtual void init();
-        virtual bool run();
+        virtual bool doBeforeTest() override;
+        virtual void executeTest() override;
+        virtual bool doAfterTest() override;
 };
 
 #endif // UNIT_TEST_TO_LOWER_H

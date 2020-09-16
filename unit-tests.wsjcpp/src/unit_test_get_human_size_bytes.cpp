@@ -10,15 +10,14 @@ UnitTestgetHumanSizeBytes::UnitTestgetHumanSizeBytes()
 
 // ---------------------------------------------------------------------
 
-void UnitTestgetHumanSizeBytes::init() {
+bool UnitTestgetHumanSizeBytes::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestgetHumanSizeBytes::run() {
-    bool bTestSuccess = true;
-
+void UnitTestgetHumanSizeBytes::executeTest() {
     struct LTest {
         LTest(
             long nValue,
@@ -56,9 +55,13 @@ bool UnitTestgetHumanSizeBytes::run() {
         long nValue = tests[i].nValue;
         std::string sExpectedStr = tests[i].sExpectedStr;
         std::string sGotStr = WsjcppCore::getHumanSizeBytes(nValue);
-        compareS(bTestSuccess, "value=" + std::to_string(nValue), sGotStr, sExpectedStr);
+        compareS("value=" + std::to_string(nValue), sGotStr, sExpectedStr);
     }
-    
-    return bTestSuccess;
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestgetHumanSizeBytes::doAfterTest() {
+    // nothing
+    return true;
+}

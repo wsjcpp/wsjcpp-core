@@ -36,13 +36,8 @@ int main(int argc, char** argv) {
         int nSuccess = 0;
         for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
             WsjcppUnitTestBase* pUnitTest = g_pWsjcppUnitTests->at(i);
-            std::string sTestName = pUnitTest->name();
-            WsjcppLog::info(TAG,  "Run test " + sTestName);
-            if (pUnitTest->run()) {
-                WsjcppLog::ok(sTestName,  "Test passed");
+            if (pUnitTest->runTest()) {
                 nSuccess++;
-            } else {
-                WsjcppLog::err(sTestName,  "Test failed");
             }
         }
         WsjcppLog::info(TAG,  "Passed tests " + std::to_string(nSuccess) + " / " + std::to_string(nAll));
@@ -54,7 +49,7 @@ int main(int argc, char** argv) {
             std::string sOutput = "\nList of unit-tests:\n";
             for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
                 WsjcppUnitTestBase* pUnitTest = g_pWsjcppUnitTests->at(i);
-                sOutput += "  - " + pUnitTest->name() + "\n";
+                sOutput += "  - " + pUnitTest->getName() + "\n";
             }
             WsjcppLog::info(TAG,  sOutput);
             return -1;
@@ -70,15 +65,11 @@ int main(int argc, char** argv) {
             bool bTestFound = false;
             for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
                 WsjcppUnitTestBase* pUnitTest = g_pWsjcppUnitTests->at(i);
-                if (pUnitTest->name() == sArg3) {
+                if (pUnitTest->getName() == sArg3) {
                     bTestFound = true;
-                    WsjcppLog::info(TAG, "Run test " + pUnitTest->name());
-                    bool bResult = pUnitTest->run();
+                    bool bResult = pUnitTest->runTest();
                     if (bResult) {
-                        WsjcppLog::ok(TAG, pUnitTest->name() + " Test passed");
                         nSuccess++;
-                    } else {
-                        WsjcppLog::err(TAG,  pUnitTest->name() + " Test failed");
                     }
                 }
             }

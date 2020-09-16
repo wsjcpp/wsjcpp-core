@@ -7,8 +7,9 @@
 class UnitTestReadFileToBuffer : public WsjcppUnitTestBase {
     public:
         UnitTestReadFileToBuffer();
-        virtual void init();
-        virtual bool run();
+        virtual bool doBeforeTest() override;
+        virtual void executeTest() override;
+        virtual bool doAfterTest() override;
 };
 
 #endif // UNIT_TEST_READ_FILE_TO_BUFFER_H

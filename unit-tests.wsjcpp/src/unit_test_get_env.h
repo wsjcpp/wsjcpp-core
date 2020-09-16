@@ -7,8 +7,9 @@
 class UnitTestGetEnv : public WsjcppUnitTestBase {
     public:
         UnitTestGetEnv();
-        virtual void init();
-        virtual bool run();
+        virtual bool doBeforeTest() override;
+        virtual void executeTest() override;
+        virtual bool doAfterTest() override;
 };
 
 #endif // UNIT_TEST_GET_ENV_H
