@@ -30,5 +30,7 @@ int main(int argc, char* argv[]) {
     WsjcppCore::recoursiveCopyFiles("./tmp", "./tmp2");
     WsjcppCore::recoursiveRemoveDir("./tmp2");
 
+    WsjcppCore::getThreadId();
+
     return 0;
 }

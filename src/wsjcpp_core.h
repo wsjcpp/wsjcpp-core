@@ -78,7 +78,7 @@ class WsjcppCore {
         static long currentTime_seconds();
         static std::string currentTime_forFilename();
         static std::string currentTime_logformat();
-        static std::string threadId();
+        static std::string getThreadId();
         static std::string formatTimeForWeb(long nTimeInSec);
         static std::string formatTimeForFilename(long nTimeInSec);
         static std::string formatTimeUTC(int nTimeInSec);

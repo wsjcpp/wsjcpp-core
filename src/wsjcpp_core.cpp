@@ -20,6 +20,7 @@
 // #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <random>
+#include <iomanip>
 
 // ---------------------------------------------------------------------
 // WsjcppFilePermissions
@@ -398,11 +399,14 @@ std::string WsjcppCore::currentTime_logformat() {
 
 // ---------------------------------------------------------------------
 
-std::string WsjcppCore::threadId() {
+std::string WsjcppCore::getThreadId() {
+
+    static_assert(sizeof(std::thread::id)==sizeof(uint64_t),"this function only works if size of thead::id is equal to the size of uint_64");
     std::thread::id this_id = std::this_thread::get_id();
+    uint64_t val = *((uint64_t*) &this_id);
     std::stringstream stream;
-    stream << std::hex << this_id;
-    return "0x" + std::string(stream.str());
+    stream << "0x" << std::setw(16) << std::setfill('0') << std::hex << val;
+    return std::string(stream.str());
 }
 
 // ---------------------------------------------------------------------
@@ -1159,7 +1163,7 @@ void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const st
     std::lock_guard<std::mutex> lock(WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logMutex);
     WsjcppColorModifier def(WsjcppColorCode::FG_DEFAULT);
 
-    std::string sLogMessage = WsjcppCore::currentTime_logformat() + ", " + WsjcppCore::threadId()
+    std::string sLogMessage = WsjcppCore::currentTime_logformat() + ", " + WsjcppCore::getThreadId()
          + " [" + sType + "] " + sTag + ": " + sMessage;
     std::cout << clr << sLogMessage << def << std::endl;
 
