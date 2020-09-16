@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
             }
         }
         if (nSuccess == nAll) {
-            WsjcppLog::ok(TAG, "All unit-tests passed" + std::to_string(nSuccess) + " / " + std::to_string(nAll));
+            WsjcppLog::ok(TAG, "All unit-tests passed " + std::to_string(nSuccess) + " / " + std::to_string(nAll));
         } else {
             WsjcppLog::warn(TAG, "Passed unit-tests " + std::to_string(nSuccess) + " / " + std::to_string(nAll));
             WsjcppLog::err(TAG, std::to_string(nAll - nSuccess) + " unit-test(s) failed.");

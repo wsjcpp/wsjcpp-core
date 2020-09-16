@@ -74,10 +74,10 @@ class WsjcppCore {
         static std::string extractFilename(const std::string &sPath);
         static std::string getCurrentDirectory();
 
-        static long currentTime_milliseconds();
-        static long currentTime_seconds();
-        static std::string currentTime_forFilename();
-        static std::string currentTime_logformat();
+        static long getCurrentTimeInMilliseconds();
+        static long getCurrentTimeInSeconds();
+        static std::string getCurrentTimeForFilename();
+        static std::string getCurrentTimeForLogFormat();
         static std::string getThreadId();
         static std::string formatTimeForWeb(long nTimeInSec);
         static std::string formatTimeForFilename(long nTimeInSec);

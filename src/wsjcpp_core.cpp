@@ -367,22 +367,29 @@ std::string WsjcppCore::getCurrentDirectory() {
 
 // ---------------------------------------------------------------------
 
-long WsjcppCore::currentTime_milliseconds() {
+long WsjcppCore::getCurrentTimeInMilliseconds() {
     long nTimeStart = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     return nTimeStart;
 }
 
 // ---------------------------------------------------------------------
 
-long WsjcppCore::currentTime_seconds() {
+long WsjcppCore::getCurrentTimeInSeconds() {
     long nTimeStart = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     return nTimeStart;
 }
 
 // ---------------------------------------------------------------------
 
-std::string WsjcppCore::currentTime_logformat() {
-    long nTimeStart = WsjcppCore::currentTime_milliseconds();
+std::string WsjcppCore::getCurrentTimeForFilename() {
+    long nTimeStart = WsjcppCore::getCurrentTimeInSeconds();
+    return WsjcppCore::formatTimeForFilename(nTimeStart);
+}
+
+// ---------------------------------------------------------------------
+
+std::string WsjcppCore::getCurrentTimeForLogFormat() {
+    long nTimeStart = WsjcppCore::getCurrentTimeInMilliseconds();
     std::string sMilliseconds = std::to_string(int(nTimeStart % 1000));
     nTimeStart = nTimeStart / 1000;
 
@@ -425,12 +432,7 @@ std::string WsjcppCore::formatTimeForWeb(long nTimeInSec) {
     return std::string(buf);
 }
 
-// ---------------------------------------------------------------------
 
-std::string WsjcppCore::currentTime_forFilename() {
-    long nTimeStart = WsjcppCore::currentTime_seconds();
-    return WsjcppCore::formatTimeForFilename(nTimeStart);
-}
 
 // ---------------------------------------------------------------------
 
@@ -1065,7 +1067,7 @@ WsjcppLogGlobalConf::WsjcppLogGlobalConf() {
 // ---------------------------------------------------------------------
 
 void WsjcppLogGlobalConf::doLogRotateUpdateFilename(bool bForce) {
-    long t = WsjcppCore::currentTime_seconds();
+    long t = WsjcppCore::getCurrentTimeInSeconds();
     long nEverySeconds = logRotationPeriodInSeconds; // rotate log if started now or if time left more then 1 day
     if (logStartTime == 0 || t - logStartTime > nEverySeconds || bForce) {
         logStartTime = t;
@@ -1163,7 +1165,7 @@ void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const st
     std::lock_guard<std::mutex> lock(WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logMutex);
     WsjcppColorModifier def(WsjcppColorCode::FG_DEFAULT);
 
-    std::string sLogMessage = WsjcppCore::currentTime_logformat() + ", " + WsjcppCore::getThreadId()
+    std::string sLogMessage = WsjcppCore::getCurrentTimeForLogFormat() + ", " + WsjcppCore::getThreadId()
          + " [" + sType + "] " + sTag + ": " + sMessage;
     std::cout << clr << sLogMessage << def << std::endl;
 
