@@ -84,3 +84,5 @@ unit-tests:
       description: "Check list of directories"
     - name: "FilePermissions"
       description: ""
+    - name: "StringPadding"
+      description: ""

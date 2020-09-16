@@ -127,6 +127,9 @@ class WsjcppCore {
         static bool setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError);
         static bool getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError);
 
+        static std::string doPadLeft(const std::string& sIn, char cWhat, int nLength);
+        static std::string doPadRight(const std::string& sIn, char cWhat, int nLength);
+
 };
 
 

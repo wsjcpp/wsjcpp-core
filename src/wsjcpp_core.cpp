@@ -1052,6 +1052,28 @@ bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePerm
 }
 
 // ---------------------------------------------------------------------
+
+std::string WsjcppCore::doPadLeft(const std::string& sIn, char cWhat, int nLength) {
+    std::string sRet;
+    int nPadLen = nLength - sIn.length();
+    for (int i = 0; i < nPadLen; i++) {
+        sRet += cWhat;
+    }
+    return sRet + sIn; 
+}
+
+// ---------------------------------------------------------------------
+
+std::string WsjcppCore::doPadRight(const std::string& sIn, char cWhat, int nLength) {
+    std::string sRet;
+    int nPadLen = nLength - sIn.length();
+    for (int i = 0; i < nPadLen; i++) {
+        sRet += cWhat;
+    }
+    return sIn + sRet;
+}
+
+// ---------------------------------------------------------------------
 // WsjcppLog
 
 WsjcppLogGlobalConf::WsjcppLogGlobalConf() {
