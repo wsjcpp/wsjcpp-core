@@ -6,8 +6,9 @@
 class UnitTestCoreNormalizePath : public WsjcppUnitTestBase {
     public:
         UnitTestCoreNormalizePath();
-        virtual void init();
-        virtual bool run();
+        virtual bool doBeforeTest() override;
+        virtual void executeTest() override;
+        virtual bool doAfterTest() override;
 };
 
 #endif // UNIT_TEST_CORE_NORMALIZE_PATH_H

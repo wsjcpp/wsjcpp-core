@@ -11,18 +11,23 @@ UnitTestTestResources::UnitTestTestResources()
 
 // ---------------------------------------------------------------------
 
-void UnitTestTestResources::init() {
+bool UnitTestTestResources::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestTestResources::run() {
-    bool bTestSuccess = true;
+void UnitTestTestResources::executeTest() {
     // std::vector<ResourceFile*> &list();
     WsjcppResourceFile* pFile = WsjcppResourcesManager::get("html/images/points.svg");
-    compareN(bTestSuccess, "getBufferSize", pFile->getBufferSize(), 2979);
-    compareS(bTestSuccess, "getFilename", pFile->getFilename(), "html/images/points.svg");
-    return bTestSuccess;
+    compareN("getBufferSize", pFile->getBufferSize(), 2979);
+    compareS("getFilename", pFile->getFilename(), "html/images/points.svg");
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestTestResources::doAfterTest() {
+    // nothing
+    return true;
+}

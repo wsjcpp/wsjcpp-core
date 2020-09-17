@@ -2,21 +2,21 @@
 
 REGISTRY_WSJCPP_RESOURCE_FILE(RES_html_images_points_svg)
 
-const std::string &RES_html_images_points_svg::getFilename() {
+const std::string &RES_html_images_points_svg::getFilename() const {
     static const std::string s = "html/images/points.svg";
     return s;
 }
 
-const std::string &RES_html_images_points_svg::getPackAs() {
+const std::string &RES_html_images_points_svg::getPackAs() const {
     static const std::string s = "text";
     return s;
 }
 
-const int RES_html_images_points_svg::getBufferSize() {
+int RES_html_images_points_svg::getBufferSize() const {
     return 2979;
 }
 
-const char *RES_html_images_points_svg::getBuffer() {
+const char *RES_html_images_points_svg::getBuffer() const {
     static const std::string sRet =  // size: 2979
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"
         "<!-- Created with Inkscape (http://www.inkscape.org/) -->\n"

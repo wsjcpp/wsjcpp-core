@@ -7,8 +7,9 @@
 class UnitTestEncodeUriComponent : public WsjcppUnitTestBase {
     public:
         UnitTestEncodeUriComponent();
-        virtual void init();
-        virtual bool run();
+        virtual bool doBeforeTest() override;
+        virtual void executeTest() override;
+        virtual bool doAfterTest() override;
 };
 
 #endif // UNIT_TEST_ENCODE_URI_COMPONENT_H

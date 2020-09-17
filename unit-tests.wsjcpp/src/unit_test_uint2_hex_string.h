@@ -7,8 +7,9 @@
 class UnitTestUint2HexString : public WsjcppUnitTestBase {
     public:
         UnitTestUint2HexString();
-        virtual void init();
-        virtual bool run();
+        virtual bool doBeforeTest() override;
+        virtual void executeTest() override;
+        virtual bool doAfterTest() override;
 };
 
 #endif // UNIT_TEST_UINT2_HEX_STRING_H

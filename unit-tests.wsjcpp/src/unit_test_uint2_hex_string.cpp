@@ -10,15 +10,14 @@ UnitTestUint2HexString::UnitTestUint2HexString()
 
 // ---------------------------------------------------------------------
 
-void UnitTestUint2HexString::init() {
+bool UnitTestUint2HexString::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestUint2HexString::run() {
-    bool bTestSuccess = true;
-
+void UnitTestUint2HexString::executeTest() {
     struct LTest {
         LTest(
             unsigned int nNumber,
@@ -38,9 +37,13 @@ bool UnitTestUint2HexString::run() {
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
         std::string sStr = WsjcppCore::uint2hexString(test.nNumber);
-        compareS(bTestSuccess, "test" + std::to_string(i), sStr, test.sExpectedStr);
+        compareS("test" + std::to_string(i), sStr, test.sExpectedStr);
     }
-
-    return bTestSuccess;
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestUint2HexString::doAfterTest() {
+    // nothing
+    return true;
+}

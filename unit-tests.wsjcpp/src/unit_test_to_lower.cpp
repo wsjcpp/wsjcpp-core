@@ -10,15 +10,20 @@ UnitTestToLower::UnitTestToLower()
 
 // ---------------------------------------------------------------------
 
-void UnitTestToLower::init() {
+bool UnitTestToLower::doBeforeTest() {
     // nothing
+    return true;
 }
 
 // ---------------------------------------------------------------------
 
-bool UnitTestToLower::run() {
-    bool bTestSuccess = true;
-    compareS(bTestSuccess, "str1", "abc_def", WsjcppCore::toLower("ABC_DEF"));
-    return bTestSuccess;
+void UnitTestToLower::executeTest() {
+    compareS("str1", "abc_def", WsjcppCore::toLower("ABC_DEF"));
 }
 
+// ---------------------------------------------------------------------
+
+bool UnitTestToLower::doAfterTest() {
+    // nothing
+    return true;
+}

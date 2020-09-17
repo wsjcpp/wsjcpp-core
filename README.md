@@ -1,6 +1,7 @@
 # wsjcpp-core
 
 [![Build Status](https://api.travis-ci.org/wsjcpp/wsjcpp-core.svg?branch=master)](https://travis-ci.org/wsjcpp/wsjcpp-core) [![Github Stars](https://img.shields.io/github/stars/wsjcpp/wsjcpp-core.svg?label=github%20%E2%98%85)](https://github.com/wsjcpp/wsjcpp-core/stargazers) [![Github Stars](https://img.shields.io/github/contributors/wsjcpp/wsjcpp-core.svg)](https://github.com/wsjcpp/wsjcpp-core/) [![Github Forks](https://img.shields.io/github/forks/wsjcpp/wsjcpp-core.svg?label=github%20forks)](https://github.com/wsjcpp/wsjcpp-core/network/members)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/wsjcpp/wsjcpp-core.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/wsjcpp/wsjcpp-core/context:cpp) [![Total alerts](https://img.shields.io/lgtm/alerts/g/wsjcpp/wsjcpp-core.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/wsjcpp/wsjcpp-core/alerts/)
 
 Basic utils for wsjcpp
 
@@ -86,35 +87,41 @@ std::string sFilename = WsjcppCore::doNormalizePath(".//../bin/some/../file.txt"
 static std::string getCurrentDirectory();
 ```
 
-### currentTime_milliseconds
+### getCurrentTimeInMilliseconds
 
 ```
-static long currentTime_milliseconds();
+static long getCurrentTimeInMilliseconds();
 ```
 
-### currentTime_seconds
+### getCurrentTimeInSeconds
 
 ```
-static long currentTime_seconds();
+static long getCurrentTimeInSeconds();
 ```
 
-### currentTime_forFilename
+### getCurrentTimeForFilename
 
 ```
-static std::string currentTime_forFilename();
+static std::string getCurrentTimeForFilename();
 ```
 
-### currentTime_logformat
+will be like this: `?`
+
+### getCurrentTimeForLogFormat
 
 ```
-static std::string currentTime_logformat();
+static std::string getCurrentTimeForLogFormat();
 ```
 
-### threadId
+will be like this: `2020-09-17 02:22:40.755`
+
+### getThreadId
 
 ```
-static std::string threadId();
+static std::string getThreadId();
 ```
+
+will be like this: `0x00007fa9c6a96740`
 
 ### formatTimeForWeb
 
