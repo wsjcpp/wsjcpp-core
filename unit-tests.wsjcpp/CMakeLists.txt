@@ -69,6 +69,8 @@ list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_file_permissions
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_file_permissions.cpp")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_string_padding.h")
 list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_string_padding.cpp")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_date_time_format.h")
+list (APPEND WSJCPP_SOURCES "../unit-tests.wsjcpp/src/unit_test_date_time_format.cpp")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.user-custom.txt)
 

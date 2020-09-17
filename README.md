@@ -87,35 +87,41 @@ std::string sFilename = WsjcppCore::doNormalizePath(".//../bin/some/../file.txt"
 static std::string getCurrentDirectory();
 ```
 
-### currentTime_milliseconds
+### getCurrentTimeInMilliseconds
 
 ```
-static long currentTime_milliseconds();
+static long getCurrentTimeInMilliseconds();
 ```
 
-### currentTime_seconds
+### getCurrentTimeInSeconds
 
 ```
-static long currentTime_seconds();
+static long getCurrentTimeInSeconds();
 ```
 
-### currentTime_forFilename
+### getCurrentTimeForFilename
 
 ```
-static std::string currentTime_forFilename();
+static std::string getCurrentTimeForFilename();
 ```
 
-### currentTime_logformat
+will be like this: `?`
+
+### getCurrentTimeForLogFormat
 
 ```
-static std::string currentTime_logformat();
+static std::string getCurrentTimeForLogFormat();
 ```
 
-### threadId
+will be like this: `2020-09-17 02:22:40.755`
+
+### getThreadId
 
 ```
-static std::string threadId();
+static std::string getThreadId();
 ```
+
+will be like this: `0x00007fa9c6a96740`
 
 ### formatTimeForWeb
 

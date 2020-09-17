@@ -394,8 +394,8 @@ std::string WsjcppCore::getCurrentTimeForLogFormat() {
     nTimeStart = nTimeStart / 1000;
 
     std::time_t tm_ = long(nTimeStart);
-    // struct tm tstruct = *localtime(&tm_);
-    struct tm tstruct = *gmtime ( &tm_ );
+    struct tm tstruct;
+    gmtime_r(&tm_, &tstruct);
 
     // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
     // for more information about date/time format
@@ -421,8 +421,8 @@ std::string WsjcppCore::getThreadId() {
 std::string WsjcppCore::formatTimeForWeb(long nTimeInSec) {
     std::time_t tm_ = long(nTimeInSec);
     // struct tm tstruct = *localtime(&tm_);
-    struct tm tstruct = *gmtime ( &tm_ );
-
+    struct tm tstruct;
+    gmtime_r(&tm_, &tstruct);
     
     // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
     // for more information about date/time format
@@ -439,7 +439,8 @@ std::string WsjcppCore::formatTimeForWeb(long nTimeInSec) {
 std::string WsjcppCore::formatTimeForFilename(long nTimeInSec) {
     std::time_t tm_ = long(nTimeInSec);
     // struct tm tstruct = *localtime(&tm_);
-    struct tm tstruct = *gmtime ( &tm_ );
+    struct tm tstruct;
+    gmtime_r(&tm_, &tstruct);
 
     // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
     // for more information about date/time format
@@ -454,7 +455,8 @@ std::string WsjcppCore::formatTimeUTC(int nTimeInSec) {
     // datetime
     std::time_t tm_ = long(nTimeInSec);
     // struct tm tstruct = *localtime(&tm_);
-    struct tm tstruct = *gmtime ( &tm_ );
+    struct tm tstruct;
+    gmtime_r(&tm_, &tstruct);
 
     // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
     // for more information about date/time format
