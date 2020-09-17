@@ -181,26 +181,33 @@ void UnitTestFilePermissions::executeTest() {
     compare("file_perm (11) other write",    fp2.getOtherWriteFlag(),   true);
     compare("file_perm (11) other execute",  fp2.getOtherExecuteFlag(), true);
 
-    WsjcppFilePermissions fp3(0x0777);
-    compare("file_perm (12) toString",       fp3.toString(), "-rwxrwxrwx");
-    compare("file_perm (12) toUInt16",       fp3.toUInt16(), 0x0777);
+    WsjcppFilePermissions fp3(0x764);
+    compare("file_perm (12) toString",       fp3.toString(), "-rwxrw-r--");
+    compare("file_perm (12) toUInt16",       fp3.toUInt16(), 0x0764);
     compare("file_perm (12) owner read",     fp3.getOwnerReadFlag(),    true);
     compare("file_perm (12) owner write",    fp3.getOwnerWriteFlag(),   true);
     compare("file_perm (12) owner execute",  fp3.getOwnerExecuteFlag(), true);
     compare("file_perm (12) group read",     fp3.getGroupReadFlag(),    true);
     compare("file_perm (12) group write",    fp3.getGroupWriteFlag(),   true);
-    compare("file_perm (12) group execute",  fp3.getGroupExecuteFlag(), true);
+    compare("file_perm (12) group execute",  fp3.getGroupExecuteFlag(), false);
     compare("file_perm (12) other read",     fp3.getOtherReadFlag(),    true);
-    compare("file_perm (12) other write",    fp3.getOtherWriteFlag(),   true);
-    compare("file_perm (12) other execute",  fp3.getOtherExecuteFlag(), true);
+    compare("file_perm (12) other write",    fp3.getOtherWriteFlag(),   false);
+    compare("file_perm (12) other execute",  fp3.getOtherExecuteFlag(), false);
 
     {
-        WsjcppFilePermissions fp4(0x0);
         std::string sError;
-        bool bRes1 = WsjcppCore::getFilePermissions("./data/file_permissions/file1", fp4, sError);
-        compare("file_perm (13) getFilePermissions",  bRes1, true);
-        compare("file_perm (13) toString", fp4.toString(), "-rw----r--");
-        compare("file_perm (13) toUInt16", fp4.toUInt16(), 0x0604);
+        WsjcppFilePermissions fp4_(0x0604);
+        compare("file_perm (13b) toString", fp4_.toString(), "-rw----r--");
+        compare("file_perm (13b) toUInt16", fp4_.toUInt16(), 0x0604);
+        bool bRes1 = WsjcppCore::setFilePermissions("./data/file_permissions/file1", fp4_, sError);
+        compare("file_perm (13b) setFilePermissions",  bRes1, true);
+
+
+        WsjcppFilePermissions fp4(0x0);
+        bool bRes2 = WsjcppCore::getFilePermissions("./data/file_permissions/file1", fp4, sError);
+        compare("file_perm (13a) getFilePermissions",  bRes2, true);
+        compare("file_perm (13a) toString", fp4.toString(), "-rw----r--");
+        compare("file_perm (13a) toUInt16", fp4.toUInt16(), 0x604);
     }
 
     {

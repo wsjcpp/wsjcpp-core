@@ -57,19 +57,19 @@ WsjcppFilePermissions::WsjcppFilePermissions(
 WsjcppFilePermissions::WsjcppFilePermissions(uint16_t nFilePermission) {
     
     // owner
-    m_bOwnerReadFlag = nFilePermission & 0x0400 != 0x0;
-    m_bOwnerWriteFlag = nFilePermission & 0x0200 != 0x0;
-    m_bOwnerExecuteFlag = nFilePermission & 0x0100 != 0x0;
+    m_bOwnerReadFlag = nFilePermission & 0x0400;
+    m_bOwnerWriteFlag = nFilePermission & 0x0200;
+    m_bOwnerExecuteFlag = nFilePermission & 0x0100;
 
     // group
-    m_bGroupReadFlag = nFilePermission & 0x0040 != 0x0;
-    m_bGroupWriteFlag = nFilePermission & 0x0020 != 0x0;
-    m_bGroupExecuteFlag = nFilePermission & 0x0010 != 0x0;
+    m_bGroupReadFlag = nFilePermission & 0x0040;
+    m_bGroupWriteFlag = nFilePermission & 0x0020;
+    m_bGroupExecuteFlag = nFilePermission & 0x0010;
 
     // for other
-    m_bOtherReadFlag = nFilePermission & 0x0004 != 0x0;
-    m_bOtherWriteFlag = nFilePermission & 0x0002 != 0x0;
-    m_bOtherExecuteFlag = nFilePermission & 0x0001 != 0x0;
+    m_bOtherReadFlag = nFilePermission & 0x0004;
+    m_bOtherWriteFlag = nFilePermission & 0x0002;
+    m_bOtherExecuteFlag = nFilePermission & 0x0001;
 }
 
 // ---------------------------------------------------------------------
@@ -996,8 +996,8 @@ bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFi
 
     // owner
     m |= filePermissions.getOwnerReadFlag() ? S_IRUSR : 0x0;
-    m |= filePermissions.getOwnerWriteFlag() & S_IWUSR != 0x0;
-    m |= filePermissions.getOwnerExecuteFlag() & S_IXUSR != 0x0;
+    m |= filePermissions.getOwnerWriteFlag() ? S_IWUSR : 0x0;
+    m |= filePermissions.getOwnerExecuteFlag() ? S_IXUSR : 0x0;
 
     // group
     m |= filePermissions.getGroupReadFlag() ? S_IRGRP : 0x0;
