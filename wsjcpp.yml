@@ -33,11 +33,11 @@ distribution:
   - source-file: "src/wsjcpp_unit_tests_main.cpp"
     target-file: "wsjcpp_unit_tests_main.cpp"
     type: "unit-tests"
-  - source-file: "scripts.wsjcpp/generate.WsjcppUnitTest"
-    target-file: "generate.WsjcppUnitTest"
+  - source-file: "scripts.wsjcpp/generate.WsjcppUnitTest.wsjcpp-script"
+    target-file: "generate.WsjcppUnitTest.wsjcpp-script"
     type: "safe-scripting-generate"
-  - source-file: "scripts.wsjcpp/generate.Class"
-    target-file: "generate.Class"
+  - source-file: "scripts.wsjcpp/generate.Class.wsjcpp-script"
+    target-file: "generate.Class.wsjcpp-script"
     type: "safe-scripting-generate"
 
 unit-tests:
