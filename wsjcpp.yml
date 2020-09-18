@@ -39,12 +39,6 @@ distribution:
   - source-file: "scripts.wsjcpp/generate.Class"
     target-file: "generate.Class"
     type: "safe-scripting-generate"
-  - source-file: "src/wsjcpp_resources_manager.h"
-    target-file: "wsjcpp_resources_manager.h"
-    type: "source-code"
-  - source-file: "src/wsjcpp_resources_manager.cpp"
-    target-file: "wsjcpp_resources_manager.cpp"
-    type: "source-code"
 
 unit-tests:
   cases:

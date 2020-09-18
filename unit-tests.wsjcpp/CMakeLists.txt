@@ -26,8 +26,6 @@ list (APPEND WSJCPP_SOURCES "../src/wsjcpp_core.h")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_unit_tests.cpp")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_unit_tests.h")
 list (APPEND WSJCPP_SOURCES "../src/wsjcpp_unit_tests_main.cpp")
-list (APPEND WSJCPP_SOURCES "../src/wsjcpp_resources_manager.h")
-list (APPEND WSJCPP_SOURCES "../src/wsjcpp_resources_manager.cpp")
 
 # unit-tests
 list (APPEND WSJCPP_INCLUDE_DIRS "src")

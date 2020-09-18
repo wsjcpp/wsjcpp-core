@@ -1,7 +1,6 @@
 #include "unit_test_test_resources.h"
 #include <vector>
 #include <wsjcpp_core.h>
-#include <wsjcpp_resources_manager.h>
 
 REGISTRY_WSJCPP_UNIT_TEST(UnitTestTestResources)
 
