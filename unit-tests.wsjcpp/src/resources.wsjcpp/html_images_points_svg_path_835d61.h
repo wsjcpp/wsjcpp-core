@@ -1,4 +1,4 @@
-#include <wsjcpp_resources_manager.h>
+#include <wsjcpp_core.h>
 
 class RES_html_images_points_svg : public WsjcppResourceFile { 
     public:

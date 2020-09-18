@@ -24,7 +24,7 @@ void UnitTestJoin::executeTest() {
     vTest.push_back("2");
     vTest.push_back("abc");
     std::string sRet = WsjcppCore::join(vTest, ", ");
-    compareS("join", sRet, ", 1, 2, abc");
+    compare("join", sRet, ", 1, 2, abc");
 }
 
 // ---------------------------------------------------------------------

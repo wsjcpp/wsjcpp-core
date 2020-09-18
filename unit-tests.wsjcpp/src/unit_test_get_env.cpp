@@ -40,8 +40,8 @@ void UnitTestGetEnv::executeTest() {
         std::string sValue;
         bool bResult = WsjcppCore::getEnv(test.sName, sValue);
         std::string testBaseName = "test#" + std::to_string(i) + " (" + test.sName + ")";
-        compareB(testBaseName + "-result", bResult, test.bExpectedResult);
-        compareS(testBaseName + "-value", sValue, test.sExpectedValue);
+        compare(testBaseName + "-result", bResult, test.bExpectedResult);
+        compare(testBaseName + "-value", sValue, test.sExpectedValue);
     }
 }
 

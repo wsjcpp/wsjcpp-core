@@ -55,7 +55,7 @@ void UnitTestgetHumanSizeBytes::executeTest() {
         long nValue = tests[i].nValue;
         std::string sExpectedStr = tests[i].sExpectedStr;
         std::string sGotStr = WsjcppCore::getHumanSizeBytes(nValue);
-        compareS("value=" + std::to_string(nValue), sGotStr, sExpectedStr);
+        compare("value=" + std::to_string(nValue), sGotStr, sExpectedStr);
     }
 }
 

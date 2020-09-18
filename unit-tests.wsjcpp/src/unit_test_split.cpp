@@ -45,10 +45,10 @@ void UnitTestSplit::executeTest() {
         LTest test = tests[i];
         std::string sPrefix = "test" + std::to_string(i) + "(\"" + test.sStr + "\")";
         std::vector<std::string> vSplitted = WsjcppCore::split(test.sStr, test.sDelim);
-        compareN(sPrefix + ": size", vSplitted.size(), test.vExpectedVector.size());
+        compare(sPrefix + ": size", vSplitted.size(), test.vExpectedVector.size());
         int nMin = std::min(vSplitted.size(), test.vExpectedVector.size());
         for (int n = 0; n < nMin; n++) {
-            compareS(sPrefix + ", element: " + std::to_string(n), vSplitted[n], test.vExpectedVector[n]);
+            compare(sPrefix + ", element: " + std::to_string(n), vSplitted[n], test.vExpectedVector[n]);
         }
     }
 }
