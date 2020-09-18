@@ -23,12 +23,12 @@ void UnitTestReadFileToBuffer::executeTest() {
     char *pBuffer = nullptr;
     int nBufferSize = 0;
     WsjcppCore::readFileToBuffer("./data/readFileToBuffer.txt", &pBuffer, nBufferSize);
-    compareN("Size of readed", nBufferSize, sExpected.length());
+    compare("Size of readed", nBufferSize, sExpected.length());
     int nMin = std::min(nBufferSize, (int)sExpected.length());
     for (int i = 0; i < nMin; i++) {
         char c_got = pBuffer[i];
         char c_expected = sExpected[i];
-        compareN("Check the " + std::to_string(i), c_got, c_expected);
+        compare("Check the " + std::to_string(i), c_got, c_expected);
     }
 }
 

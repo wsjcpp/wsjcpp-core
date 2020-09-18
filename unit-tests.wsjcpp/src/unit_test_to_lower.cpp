@@ -18,7 +18,7 @@ bool UnitTestToLower::doBeforeTest() {
 // ---------------------------------------------------------------------
 
 void UnitTestToLower::executeTest() {
-    compareS("str1", "abc_def", WsjcppCore::toLower("ABC_DEF"));
+    compare("str1", "abc_def", WsjcppCore::toLower("ABC_DEF"));
 }
 
 // ---------------------------------------------------------------------

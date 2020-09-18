@@ -43,7 +43,7 @@ void UnitTestReplaceAll::executeTest() {
         LTest test = tests[i];
         std::string sStr = test.sStr;
         WsjcppCore::replaceAll(sStr, test.sFrom, test.sTo);
-        compareS("test" + std::to_string(i), sStr, test.sExpectedStr);
+        compare("test" + std::to_string(i), sStr, test.sExpectedStr);
     }
 }
 

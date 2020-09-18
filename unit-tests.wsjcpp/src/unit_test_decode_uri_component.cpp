@@ -37,7 +37,7 @@ void UnitTestDecodeUriComponent::executeTest() {
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];
         std::string sStr = WsjcppCore::decodeUriComponent(test.sStr);
-        compareS("test" + std::to_string(i), sStr, test.sExpectedStr);
+        compare("test" + std::to_string(i), sStr, test.sExpectedStr);
     }
 }
 
