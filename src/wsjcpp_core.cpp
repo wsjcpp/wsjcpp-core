@@ -549,7 +549,25 @@ bool WsjcppCore::makeDir(const std::string &sDirname) {
     return true;
 }
 
-// ---------------------------------------------------------------------
+bool WsjcppCore::makeDirsPath(const std::string &sDirname) {
+    std::string sDirpath = WsjcppCore::doNormalizePath(sDirname);
+    std::vector<std::string> vDirs = WsjcppCore::split(sDirpath, "/");
+    std::string sDirpath2 = "";
+    for (int i = 0; i < vDirs.size(); i++) {
+        if (vDirs[i] == "") {
+            continue;
+        }
+        sDirpath2 += vDirs[i] + "/";
+        if (WsjcppCore::dirExists(sDirpath2)) {
+            continue;
+        } else {
+            if (!WsjcppCore::makeDir(sDirpath2)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 bool WsjcppCore::writeFile(const std::string &sFilename, const std::string &sContent) {
     

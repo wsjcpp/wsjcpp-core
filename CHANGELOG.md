@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added test for normalize path
 - Added test case for replace all
 - Added build_simple.bat for windows
+- Added WsjcppCore::makeDirsPath
 
 ### Changed
 

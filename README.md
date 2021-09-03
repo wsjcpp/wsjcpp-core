@@ -181,6 +181,16 @@ if (WsjcppCore::makeDir(sDirname)) {
 }
 ```
 
+### makeDirsPath
+
+Create a new directories full path
+```
+std::string sDirsPath = "./data/dir1/dir1/dir3";
+if (WsjcppCore::makeDirsPath(sDirname)) {
+    std::cout << " Created '" << sDirsPath << "'" << std::endl;
+}
+```
+
 ### writeFile
 
 ```

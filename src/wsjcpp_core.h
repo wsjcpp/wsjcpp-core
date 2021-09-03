@@ -90,6 +90,7 @@ class WsjcppCore {
         static std::vector<std::string> listOfFiles(const std::string &sDirname);
         static std::vector<std::string> getListOfFiles(const std::string &sDirname);
         static bool makeDir(const std::string &sDirname);
+        static bool makeDirsPath(const std::string &sDirname);
         static bool writeFile(const std::string &sFilename, const std::string &sContent);
         static bool readTextFile(const std::string &sFilename, std::string &sOutputContent);
         static bool readFileToBuffer(const std::string &sFilename, char *pBuffer[], int &nBufferSize);
