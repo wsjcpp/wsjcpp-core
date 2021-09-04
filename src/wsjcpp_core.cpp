@@ -362,7 +362,11 @@ std::string WsjcppCore::extractFilename(const std::string &sPath) {
     return sRet;
 }
 
-// ---------------------------------------------------------------------
+std::string WsjcppCore::extractDirpath(const std::string &sFullPath) {
+    std::vector<std::string> vDirs = WsjcppCore::split(sFullPath, "/");
+    vDirs.pop_back();
+    return WsjcppCore::join(vDirs, "/");
+}
 
 std::string WsjcppCore::getCurrentDirectory() {
     char cwd[PATH_MAX];
@@ -371,8 +375,6 @@ std::string WsjcppCore::getCurrentDirectory() {
     }
     return std::string(cwd) + "/";
 }
-
-// ---------------------------------------------------------------------
 
 long WsjcppCore::getCurrentTimeInMilliseconds() {
     long nTimeStart = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -423,8 +425,6 @@ std::string WsjcppCore::getThreadId() {
     return std::string(stream.str());
 }
 
-// ---------------------------------------------------------------------
-
 std::string WsjcppCore::formatTimeForWeb(long nTimeInSec) {
     std::time_t tm_ = long(nTimeInSec);
     // struct tm tstruct = *localtime(&tm_);
@@ -438,10 +438,6 @@ std::string WsjcppCore::formatTimeForWeb(long nTimeInSec) {
     strftime(buf, sizeof(buf), "%a, %d %b %Y %H:%M:%S GMT", &tstruct);
     return std::string(buf);
 }
-
-
-
-// ---------------------------------------------------------------------
 
 std::string WsjcppCore::formatTimeForFilename(long nTimeInSec) {
     std::time_t tm_ = long(nTimeInSec);

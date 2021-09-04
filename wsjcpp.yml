@@ -84,3 +84,7 @@ unit-tests:
       description: ""
     - name: "MakeDirsPath"
       description: ""
+    - name: "ExtractDirpath"
+      description: ""
+    - name: "ExtractFilepath"
+      description: ""

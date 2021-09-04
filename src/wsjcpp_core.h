@@ -72,6 +72,7 @@ class WsjcppCore {
 
         static std::string doNormalizePath(const std::string &sPath);
         static std::string extractFilename(const std::string &sPath);
+        static std::string extractDirpath(const std::string &sFullPath);
         static std::string getCurrentDirectory();
 
         static long getCurrentTimeInMilliseconds();

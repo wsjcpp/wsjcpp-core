@@ -84,8 +84,20 @@ std::string sPath = WsjcppCore::doNormalizePath(".//../bin/some/../");
 Extract base filename from fullpath.
 
 ```
-std::string sFilename = WsjcppCore::doNormalizePath(".//../bin/some/../file.txt");
+std::string sFilename = WsjcppCore::extractFilename(".//../bin/some/../file.txt");
 ```
+
+Variable `sFilename` will has value `file.txt`
+
+### extractDirpath
+
+Extract base dir path from fullpath.
+
+```
+std::string sDirpath = WsjcppCore::extractDirpath(".//../bin/some/../file.txt");
+```
+
+Variable `sDirpath` will has value `.//../bin/some/..`
 
 ### getCurrentDirectory
 
