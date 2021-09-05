@@ -4,7 +4,7 @@ branches:
   only:
     - master
 
-dist: bionic
+dist: focal
 
 addons:
   apt:
