@@ -84,8 +84,20 @@ std::string sPath = WsjcppCore::doNormalizePath(".//../bin/some/../");
 Extract base filename from fullpath.
 
 ```
-std::string sFilename = WsjcppCore::doNormalizePath(".//../bin/some/../file.txt");
+std::string sFilename = WsjcppCore::extractFilename(".//../bin/some/../file.txt");
 ```
+
+Variable `sFilename` will has value `file.txt`
+
+### extractDirpath
+
+Extract base dir path from fullpath.
+
+```
+std::string sDirpath = WsjcppCore::extractDirpath(".//../bin/some/../file.txt");
+```
+
+Variable `sDirpath` will has value `.//../bin/some/..`
 
 ### getCurrentDirectory
 
@@ -178,6 +190,16 @@ Create a new directory
 std::string sDirname = ".logs";
 if (WsjcppCore::makeDir(sDirname)) {
     std::cout << " Created '" << sDirname << "'" << std::endl;
+}
+```
+
+### makeDirsPath
+
+Create a new directories full path
+```
+std::string sDirsPath = "./data/dir1/dir1/dir3";
+if (WsjcppCore::makeDirsPath(sDirname)) {
+    std::cout << " Created '" << sDirsPath << "'" << std::endl;
 }
 ```
 

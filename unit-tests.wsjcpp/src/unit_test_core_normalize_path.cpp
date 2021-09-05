@@ -35,6 +35,7 @@ void UnitTestCoreNormalizePath::executeTest() {
     mapPaths.insert(std::pair<std::string, std::string>("/usr/local/../../bin/./some/","/bin/some/"));
     mapPaths.insert(std::pair<std::string, std::string>("/usr/local/../../../bin/./some/","../bin/some/"));
     mapPaths.insert(std::pair<std::string, std::string>(".//","./"));
+    mapPaths.insert(std::pair<std::string, std::string>("./wsjcpp.hold.yml", "./wsjcpp.hold.yml"));
     std::map<std::string, std::string>::iterator it;
 
     for ( it = mapPaths.begin(); it != mapPaths.end(); it++ ) {

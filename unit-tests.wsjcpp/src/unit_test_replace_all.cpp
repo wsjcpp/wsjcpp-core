@@ -38,6 +38,7 @@ void UnitTestReplaceAll::executeTest() {
     std::vector<LTest> tests;
     tests.push_back(LTest("Some long string", "o", "00", "S00me l00ng string"));
     tests.push_back(LTest("S00me l00ng string", "00", "o", "Some long string"));
+    tests.push_back(LTest("dddng.string", ".", "_", "dddng_string"));
 
     for (int i = 0; i < tests.size(); i++) {
         LTest test = tests[i];

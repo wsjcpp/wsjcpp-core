@@ -4,7 +4,7 @@ branches:
   only:
     - master
 
-dist: bionic
+dist: focal
 
 addons:
   apt:
@@ -16,10 +16,4 @@ addons:
 
 # Build steps
 script:
-  - mkdir -p tmp
-  - cd tmp
-  - cmake ..
-  - make
-  - cd ../unit-tests.wsjcpp
-  - ./build_simple.sh
-  - ./run_unit-tests.sh
+  - ./ci/travis/run.sh
