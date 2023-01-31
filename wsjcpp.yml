@@ -3,7 +3,7 @@ cmake_cxx_standard: 17
 cmake_minimum_required: 3.0
 
 name: wsjcpp-core
-version: v0.2.2
+version: v0.2.3
 description: Basic Utils for wsjcpp
 issues: https://github.com/wsjcpp/wsjcpp-core/issues
 repositories:
