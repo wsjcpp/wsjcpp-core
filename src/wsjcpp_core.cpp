@@ -837,8 +837,6 @@ std::string WsjcppCore::extractURLProtocol(const std::string& sValue) {
     return sRet;
 }
 
-// ---------------------------------------------------------------------
-
 bool WsjcppCore::getEnv(const std::string& sName, std::string& sValue) {
     if (const char* env_p = std::getenv(sName.c_str())) {
         sValue = std::string(env_p);
@@ -846,8 +844,6 @@ bool WsjcppCore::getEnv(const std::string& sName, std::string& sValue) {
     }
     return false;
 }
-
-// ---------------------------------------------------------------------
 
 std::string WsjcppCore::encodeUriComponent(const std::string& sValue) {
     std::stringstream ssRet;
@@ -866,8 +862,6 @@ std::string WsjcppCore::encodeUriComponent(const std::string& sValue) {
     }
     return ssRet.str();
 }
-
-// ---------------------------------------------------------------------
 
 std::string WsjcppCore::decodeUriComponent(const std::string& sValue) {
     std::string sRet = "";
@@ -892,8 +886,6 @@ std::string WsjcppCore::decodeUriComponent(const std::string& sValue) {
     return sRet;
 }
 
-// ---------------------------------------------------------------------
-
 std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
     if (nBytes == 0) {
         return "0B";
@@ -916,8 +908,6 @@ std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
     }
     return std::to_string(nBytes) + "PB";
 }
-
-// ---------------------------------------------------------------------
 
 bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir) {
     if (!WsjcppCore::dirExists(sSourceDir)) {
@@ -959,8 +949,6 @@ bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::s
     return true;
 }
 
-// ---------------------------------------------------------------------
-
 bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
     if (!WsjcppCore::dirExists(sDir)) {
         WsjcppLog::err("recoursiveCopyFiles", "Dir '" + sDir + "' did not exists");
@@ -989,8 +977,6 @@ bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
     return true;
 }
 
-// ---------------------------------------------------------------------
-
 bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError) {
 
     mode_t m = 0x0;
@@ -1016,8 +1002,6 @@ bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFi
     }
     return true;
 }
-
-// ---------------------------------------------------------------------
 
 bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError) {
     if (!WsjcppCore::fileExists(sFilePath)) {
@@ -1054,8 +1038,6 @@ bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePerm
     return true;
 }
 
-// ---------------------------------------------------------------------
-
 std::string WsjcppCore::doPadLeft(const std::string& sIn, char cWhat, size_t nLength) {
     std::string sRet;
     size_t nPadLen = nLength - sIn.length();
@@ -1065,8 +1047,6 @@ std::string WsjcppCore::doPadLeft(const std::string& sIn, char cWhat, size_t nLe
     return sRet + sIn; 
 }
 
-// ---------------------------------------------------------------------
-
 std::string WsjcppCore::doPadRight(const std::string& sIn, char cWhat, size_t nLength) {
     std::string sRet;
     size_t nPadLen = nLength - sIn.length();
@@ -1074,6 +1054,18 @@ std::string WsjcppCore::doPadRight(const std::string& sIn, char cWhat, size_t nL
         sRet += cWhat;
     }
     return sIn + sRet;
+}
+
+bool WsjcppCore::startsWith(const std::string& sLine, const std::string& sStart) {
+    return sLine.rfind(sStart, 0) == 0;
+}
+
+bool WsjcppCore::endsWith(const std::string& sLine, const std::string& sEnd) {
+    // https://www.techiedelight.com/check-if-a-string-ends-with-another-string-in-cpp/
+    if (sLine.length() < sEnd.length()) {
+        return false;
+    }
+    return std::equal(sEnd.rbegin(), sEnd.rend(), sLine.rbegin());
 }
 
 // ---------------------------------------------------------------------
@@ -1269,7 +1261,6 @@ const std::vector<WsjcppResourceFile*> &WsjcppResourcesManager::list() {
     return *g_pWsjcppResourceFiles;
 }
 
-// ---------------------------------------------------------------------
 
 /*
 bool WsjcppResourcesManager::make(const std::string &sWorkspace) {
