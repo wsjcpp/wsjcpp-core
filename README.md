@@ -456,3 +456,23 @@ if (WsjcppCore::recoursiveRemoveDir("./folder2")) {
     // everything removed
 }
 ```
+
+### startsWith
+
+Test string starts with substring
+
+```
+if (WsjcppCore::startsWith("123456", "123")) {
+    // true
+}
+```
+
+### endsWith
+
+Test string starts with substring
+
+```
+if (WsjcppCore::startsWith("123456", "456")) {
+    // true
+}
+```
