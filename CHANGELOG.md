@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- New functions: startsWith and endssWith
+- New functions: startsWith and endsWith
 
 ## [v0.2.2] - 2021-09-04 (2021 Sept 4)
 
