@@ -5,7 +5,7 @@ All notable changes to wsjcpp-core project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v0.2.4] - 2023-02-01 (2026 Feb 4)
+## [v0.2.4] - 2026-02-04 (2026 Feb 4)
 
 - New function: englishAlphabetLowerCase
 - New function: englishAlphabetUpperCase
