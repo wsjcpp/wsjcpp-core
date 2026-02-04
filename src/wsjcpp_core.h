@@ -1,6 +1,10 @@
 #ifndef WSJCPP_CORE_H
 #define WSJCPP_CORE_H
 
+#define WSJCPP_CORE_VER_0
+#define WSJCPP_CORE_VER_0_2
+#define WSJCPP_CORE_VER_0_2_4
+
 #include <string>
 #include <vector>
 #include <map>
@@ -233,7 +237,6 @@ class WsjcppResourcesManager {
 // Registry WsjcppResourceFile
 #define REGISTRY_WSJCPP_RESOURCE_FILE( classname ) \
     static classname * pRegistryWsjcppResourceFile ## classname = new classname(); \
-
 
 namespace wsjcpp {
 
