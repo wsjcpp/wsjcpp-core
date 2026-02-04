@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - New function: englishAlphabetBothCaseAndNumbers
 - New function: randomString
 - Added define: WSJCPP_CORE_VER_0_2_4
+- Added license information to source-code
 
 ## [v0.2.3] - 2023-02-01 (2023 Feb 1)
 
