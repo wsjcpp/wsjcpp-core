@@ -1297,3 +1297,36 @@ bool WsjcppResourcesManager::extractFiles(const std::string &sWorkspace) {
 }
 */
 
+namespace wsjcpp {
+
+const std::string &Core::englishAlphabetLowerCase() {
+    static const std::string ret = "abcdefghijklmnopqrstuvwxyz";
+    return ret;
+}
+
+const std::string &Core::englishAlphabetUpperCase() {
+    static const std::string ret = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return ret;
+}
+
+const std::string &Core::englishAlphabetBothCase() {
+    static const std::string ret = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return ret;
+}
+
+const std::string &Core::englishAlphabetBothCaseAndNumbers() {
+    static const std::string ret = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    return ret;
+}
+
+std::string Core::randomString(const std::string &alphabet, int length) {
+    std::string ret = "";
+    ret.resize(length, alphabet[0]);
+    int alphabet_len = alphabet.length();
+    for (int i = 0; i < length; i++) {
+        ret[i] = alphabet[rand() % alphabet_len];
+    }
+    return ret;
+}
+
+} // namespace wsjcpp

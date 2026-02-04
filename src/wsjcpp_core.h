@@ -235,6 +235,19 @@ class WsjcppResourcesManager {
     static classname * pRegistryWsjcppResourceFile ## classname = new classname(); \
 
 
+namespace wsjcpp {
+
+class Core {
+  public:
+    static const std::string &englishAlphabetLowerCase();
+    static const std::string &englishAlphabetUpperCase();
+    static const std::string &englishAlphabetBothCase();
+    static const std::string &englishAlphabetBothCaseAndNumbers();
+    static std::string randomString(const std::string &alphabet, int length);
+};
+
+} // namespace wsjcpp
+
 #endif // WSJCPP_CORE_H
 
 
