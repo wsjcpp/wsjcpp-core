@@ -40,7 +40,7 @@ void UnitTestCoreNormalizePath::executeTest() {
   for ( it = mapPaths.begin(); it != mapPaths.end(); it++ ) {
     std::string sSource = it->first;
     std::string sExpected = it->second;
-    std::string sGot = WsjcppCore::doNormalizePath(sSource);
+    std::string sGot = wsjcpp::normalizeFilePath(sSource);
     compare(sSource, sGot, sExpected);
   }
 }

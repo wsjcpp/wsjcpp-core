@@ -1363,4 +1363,8 @@ std::string Core::randomString(const std::string &alphabet, int length) {
     return ret;
 }
 
+std::string normalizeFilePath(const std::string &path) {
+  return WsjcppCore::doNormalizePath(path);
+}
+
 } // namespace wsjcpp
