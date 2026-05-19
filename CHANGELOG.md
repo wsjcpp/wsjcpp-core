@@ -5,6 +5,12 @@ All notable changes to wsjcpp-core project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.2.5] - 2026-05-19 (2026 May 19)
+
+- Fixed for path traversal `WsjcppCore::doNormalizePath`
+- `WsjcppCore::doNormalizePath` marked as deprecated
+- Added symlink `WsjcppCore::doNormalizePath` -> `wsjcpp::normalizeFilePath`
+
 ## [v0.2.4] - 2026-02-04 (2026 Feb 4)
 
 - New function: englishAlphabetLowerCase
