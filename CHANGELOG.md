@@ -13,6 +13,7 @@
 - Fixed #39: Removed missing implementation `WsjcppCore::listOfDirs`
 - Renamed `WsjcppCore::getListOfDirs` to `wsjcpp::directory_list`
 - Fixed #40: Missing first character in name of child directory
+- Removed definition `WsjcppCore::listOfFiles` because missing implementation
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 

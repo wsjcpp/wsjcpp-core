@@ -115,7 +115,6 @@ public:
 
   static bool dirExists(const std::string &sFilename);
   static bool fileExists(const std::string &sFilename);
-  static std::vector<std::string> listOfFiles(const std::string &sDirname);
   static std::vector<std::string> getListOfFiles(const std::string &sDirname);
   static bool makeDir(const std::string &sDirname);
   static bool makeDirsPath(const std::string &sDirname);

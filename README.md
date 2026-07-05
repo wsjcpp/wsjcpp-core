@@ -178,12 +178,6 @@ static bool dirExists(const std::string &sFilename);
 static bool fileExists(const std::string &sFilename);
 ```
 
-### listOfFiles
-
-```
-static std::vector<std::string> listOfFiles(const std::string &sDirname);     
-```
-
 ### makeDir
 
 Create a new directory
