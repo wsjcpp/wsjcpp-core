@@ -72,18 +72,19 @@ Example output
 
 | function | description | code-example |
 | -------- | ----------- | ------- |
-| `wsjcpp::normalize_file_path` | Normalize paths. (For example: `.//../bin/some/../` -> `./../bin/`) | [Code-Example](#wsjcppnormalize_file_path) |
+| `wsjcpp::normalize_filepath` | Normalize paths. (For example: `.//../bin/some/../` -> `./../bin/`) | [Code-Example](#wsjcppnormalize_filepath) |
 | `wsjcpp::recursive_remove_dir` | *Please will be careful*. Recursive remove directory with sub-directories and sub-files | [Code-Example](#wsjcpprecursive_remove_dir) |
 | `wsjcpp::starts_with` | Test string starts with substring | [Code-Example](#wsjcppstarts_with) |
 | `wsjcpp::ends_with` | Test string ends with substring | [Code-Example](#wsjcppends_with) |
 | `wsjcpp::directory_list` | Return list of child directories | [Code-Example](#wsjcppdirectory_list) |
+| `wsjcpp::generate_uuid` | Generate uuid, but you need to call `WsjcppCore::initRandom();` before it (for example in main() function) | [Code-Example](#wsjcppgenerate_uuid) |
 
-### wsjcpp::normalize_file_path
+### wsjcpp::normalize_filepath
 
 Normalize paths. For example: ".//../bin/some/../" -> "./../bin/"
 
 ```
-std::string _path = wsjcpp::normalize_file_path(".//../bin/some/../");
+std::string _path = wsjcpp::normalize_filepath(".//../bin/some/../");
 ```
 
 ### extractFilename
@@ -320,14 +321,14 @@ Example output:
 1a,2b,3c,4d
 ```
 
-### createUuid
+### wsjcpp::generate_uuid
 
 Generate uuid, but you need to call `WsjcppCore::initRandom();` before it (for example in main() function)
 
 ```
 WsjcppCore::initRandom(); // once in main on start
-std::string sUuid = WsjcppCore::createUuid();
-std::cout << sUuid << std::endl;
+std::string _uuid = wsjcpp::generate_uuid();
+std::cout << _uuid << std::endl;
 ```
 
 Example output:
@@ -473,7 +474,6 @@ if (wsjcpp::ends_with("123456", "456")) {
     // true
 }
 ```
-
 
 ### wsjcpp::directory_list
 

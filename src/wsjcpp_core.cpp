@@ -631,17 +631,6 @@ void WsjcppCore::initRandom() {
   std::srand((unsigned int)t);
 }
 
-std::string WsjcppCore::createUuid() {
-  std::string sRet = "00000000-0000-0000-0000-000000000000";
-  const std::string sAlphabet = "0123456789abcdef";
-  for (int i = 0; i < 36; i++) {
-    if (i != 8 && i != 13 && i != 18 && i != 23) {
-      sRet[i] = sAlphabet[rand() % sAlphabet.length()];
-    }
-  }
-  return sRet;
-}
-
 std::string WsjcppCore::uint2hexString(unsigned int n) {
   std::string sRet;
   for (int i = 0; i < 8; i++) {
@@ -1235,6 +1224,17 @@ std::vector<std::string> directory_list(const std::string &dirpath) {
     }
   }
   std::sort(ret.begin(), ret.end());
+  return ret;
+}
+
+std::string generate_uuid() {
+  std::string ret = "00000000-0000-0000-0000-000000000000";
+  const std::string sAlphabet = "0123456789abcdef";
+  for (int i = 0; i < 36; i++) {
+    if (i != 8 && i != 13 && i != 18 && i != 23) {
+      ret[i] = sAlphabet[rand() % sAlphabet.length()];
+    }
+  }
   return ret;
 }
 

@@ -46,8 +46,6 @@ unit-tests:
       description: Check function extract filenane from path
     - name: "ToUpper"
       description: "String to upper"
-    - name: "CreateUuid"
-      description: "Test generation uuids"
     - name: "GetEnv"
       description: "Test getEnv function"
     - name: "ToLower"

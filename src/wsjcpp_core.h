@@ -137,7 +137,6 @@ public:
   static std::string join(const std::vector<std::string> &vWhat, const std::string& sDelim);
 
   static void initRandom();
-  static std::string createUuid();
   static std::string uint2hexString(unsigned int n);
   static unsigned long convertVoidToULong(void *p);
   static std::string getPointerAsHex(void *p);
@@ -266,6 +265,7 @@ bool recursive_remove_dir(const std::string &dirpath, std::string &error);
 bool starts_with(const std::string &str, const std::string &start_str);
 bool ends_with(const std::string &str, const std::string &end_str);
 std::vector<std::string> directory_list(const std::string &dirpath);
+std::string generate_uuid();
 
 } // namespace wsjcpp
 
