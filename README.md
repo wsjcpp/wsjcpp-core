@@ -70,10 +70,12 @@ Example output
 
 ## List of static function:
 
-| function | description |
-| -------- | ----------- |
-| `wsjcpp::normalize_file_path` | Normalize paths. (For example: `.//../bin/some/../` -> `./../bin/`) |
-| `wsjcpp::recursive_remove_dir` | *Please will be careful*. Recursive remove directory with sub-directories and sub-files |
+| function | description | code-example |
+| -------- | ----------- | ------- |
+| `wsjcpp::normalize_file_path` | Normalize paths. (For example: `.//../bin/some/../` -> `./../bin/`) | [Code-Example](#wsjcppnormalize_file_path) |
+| `wsjcpp::recursive_remove_dir` | *Please will be careful*. Recursive remove directory with sub-directories and sub-files | [Code-Example](#wsjcpprecursive_remove_dir) |
+| `wsjcpp::starts_with` | Test string starts with substring | [Code-Example](#wsjcppstarts_with) |
+| `wsjcpp::ends_with` | Test string ends with substring | [Code-Example](#wsjcppends_with) |
 
 ### wsjcpp::normalize_file_path
 
@@ -463,22 +465,22 @@ if (!wsjcpp::recursive_remove_dir("./folder2", error)) {
 }
 ```
 
-### startsWith
+### wsjcpp::starts_with
 
 Test string starts with substring
 
 ```
-if (WsjcppCore::startsWith("123456", "123")) {
+if (wsjcpp::starts_with("123456", "123")) {
     // true
 }
 ```
 
-### endsWith
+### wsjcpp::ends_with
 
-Test string starts with substring
+Test string ends with substring
 
 ```
-if (WsjcppCore::startsWith("123456", "456")) {
+if (wsjcpp::ends_with("123456", "456")) {
     // true
 }
 ```

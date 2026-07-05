@@ -8,6 +8,8 @@
 - Renamed `WsjcppCore::extractURLProtocol` to `wsjcpp::extract_url_protocol`
 - Fixed #38: Added test for extract_url_protocol
 - Renamed and redesign `WsjcppCore::recoursiveRemoveDir` to `wsjcpp::recursive_remove_dir`
+- Fixed #41: Renamed `WsjcppCore::startsWith` to `wsjcpp::starts_with`
+- Renamed `WsjcppCore::endsWith` to `wsjcpp::ends_with`
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 

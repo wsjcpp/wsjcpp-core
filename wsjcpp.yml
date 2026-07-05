@@ -84,9 +84,4 @@ unit-tests:
       description: ""
     - name: "ExtractFilepath"
       description: ""
-    - name: "StartsWith"
-      description: ""
-
-    - name: "EndsWith"
-      description: ""
 

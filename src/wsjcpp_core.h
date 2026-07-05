@@ -158,10 +158,6 @@ public:
 
   static std::string doPadLeft(const std::string& sIn, char cWhat, size_t nLength);
   static std::string doPadRight(const std::string& sIn, char cWhat, size_t nLength);
-
-  static bool startsWith(const std::string& sLine, const std::string& sStart);
-  static bool endsWith(const std::string& sLine, const std::string& sEnd);
-
 };
 
 enum WsjcppColorCode {
@@ -270,6 +266,8 @@ public:
 std::string normalize_filepath(const std::string &path);
 std::string extract_url_protocol(const std::string& sValue);
 bool recursive_remove_dir(const std::string &dirpath, std::string &error);
+bool starts_with(const std::string &str, const std::string &start_str);
+bool ends_with(const std::string &str, const std::string &end_str);
 
 } // namespace wsjcpp
 

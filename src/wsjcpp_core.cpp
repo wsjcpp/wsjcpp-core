@@ -870,18 +870,6 @@ std::string WsjcppCore::doPadRight(const std::string& sIn, char cWhat, size_t nL
   return sIn + sRet;
 }
 
-bool WsjcppCore::startsWith(const std::string& sLine, const std::string& sStart) {
-  return sLine.rfind(sStart, 0) == 0;
-}
-
-bool WsjcppCore::endsWith(const std::string& sLine, const std::string& sEnd) {
-  // https://www.techiedelight.com/check-if-a-string-ends-with-another-string-in-cpp/
-  if (sLine.length() < sEnd.length()) {
-    return false;
-  }
-  return std::equal(sEnd.rbegin(), sEnd.rend(), sLine.rbegin());
-}
-
 // ---------------------------------------------------------------------
 // WsjcppLog
 
@@ -1232,6 +1220,18 @@ bool recursive_remove_dir(const std::string &dirpath, std::string &error) {
     return false;
   }
   return true;
+}
+
+bool starts_with(const std::string &str, const std::string &start_str) {
+  return str.rfind(start_str, 0) == 0;
+}
+
+bool ends_with(const std::string &str, const std::string &end_str) {
+  // https://www.techiedelight.com/check-if-a-string-ends-with-another-string-in-cpp/
+  if (str.length() < end_str.length()) {
+    return false;
+  }
+  return std::equal(end_str.rbegin(), end_str.rend(), str.rbegin());
 }
 
 } // namespace wsjcpp
