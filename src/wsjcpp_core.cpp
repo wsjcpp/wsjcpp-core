@@ -1238,4 +1238,17 @@ std::string generate_uuid() {
   return ret;
 }
 
+std::string parent_dirpath(const std::string &filepath) {
+  std::string _filepath = wsjcpp::normalize_filepath(filepath);
+  if (_filepath.size() > 0 && _filepath[_filepath.size()-1] == '/') {
+    _filepath = _filepath.substr(0, _filepath.size()-1);
+  }
+  std::string filename = WsjcppCore::extractFilename(_filepath);
+  std::string _ret = _filepath.substr(0, _filepath.length() - filename.length());
+  if (_ret.size() > 0 && _ret[_ret.size()-1] == '/') {
+    _ret = _ret.substr(0, _ret.size()-1);
+  }
+  return _ret;
+}
+
 } // namespace wsjcpp

@@ -25,7 +25,7 @@ Or include files:
 
 ## Logger (WsjcppLog)
 
-* Output will be collored for console, but color will be missing for files.
+* Output will be colored for console, but color will be missing for files.
 * Functions are safe thread.
 * Logger supports a log rotation (every 51000 seconds / every day)
 * WsjcppLog::throw_err - will be generate `throw std::runtime_error(sMessage);`
@@ -78,6 +78,7 @@ Example output
 | `wsjcpp::ends_with` | Test string ends with substring | [Code-Example](#wsjcppends_with) |
 | `wsjcpp::directory_list` | Return list of child directories | [Code-Example](#wsjcppdirectory_list) |
 | `wsjcpp::generate_uuid` | Generate uuid, but you need to call `WsjcppCore::initRandom();` before it (for example in main() function) | [Code-Example](#wsjcppgenerate_uuid) |
+| `wsjcpp::parent_dirpath` | Extract dirpath from filepath | [Code-Example](#wsjcppparent_dirpath) |
 
 ### wsjcpp::normalize_filepath
 
@@ -404,7 +405,7 @@ Example output:
 
 ### encodeUriComponent
 
-Simular a js function `encodeURIComponent`
+Similar a js function `encodeURIComponent`
 
 ```
 static std::string encodeUriComponent(const std::string& sValue);
@@ -412,7 +413,7 @@ static std::string encodeUriComponent(const std::string& sValue);
 
 ### decodeUriComponent
 
-Simular a js function `decodeURIComponent`
+Similar a js function `decodeURIComponent`
 
 ```
 static std::string decodeUriComponent(const std::string& sValue);
@@ -479,4 +480,13 @@ if (wsjcpp::ends_with("123456", "456")) {
 
 ```
 std::vector<std::string> dirs = wsjcpp::directory_list("./");
+```
+
+### wsjcpp::parent_dirpath
+
+Extracted normalize dirpath from filepath
+
+```cpp
+std::string parent_dir = wsjcpp::directory_list("./bo/test.txt");
+// parent_dir will be contains './bo'
 ```

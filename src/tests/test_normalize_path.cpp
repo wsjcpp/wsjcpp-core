@@ -51,6 +51,7 @@ int main() {
   map_paths.insert(std::pair<std::string, std::string>("/../db/flags_live.db", "/db/flags_live.db"));
   map_paths.insert(std::pair<std::string, std::string>("//../db/flags_live.db", "/db/flags_live.db"));
   map_paths.insert(std::pair<std::string, std::string>("//../../../etc/passwd", "/etc/passwd"));
+  map_paths.insert(std::pair<std::string, std::string>("//..\\../../etc/passwd", "/etc/passwd"));
   std::map<std::string, std::string>::iterator it;
 
   int found_errors = 0;
