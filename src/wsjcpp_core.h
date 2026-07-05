@@ -115,7 +115,6 @@ public:
 
   static bool dirExists(const std::string &sFilename);
   static bool fileExists(const std::string &sFilename);
-  static std::vector<std::string> getListOfDirs(const std::string &sDirname);
   static std::vector<std::string> listOfFiles(const std::string &sDirname);
   static std::vector<std::string> getListOfFiles(const std::string &sDirname);
   static bool makeDir(const std::string &sDirname);
@@ -267,6 +266,7 @@ std::string extract_url_protocol(const std::string& sValue);
 bool recursive_remove_dir(const std::string &dirpath, std::string &error);
 bool starts_with(const std::string &str, const std::string &start_str);
 bool ends_with(const std::string &str, const std::string &end_str);
+std::vector<std::string> directory_list(const std::string &dirpath);
 
 } // namespace wsjcpp
 

@@ -392,22 +392,6 @@ bool WsjcppCore::dirExists(const std::string &sDirname) {
   return false;
 }
 
-std::vector<std::string> WsjcppCore::getListOfDirs(const std::string &sDirname) {
-  std::vector<std::string> vDirs;
-  if (!WsjcppCore::dirExists(sDirname)) {
-    return vDirs;
-  }
-  for (auto& entry : std::filesystem::directory_iterator(sDirname)) {
-    if (entry.is_directory()) {
-      std::string sPath = entry.path();
-      sPath.erase(0, sDirname.size() + 1);
-      vDirs.push_back(sPath);
-    }
-  }
-  std::sort(vDirs.begin(), vDirs.end());
-  return vDirs;
-}
-
 std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname) {
   std::vector<std::string> vFiles;
   if (!WsjcppCore::dirExists(sDirname)) {
@@ -773,7 +757,7 @@ bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::s
     }
   }
 
-  std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(sSourceDir);
+  std::vector<std::string> vDirs = wsjcpp::directory_list(sSourceDir);
   for (int i = 0; i < vDirs.size(); i++) {
     std::string sSourceDir2 = sSourceDir + "/" + vDirs[i];
     std::string sTargetDir2 = sTargetDir + "/" + vDirs[i];
@@ -1208,7 +1192,7 @@ bool recursive_remove_dir(const std::string &dirpath, std::string &error) {
       return false;
     }
   }
-  std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(dirpath);
+  std::vector<std::string> vDirs = wsjcpp::directory_list(dirpath);
   for (int i = 0; i < vDirs.size(); i++) {
     std::string sDir2 = dirpath + "/" + vDirs[i];
     if (!recursive_remove_dir(sDir2, error)) {
@@ -1235,7 +1219,19 @@ bool ends_with(const std::string &str, const std::string &end_str) {
 }
 
 std::vector<std::string> directory_list(const std::string &dirpath) {
-  
+  std::vector<std::string> vDirs;
+  if (!WsjcppCore::dirExists(dirpath)) {
+    return vDirs;
+  }
+  for (auto& entry : std::filesystem::directory_iterator(dirpath)) {
+    if (entry.is_directory()) {
+      std::string sPath = entry.path();
+      sPath.erase(0, dirpath.size() + 1);
+      vDirs.push_back(sPath);
+    }
+  }
+  std::sort(vDirs.begin(), vDirs.end());
+  return vDirs;
 }
 
 } // namespace wsjcpp

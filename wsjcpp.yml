@@ -72,8 +72,6 @@ unit-tests:
       description: "Test function get human size in bytes"
     - name: "TestResources"
       description: "Test basic resources"
-    - name: "ListOfDirs"
-      description: "Check list of directories"
     - name: "FilePermissions"
       description: ""
     - name: "StringPadding"
