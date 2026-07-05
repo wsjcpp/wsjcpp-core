@@ -791,34 +791,6 @@ bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::s
   return true;
 }
 
-bool WsjcppCore::recoursiveRemoveDir(const std::string& sDir) {
-  if (!WsjcppCore::dirExists(sDir)) {
-    WsjcppLog::err("recoursiveCopyFiles", "Dir '" + sDir + "' did not exists");
-    return false;
-  }
-
-  std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(sDir);
-  for (int i = 0; i < vFiles.size(); i++) {
-    std::string sFile = sDir + "/" + vFiles[i];
-    if (!WsjcppCore::removeFile(sFile)) {
-      return false;
-    }
-  }
-
-  std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(sDir);
-  for (int i = 0; i < vDirs.size(); i++) {
-    std::string sDir2 = sDir + "/" + vDirs[i];
-    if (!WsjcppCore::recoursiveRemoveDir(sDir2)) {
-      return false;
-    }
-  }
-
-  if (!WsjcppCore::removeFile(sDir)) {
-    return false;
-  }
-  return true;
-}
-
 bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError) {
 
   mode_t m = 0x0;
@@ -1233,6 +1205,33 @@ std::string extract_url_protocol(const std::string &value) {
   }
   ret = value.substr(0, nPosProtocol);
   return ret;
+}
+
+bool recursive_remove_dir(const std::string &dirpath, std::string &error) {
+  if (!WsjcppCore::dirExists(dirpath)) {
+    error = "Dir '" + dirpath + "' did not exists";
+    return false;
+  }
+  std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(dirpath);
+  for (int i = 0; i < vFiles.size(); i++) {
+    std::string filepath = dirpath + "/" + vFiles[i];
+    if (!WsjcppCore::removeFile(filepath)) {
+      error = "File '" + filepath + "' did not removed";
+      return false;
+    }
+  }
+  std::vector<std::string> vDirs = WsjcppCore::getListOfDirs(dirpath);
+  for (int i = 0; i < vDirs.size(); i++) {
+    std::string sDir2 = dirpath + "/" + vDirs[i];
+    if (!recursive_remove_dir(sDir2, error)) {
+      return false;
+    }
+  }
+  if (!WsjcppCore::removeFile(dirpath)) {
+    error = "File '" + dirpath + "' did not removed";
+    return false;
+  }
+  return true;
 }
 
 } // namespace wsjcpp

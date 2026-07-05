@@ -152,7 +152,6 @@ public:
   static std::string getHumanSizeBytes(long nBytes);
 
   static bool recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir);
-  static bool recoursiveRemoveDir(const std::string& sDir);
 
   static bool setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError);
   static bool getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError);
@@ -270,6 +269,7 @@ public:
 
 std::string normalize_filepath(const std::string &path);
 std::string extract_url_protocol(const std::string& sValue);
+bool recursive_remove_dir(const std::string &dirpath, std::string &error);
 
 } // namespace wsjcpp
 

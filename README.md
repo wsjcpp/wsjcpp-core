@@ -68,7 +68,12 @@ Example output
 2020-02-25 16:56:07.376, 0x0x10ac51dc0 [OK] MAIN: Hello ok
 ```
 
-## List of static function (WsjcppCore):
+## List of static function:
+
+| function | description |
+| -------- | ----------- |
+| `wsjcpp::normalize_file_path` | Normalize paths. (For example: `.//../bin/some/../` -> `./../bin/`) |
+| `wsjcpp::recursive_remove_dir` | *Please will be careful*. Recursive remove directory with sub-directories and sub-files |
 
 ### wsjcpp::normalize_file_path
 
@@ -446,14 +451,14 @@ if (WsjcppCore::recoursiveCopyFiles("./folder1", "./folder2")) {
 }
 ```
 
+### wsjcpp::recursive_remove_dir
 
-### recoursiveRemoveDir
-
-Recoursive remove dir (+ subdirs) and files
 *Please will be careful*
+Recursive remove directory with sub-directories and sub-files
 
 ```
-if (WsjcppCore::recoursiveRemoveDir("./folder2")) {
+std::string error;
+if (!wsjcpp::recursive_remove_dir("./folder2", error)) {
     // everything removed
 }
 ```

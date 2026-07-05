@@ -44,19 +44,22 @@ int main(int argc, char* argv[]) {
     WsjcppLog::ok(TAG, "Hello ok");
 
     WsjcppCore::init(
-        argc, argv, 
+        argc, argv,
         std::string(appName),
         std::string(appVersion),
         "Evgenii Sopov",
         ""
     );
+    std::string error;
     if (WsjcppCore::dirExists("./tmp2")) {
-        WsjcppCore::recoursiveRemoveDir("./tmp2");
+        if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
+            std::cerr << "recursive_remove_dir error: " << error << std::endl;
+        }
     }
     WsjcppCore::recoursiveCopyFiles("./tmp", "./tmp2");
-    WsjcppCore::recoursiveRemoveDir("./tmp2");
-
+    if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
+        std::cerr << "recursive_remove_dir error: " << error << std::endl;
+    }
     WsjcppCore::getThreadId();
-
     return 0;
 }

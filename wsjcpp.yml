@@ -80,8 +80,6 @@ unit-tests:
       description: ""
     - name: "DateTimeFormat"
       description: ""
-    - name: "MakeDirsPath"
-      description: ""
     - name: "ExtractDirpath"
       description: ""
     - name: "ExtractFilepath"
