@@ -1251,4 +1251,45 @@ std::string parent_dirpath(const std::string &filepath) {
   return _ret;
 }
 
+std::string to_snake_case(const std::string &name) {
+  std::string _to_lower_and_underscore = "";
+  for (int i = 0; i < name.size(); i++) {
+    char c = name[i];
+    if (c >= 'A' && c <= 'Z') {
+      _to_lower_and_underscore += '_';
+      _to_lower_and_underscore += char(c + 0x20); // to lower
+    } else if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
+      _to_lower_and_underscore += c;
+    } else {
+      _to_lower_and_underscore += '_';
+    }
+  }
+  // TODO: ä -> ae, ö -> oe, ü -> ue
+
+  std::string ret;
+  int underscore_counter = 0;
+  for (int i = 0; i < _to_lower_and_underscore.size(); i++) {
+    char c = _to_lower_and_underscore[i];
+    if (c == '_') {
+      underscore_counter++;
+      if (underscore_counter == 1) {
+        ret += c;
+      }
+    } else {
+      underscore_counter = 0;
+      ret += c;
+    }
+  }
+
+  // removing first underscore if next charater is not number
+  if (ret.size() > 1 && ret[0] == '_' && (ret[1] < '0' || ret[1] > '9')) {
+    ret = ret.substr(1, ret.size() - 1);
+  }
+  if (ret.size() > 0 && ret[ret.size()-1] == '_') {
+    ret = ret.substr(0, ret.size() - 1);
+  }
+  return ret;
+}
+
+
 } // namespace wsjcpp

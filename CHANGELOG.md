@@ -17,6 +17,7 @@
 - Fixed #36: Renamed `WsjcppCore::createUuid` to `wsjcpp::generate_uuid()`
 - Fixed #33: Added `wsjcpp::parent_dirpath`
 - Removed `.travis.yml` and `ci/travis`
+- Fixed #24: Added `wsjcpp::to_snake_case`
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 

@@ -79,6 +79,7 @@ Example output
 | `wsjcpp::directory_list` | Return list of child directories | [Code-Example](#wsjcppdirectory_list) |
 | `wsjcpp::generate_uuid` | Generate uuid, but you need to call `WsjcppCore::initRandom();` before it (for example in main() function) | [Code-Example](#wsjcppgenerate_uuid) |
 | `wsjcpp::parent_dirpath` | Extract dirpath from filepath | [Code-Example](#wsjcppparent_dirpath) |
+| `wsjcpp::to_snake_case` | Normalize input string to snake case | [Code-Example](#wsjcppto_snake_case) |
 
 ### wsjcpp::normalize_filepath
 
@@ -490,3 +491,17 @@ Extracted normalize dirpath from filepath
 std::string parent_dir = wsjcpp::directory_list("./bo/test.txt");
 // parent_dir will be contains './bo'
 ```
+
+### wsjcpp::to_snake_case
+
+Normalize input string to snake case
+
+```cpp
+std::string name1 = wsjcpp::to_snake_case("./bo/test.txt");
+// name1 will be contains 'bo_test_txt'
+std::string name2 = wsjcpp::to_snake_case("123:ssss");
+// name2 will be contains '_123_ssss'
+std::string name3 = wsjcpp::to_snake_case("SomeClass");
+// name3 will be contains 'some_class'
+```
+

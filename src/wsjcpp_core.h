@@ -267,6 +267,7 @@ bool ends_with(const std::string &str, const std::string &end_str);
 std::vector<std::string> directory_list(const std::string &dirpath);
 std::string generate_uuid();
 std::string parent_dirpath(const std::string &filepath);
+std::string to_snake_case(const std::string &name);
 
 } // namespace wsjcpp
 

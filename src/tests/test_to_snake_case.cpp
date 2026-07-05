@@ -35,30 +35,36 @@ int main() {
 
   struct LTest {
     LTest(
-      const std::string &filepath,
-      const std::string &expected_parent_dirpath
+      const std::string &name,
+      const std::string &snake_name
     ) {
-      this->filepath = filepath;
-      this->expected_parent_dirpath = expected_parent_dirpath;
+      this->name = name;
+      this->snake_name = snake_name;
     };
-    std::string filepath;
-    std::string expected_parent_dirpath;
+    std::string name;
+    std::string snake_name;
   };
 
   std::vector<LTest> tests;
-  tests.push_back(LTest("./bo/file.txt", "./bo"));
-  tests.push_back(LTest("./1/bo/../file.txt", "./1"));
-  tests.push_back(LTest("./bo/../file.txt", "."));
-  tests.push_back(LTest("file.txt", ""));
+  tests.push_back(LTest("PackageName", "package_name"));
+  tests.push_back(LTest("./Bo/file.txt", "bo_file_txt"));
+  tests.push_back(LTest("./1/bo/../file.txt", "_1_bo_file_txt"));
+  tests.push_back(LTest("./bo/../file.txt", "bo_file_txt"));
+  tests.push_back(LTest("file.txt", "file_txt"));
   tests.push_back(LTest("", ""));
-  tests.push_back(LTest("//a/b/c/d/////", "/a/b/c"));
+  tests.push_back(LTest("A", "a"));
+  tests.push_back(LTest("____A", "a"));
+  tests.push_back(LTest("A____", "a"));
+  tests.push_back(LTest("a", "a"));
+  tests.push_back(LTest("//a/b/c/d/////", "a_b_c_d"));
+  tests.push_back(LTest("https://github.com/wsjcpp/wsjcpp-core/issues/24", "https_github_com_wsjcpp_wsjcpp_core_issues_24"));
 
   for (int i = 0; i < tests.size(); i++) {
     LTest test = tests[i];
-    std::string got = wsjcpp::parent_dirpath(test.filepath);
-    if (got != test.expected_parent_dirpath) {
+    std::string got = wsjcpp::to_snake_case(test.name);
+    if (got != test.snake_name) {
       found_errors++;
-      std::cerr << "Expected '" << test.expected_parent_dirpath << "', but got '" << got << "'" << std::endl;
+      std::cerr << "Expected '" << test.snake_name << "', but got '" << got << "'" << std::endl;
     }
   }
   if (found_errors > 0) {
