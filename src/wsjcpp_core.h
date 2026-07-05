@@ -29,7 +29,7 @@
 
 #define WSJCPP_CORE_VER_0
 #define WSJCPP_CORE_VER_0_2
-#define WSJCPP_CORE_VER_0_2_5
+#define WSJCPP_CORE_VER_0_2_6
 
 #include <string>
 #include <vector>
