@@ -16,6 +16,7 @@
 - Removed definition `WsjcppCore::listOfFiles` because missing implementation
 - Fixed #36: Renamed `WsjcppCore::createUuid` to `wsjcpp::generate_uuid()`
 - Fixed #33: Added `wsjcpp::parent_dirpath`
+- Removed `.travis.yml` and `ci/travis`
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 
