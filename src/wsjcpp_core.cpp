@@ -724,46 +724,6 @@ std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
   return std::to_string(nBytes) + "PB";
 }
 
-bool WsjcppCore::recoursiveCopyFiles(const std::string& sSourceDir, const std::string& sTargetDir) {
-  if (!WsjcppCore::dirExists(sSourceDir)) {
-    WsjcppLog::err("recoursiveCopyFiles", "Source Dir '" + sSourceDir + "' did not exists");
-    return false;
-  }
-
-  if (!WsjcppCore::dirExists(sTargetDir)) {
-    if (!WsjcppCore::makeDir(sTargetDir)) {
-      WsjcppLog::err("recoursiveCopyFiles", "Could not create target dir '" + sTargetDir + "'");
-      return false;
-    }
-  }
-
-  std::vector<std::string> vFiles = WsjcppCore::getListOfFiles(sSourceDir);
-  for (int i = 0; i < vFiles.size(); i++) {
-    std::string sSourceFile = sSourceDir + "/" + vFiles[i];
-    std::string sTargetFile = sTargetDir + "/" + vFiles[i];
-    if (!WsjcppCore::copyFile(sSourceFile, sTargetFile)) {
-      return false;
-    }
-  }
-
-  std::vector<std::string> vDirs = wsjcpp::directory_list(sSourceDir);
-  for (int i = 0; i < vDirs.size(); i++) {
-    std::string sSourceDir2 = sSourceDir + "/" + vDirs[i];
-    std::string sTargetDir2 = sTargetDir + "/" + vDirs[i];
-    if (!WsjcppCore::dirExists(sTargetDir2)) {
-      if (!WsjcppCore::makeDir(sTargetDir2)) {
-        WsjcppLog::err("recoursiveCopyFiles", "Could not create target subdir '" + sTargetDir2 + "'");
-        return false;
-      }
-    }
-
-    if (!WsjcppCore::recoursiveCopyFiles(sSourceDir2, sTargetDir2)) {
-      return false;
-    }
-  }
-  return true;
-}
-
 bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError) {
 
   mode_t m = 0x0;
@@ -1166,6 +1126,47 @@ std::string extract_url_protocol(const std::string &value) {
   }
   ret = value.substr(0, nPosProtocol);
   return ret;
+}
+
+bool recursive_copy_files(const std::string& source_dir, const std::string& target_dir, std::string &error) {
+  if (!WsjcppCore::dirExists(source_dir)) {
+    WsjcppLog::err("recursive_copy_files", "Source Dir '" + source_dir + "' did not exists");
+    return false;
+  }
+
+  if (!WsjcppCore::dirExists(target_dir)) {
+    if (!WsjcppCore::makeDir(target_dir)) {
+      WsjcppLog::err("recursive_copy_files", "Could not create target dir '" + target_dir + "'");
+      return false;
+    }
+  }
+
+  std::vector<std::string> found_files = WsjcppCore::getListOfFiles(source_dir);
+  for (int i = 0; i < found_files.size(); i++) {
+    std::string source_file = source_dir + "/" + found_files[i];
+    std::string target_file = target_dir + "/" + found_files[i];
+    if (!WsjcppCore::copyFile(source_file, target_file)) {
+      error = "Could not copy file '" + source_file + "' -> '" + target_file + "'";
+      return false;
+    }
+  }
+
+  std::vector<std::string> found_dirs = wsjcpp::directory_list(source_dir);
+  for (int i = 0; i < found_dirs.size(); i++) {
+    std::string next_source_dir = source_dir + "/" + found_dirs[i];
+    std::string next_target_dir = target_dir + "/" + found_dirs[i];
+    if (!WsjcppCore::dirExists(next_target_dir)) {
+      if (!WsjcppCore::makeDir(next_target_dir)) {
+        error = "Could not create target subdir '" + next_target_dir + "'";
+        return false;
+      }
+    }
+
+    if (!wsjcpp::recursive_copy_files(next_target_dir, next_target_dir, error)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 bool recursive_remove_dir(const std::string &dirpath, std::string &error) {

@@ -73,6 +73,7 @@ Example output
 | function | description | code-example |
 | -------- | ----------- | ------- |
 | `wsjcpp::normalize_filepath` | Normalize paths. (For example: `.//../bin/some/../` -> `./../bin/`) | [Code-Example](#wsjcppnormalize_filepath) |
+| `wsjcpp::recursive_copy_files` | Recursive copy files. *If target folders does not exists then it will be created* | [Code-Example](#wsjcpprecursive_copy_files) |
 | `wsjcpp::recursive_remove_dir` | *Please will be careful*. Recursive remove directory with sub-directories and sub-files | [Code-Example](#wsjcpprecursive_remove_dir) |
 | `wsjcpp::starts_with` | Test string starts with substring | [Code-Example](#wsjcppstarts_with) |
 | `wsjcpp::ends_with` | Test string ends with substring | [Code-Example](#wsjcppends_with) |
@@ -434,13 +435,13 @@ Example output:
 Size: 12K
 ```
 
-### recoursiveCopyFiles
+### wsjcpp::recursive_copy_files
 
-Recoursive copy files
+Recursive copy files
 *If target folders does not exists then it will be created*
 
 ```
-if (WsjcppCore::recoursiveCopyFiles("./folder1", "./folder2")) {
+if (WsjcppCore::recursive_copy_files("./folder1", "./folder2")) {
     // everything ok
 }
 ```

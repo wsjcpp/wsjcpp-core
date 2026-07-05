@@ -56,7 +56,9 @@ int main(int argc, char* argv[]) {
             std::cerr << "recursive_remove_dir error: " << error << std::endl;
         }
     }
-    WsjcppCore::recoursiveCopyFiles("./tmp", "./tmp2");
+    if (!wsjcpp::recursive_copy_files("./tmp", "./tmp2", error)) {
+        std::cerr << "recursive_copy_files error: " << error << std::endl;
+    }
     if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
         std::cerr << "recursive_remove_dir error: " << error << std::endl;
     }
