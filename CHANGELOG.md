@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.2.6] - 2026-07-05 (2026 July 5)
+
+- Redesign normalize path to ctest
+
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 
 - Fixed for path traversal `WsjcppCore::doNormalizePath`
@@ -28,5 +32,5 @@
 - Added WsjcppCore::makeDirsPath
 - Added WsjcppCore::extractDirpath
 - Up c++ to version 17 (need for std::filesystem)
-- Redesign getListOfDisrs to using cross-platform std::filesystem
+- Redesign getListOfDirs to using cross-platform std::filesystem
 - Fixed setFilePermissions

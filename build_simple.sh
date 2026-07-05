@@ -25,7 +25,9 @@ check_ret $? "configure"
 cmake --build tmp/release --config Release
 check_ret $? "make"
 
-cd unit-tests.wsjcpp
+cd ./tmp/release && ctest --output-on-failure
+
+cd ../../unit-tests.wsjcpp
 
 cmake -H. -Btmp/release -DCMAKE_BUILD_TYPE=Release
 check_ret $? "configure"
@@ -34,3 +36,4 @@ cmake --build tmp/release --config Release
 check_ret $? "make"
 
 ./run_unit-tests.sh
+check_ret $? "unit-tests"

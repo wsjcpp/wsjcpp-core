@@ -31,8 +31,8 @@
 
 int main(int argc, char* argv[]) {
     const std::string TAG = "MAIN";
-    std::string appName = std::string(WSJCPP_APP_NAME);
-    std::string appVersion = std::string(WSJCPP_APP_VERSION);
+    std::string appName = "wsjcpp-core"; // std::string(WSJCPP_APP_NAME);
+    std::string appVersion = "..."; // std::string(WSJCPP_APP_VERSION);
 
     // WsjcppLog::setEnableLogFile(false);
     WsjcppLog::setLogDirectory(".logs");
@@ -45,8 +45,8 @@ int main(int argc, char* argv[]) {
 
     WsjcppCore::init(
         argc, argv, 
-        std::string(WSJCPP_APP_NAME),
-        std::string(WSJCPP_APP_VERSION),
+        std::string(appName),
+        std::string(appVersion),
         "Evgenii Sopov",
         ""
     );

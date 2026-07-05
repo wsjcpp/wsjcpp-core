@@ -22,41 +22,29 @@
 #
 # original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-cmake_minimum_required(VERSION 3.7)
-
-project(wsjcpp-core)
-
-# include(${CMAKE_CURRENT_SOURCE_DIR}/src.wsjcpp/CMakeLists.txt)
-
-#### BEGIN_WSJCPP_APPEND
-#### END_WSJCPP_APPEND
-
-set(CMAKE_CXX_STANDARD 17)
-set(EXECUTABLE_OUTPUT_PATH ${wsjcpp-core_SOURCE_DIR})
-
-# Sources
-
-# include header dirs
-list (APPEND WSJCPP_INCLUDE_DIRS "src")
-
-list (APPEND WSJCPP_SOURCES "src/wsjcpp_core.h")
-list (APPEND WSJCPP_SOURCES "src/wsjcpp_core.cpp")
-
-list (APPEND WSJCPP_SOURCES "src/main.cpp")
-
-include_directories(${WSJCPP_INCLUDE_DIRS})
-
-add_executable ("wsjcpp-core" ${WSJCPP_SOURCES})
-
-target_link_libraries("wsjcpp-core" -lpthread ${WSJCPP_LIBRARIES} )
-
-install(
-    TARGETS
-        "wsjcpp-core"
-    RUNTIME DESTINATION
-        /usr/bin
+file(GLOB ALL_TESTS
+  "test_*.cpp"
 )
 
-# enable testing functionality
-enable_testing()
-add_subdirectory(src/tests)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY tests)
+
+list (APPEND TEST_WSJCPP_CORE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../")
+list (APPEND TEST_WSJCPP_CORE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../wsjcpp_core.cpp")
+
+include_directories(${TEST_WSJCPP_CORE_INCLUDE_DIRS})
+
+foreach(_TEST ${ALL_TESTS})
+  get_filename_component(TEST_NAME ${_TEST} NAME_WE)
+  add_executable(${TEST_NAME}
+    ${_TEST}
+    ${TEST_WSJCPP_CORE_SOURCES}
+  )
+  target_link_libraries(${TEST_NAME} -lpthread ${WSJCPP_LIBRARIES})
+
+  add_test(
+    NAME ${TEST_NAME}
+    COMMAND $<TARGET_FILE:${TEST_NAME}>
+  )
+  message(${CMAKE_CURRENT_BINARY_DIR}/tests)
+  set_target_properties (${TEST_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY tests)
+endforeach()

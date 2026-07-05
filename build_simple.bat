@@ -16,4 +16,11 @@ if %ERRORLEVEL% GEQ 1 (
     EXIT /B 1
 )
 
+cd ./tmp/release
+ctest --output-on-failure
+if %ERRORLEVEL% GEQ 1 (
+    echo "ctest failed"
+    EXIT /B 1
+)
+
 endlocal
