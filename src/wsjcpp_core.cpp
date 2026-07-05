@@ -679,16 +679,6 @@ std::string WsjcppCore::getPointerAsHex(void *p) {
   return "0x" + std::string(stream.str());
 }
 
-std::string WsjcppCore::extractURLProtocol(const std::string& sValue) {
-  std::string sRet = "";
-  size_t nPosProtocol = sValue.find("://");
-  if (nPosProtocol == std::string::npos) {
-    return sRet;
-  }
-  sRet = sValue.substr(0, nPosProtocol);
-  return sRet;
-}
-
 bool WsjcppCore::getEnv(const std::string& sName, std::string& sValue) {
   if (const char* env_p = std::getenv(sName.c_str())) {
     sValue = std::string(env_p);
@@ -1232,6 +1222,16 @@ std::string normalize_filepath(const std::string &path) {
       ret += "/";
     }
   }
+  return ret;
+}
+
+std::string extract_url_protocol(const std::string &value) {
+  std::string ret = "";
+  size_t nPosProtocol = value.find("://");
+  if (nPosProtocol == std::string::npos) {
+    return ret;
+  }
+  ret = value.substr(0, nPosProtocol);
   return ret;
 }
 

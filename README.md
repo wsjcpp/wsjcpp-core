@@ -382,11 +382,13 @@ Example output:
 0x7ffee8b04940
 ```
 
-### extractURLProtocol
+### wsjcpp::extract_url_protocol
 
 ```
-std::string sProtocol = WsjcppCore::extractURLProtocol("https://github.com/wsjcpp");
+std::string proto = wsjcpp::extract_url_protocol("https://github.com/wsjcpp");
 ```
+
+`proto` will be contains `https`
 
 ### getEnv
 

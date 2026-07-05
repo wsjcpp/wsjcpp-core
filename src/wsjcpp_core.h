@@ -144,7 +144,6 @@ public:
   static std::string uint2hexString(unsigned int n);
   static unsigned long convertVoidToULong(void *p);
   static std::string getPointerAsHex(void *p);
-  static std::string extractURLProtocol(const std::string& sValue);
   static bool getEnv(const std::string& sName, std::string& sValue);
 
   static std::string encodeUriComponent(const std::string& sValue);
@@ -270,6 +269,7 @@ public:
 };
 
 std::string normalize_filepath(const std::string &path);
+std::string extract_url_protocol(const std::string& sValue);
 
 } // namespace wsjcpp
 
