@@ -156,7 +156,7 @@ public:
   static std::string doPadRight(const std::string& sIn, char cWhat, size_t nLength);
 };
 
-enum WsjcppColorCode {
+enum WsjcppColorCode { // deprecated, see https://github.com/sea5kg/sea5kg-logger
   FG_RED      = 31,
   FG_GREEN    = 32,
   FG_YELLOW   = 93,
@@ -168,7 +168,7 @@ enum WsjcppColorCode {
   BG_DEFAULT  = 49
 };
 
-class WsjcppColorModifier {
+class WsjcppColorModifier { // deprecated, see https://github.com/sea5kg/sea5kg-logger
 WsjcppColorCode code;
 public:
   WsjcppColorModifier(WsjcppColorCode pCode) : code(pCode) {}
@@ -180,7 +180,7 @@ public:
 
 // ---------------------------------------------------------------------
 
-class WsjcppLogGlobalConf {
+class WsjcppLogGlobalConf { // deprecated, see https://github.com/sea5kg/sea5kg-logger
 public:
   WsjcppLogGlobalConf();
   void doLogRotateUpdateFilename(bool bForce = false);
@@ -194,7 +194,7 @@ public:
   std::deque<std::string> logLastMessages;
 };
 
-class WsjcppLog {
+class WsjcppLog { // deprecated, see https://github.com/sea5kg/sea5kg-logger
 public:
   static WsjcppLogGlobalConf g_WSJCPP_LOG_GLOBAL_CONF;
 
