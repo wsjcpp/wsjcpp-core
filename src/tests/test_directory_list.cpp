@@ -85,6 +85,13 @@ int main() {
 
   test_dir_list(found_errors, "./data/list_of_dirs", expected_dirs);
 
+  expected_dirs = prepare_expected_dirs(found_errors, {
+    "dir1",
+    "dir2",
+  });
+
+  test_dir_list(found_errors, "./data/list_of_dirs/", expected_dirs);
+
   if (found_errors > 0) {
     return 1;
   }

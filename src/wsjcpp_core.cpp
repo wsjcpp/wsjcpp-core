@@ -1219,19 +1219,23 @@ bool ends_with(const std::string &str, const std::string &end_str) {
 }
 
 std::vector<std::string> directory_list(const std::string &dirpath) {
-  std::vector<std::string> vDirs;
-  if (!WsjcppCore::dirExists(dirpath)) {
-    return vDirs;
+  std::vector<std::string> ret;
+  std::string _dirpath = wsjcpp::normalize_filepath(dirpath);
+  if (_dirpath.size() > 0 && _dirpath[_dirpath.size()-1] == '/') {
+    _dirpath = _dirpath.substr(0, _dirpath.size()-1);
   }
-  for (auto& entry : std::filesystem::directory_iterator(dirpath)) {
+  if (!WsjcppCore::dirExists(_dirpath)) {
+    return ret;
+  }
+  for (auto& entry : std::filesystem::directory_iterator(_dirpath)) {
     if (entry.is_directory()) {
-      std::string sPath = entry.path();
-      sPath.erase(0, dirpath.size() + 1);
-      vDirs.push_back(sPath);
+      std::string path = entry.path();
+      path.erase(0, _dirpath.size() + 1);
+      ret.push_back(path);
     }
   }
-  std::sort(vDirs.begin(), vDirs.end());
-  return vDirs;
+  std::sort(ret.begin(), ret.end());
+  return ret;
 }
 
 } // namespace wsjcpp
