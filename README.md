@@ -177,12 +177,6 @@ static bool dirExists(const std::string &sFilename);
 static bool fileExists(const std::string &sFilename);
 ```
 
-### listOfDirs
-
-```
-static std::vector<std::string> listOfDirs(const std::string &sDirname);
-```
-
 ### listOfFiles
 
 ```

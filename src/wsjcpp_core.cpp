@@ -1234,4 +1234,8 @@ bool ends_with(const std::string &str, const std::string &end_str) {
   return std::equal(end_str.rbegin(), end_str.rend(), str.rbegin());
 }
 
+std::vector<std::string> directory_list(const std::string &dirpath) {
+  
+}
+
 } // namespace wsjcpp
