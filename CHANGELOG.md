@@ -3,6 +3,7 @@
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 
 - Redesign normalize path to ctest
+- Removed `WsjcppCore::doNormalizePath`
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 

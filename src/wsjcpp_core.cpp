@@ -298,78 +298,6 @@ bool WsjcppCore::init(
     return true;
 }
 
-// ---------------------------------------------------------------------
-
-std::string WsjcppCore::doNormalizePath(const std::string &path) {
-  // split path by /
-  std::vector<std::string> vNames;
-  bool has_root = false;
-  {
-    std::string fname = "";
-    size_t nStrLen = path.length();
-    for (size_t i = 0; i < path.length(); i++) {
-      if (path[i] == '/') {
-        vNames.push_back(fname);
-        if (i == 0) {
-          has_root = true;
-        }
-        fname = "";
-        if (i == nStrLen-1) {
-          vNames.push_back("");
-        }
-      } else {
-        fname += path[i];
-      }
-    }
-    if (fname != "") {
-        vNames.push_back(fname);
-    }
-  }
-
-  // filtered
-  size_t nLen = vNames.size();
-  std::vector<std::string> result;
-  for (size_t i = 0; i < nLen; i++) {
-    std::string cur = vNames[i];
-    if (cur == "" && i == nLen-1) {
-      result.push_back(cur);
-      continue;
-    }
-    if (cur == ".." && result.size() == 1 && has_root) {
-      continue;
-    }
-    if ((cur == "" || cur == ".") && i != 0) {
-      continue;
-    }
-    if (cur == ".." && result.size() > 0) {
-      std::string sPrev = result[result.size()-1];
-      if (sPrev == "") {
-        result.pop_back();
-        result.push_back(cur);
-      } else if (sPrev != "." && sPrev != "..") {
-        result.pop_back();
-      } else {
-        result.push_back(cur);
-      }
-    } else {
-      result.push_back(cur);
-    }
-  }
-
-  std::string ret = "";
-  size_t nNewLen = result.size();
-  size_t nLastNew = nNewLen-1;
-  for (size_t i = 0; i < nNewLen; i++) {
-    ret += result[i];
-    if (i != nLastNew) {
-      ret += "/";
-    }
-  }
-  return ret;
-}
-
-// ---------------------------------------------------------------------
-
 std::string WsjcppCore::extractFilename(const std::string &sPath) {
     // split path by /
     std::vector<std::string> vNames;
@@ -580,8 +508,8 @@ bool WsjcppCore::makeDir(const std::string &sDirname) {
     return true;
 }
 
-bool WsjcppCore::makeDirsPath(const std::string &sDirname) {
-    std::string sDirpath = WsjcppCore::doNormalizePath(sDirname);
+bool WsjcppCore::makeDirsPath(const std::string &dirpath) {
+    std::string sDirpath = wsjcpp::normalize_filepath(dirpath);
     std::vector<std::string> vDirs = WsjcppCore::split(sDirpath, "/");
     std::string sDirpath2 = "";
     if (sDirpath.length() > 0 && sDirpath[0] == '/') {
@@ -604,7 +532,7 @@ bool WsjcppCore::makeDirsPath(const std::string &sDirname) {
 }
 
 bool WsjcppCore::writeFile(const std::string &sFilename, const std::string &sContent) {
-    
+
     // std::ofstream f(sFilename, std::ifstream::in);
     std::ofstream f(sFilename, std::ios::out);
     if (!f) {
@@ -619,7 +547,7 @@ bool WsjcppCore::writeFile(const std::string &sFilename, const std::string &sCon
 // ---------------------------------------------------------------------
 
 bool WsjcppCore::readTextFile(const std::string &sFilename, std::string &sContent) {
-    
+
     std::ifstream f(sFilename);
     if (!f) {
         std::cout << "FAILED could not open file to read " << sFilename << std::endl;
@@ -666,7 +594,7 @@ bool WsjcppCore::readFileToBuffer(const std::string &sFilename, char *pBuffer[],
 bool WsjcppCore::writeFile(const std::string &sFilename, const char *pBuffer, const int nBufferSize) {
     std::ofstream f(sFilename, std::ios::out | std::ios::binary);
     if (!f) {
-        std::cout << "FAILED could not create file to wtite " << sFilename << std::endl;
+        std::cout << "FAILED could not create file to write " << sFilename << std::endl;
         return false;
     }
     f.write(pBuffer, nBufferSize);
@@ -717,7 +645,7 @@ bool WsjcppCore::createEmptyFile(const std::string &sFilename) {
     }
     std::ofstream f(sFilename, std::ios::out | std::ios::binary);
     if (!f) {
-        std::cout << "FAILED could not create file to wtite " << sFilename << std::endl;
+        std::cout << "FAILED could not create file to write " << sFilename << std::endl;
         return false;
     }
     f.close();
@@ -1363,8 +1291,72 @@ std::string Core::randomString(const std::string &alphabet, int length) {
     return ret;
 }
 
-std::string normalizeFilePath(const std::string &path) {
-  return WsjcppCore::doNormalizePath(path);
+std::string normalize_filepath(const std::string &path) {
+  // split path by /
+  std::vector<std::string> vNames;
+  bool has_root = false;
+  {
+    std::string fname = "";
+    size_t nStrLen = path.length();
+    for (size_t i = 0; i < path.length(); i++) {
+      if (path[i] == '/') {
+        vNames.push_back(fname);
+        if (i == 0) {
+          has_root = true;
+        }
+        fname = "";
+        if (i == nStrLen-1) {
+          vNames.push_back("");
+        }
+      } else {
+        fname += path[i];
+      }
+    }
+    if (fname != "") {
+        vNames.push_back(fname);
+    }
+  }
+
+  // filtered
+  size_t nLen = vNames.size();
+  std::vector<std::string> result;
+  for (size_t i = 0; i < nLen; i++) {
+    std::string cur = vNames[i];
+    if (cur == "" && i == nLen-1) {
+      result.push_back(cur);
+      continue;
+    }
+    if (cur == ".." && result.size() == 1 && has_root) {
+      continue;
+    }
+    if ((cur == "" || cur == ".") && i != 0) {
+      continue;
+    }
+    if (cur == ".." && result.size() > 0) {
+      std::string sPrev = result[result.size()-1];
+      if (sPrev == "") {
+        result.pop_back();
+        result.push_back(cur);
+      } else if (sPrev != "." && sPrev != "..") {
+        result.pop_back();
+      } else {
+        result.push_back(cur);
+      }
+    } else {
+      result.push_back(cur);
+    }
+  }
+
+  std::string ret = "";
+  size_t nNewLen = result.size();
+  size_t nLastNew = nNewLen-1;
+  for (size_t i = 0; i < nNewLen; i++) {
+    ret += result[i];
+    if (i != nLastNew) {
+      ret += "/";
+    }
+  }
+  return ret;
 }
 
 } // namespace wsjcpp

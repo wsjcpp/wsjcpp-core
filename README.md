@@ -70,12 +70,12 @@ Example output
 
 ## List of static function (WsjcppCore):
 
-### doNormalizePath
+### wsjcpp::normalize_file_path
 
 Normalize paths. For example: ".//../bin/some/../" -> "./../bin/"
 
 ```
-std::string sPath = WsjcppCore::doNormalizePath(".//../bin/some/../");
+std::string _path = wsjcpp::normalize_file_path(".//../bin/some/../");
 ```
 
 ### extractFilename

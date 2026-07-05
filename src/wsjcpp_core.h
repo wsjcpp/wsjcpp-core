@@ -93,14 +93,13 @@ class WsjcppFilePermissions {
 class WsjcppCore {
     public:
         static bool init(
-            int argc, char** argv, 
+            int argc, char** argv,
             const std::string &sApplicationName,
             const std::string &sApplicationVersion,
             const std::string &sApplicationAuthor,
             const std::string &sLibraryNameForExports
         );
 
-        static std::string doNormalizePath(const std::string &path); // deprecated
         static std::string extractFilename(const std::string &sPath);
         static std::string extractDirpath(const std::string &sFullPath);
         static std::string getCurrentDirectory();
@@ -275,7 +274,7 @@ class Core {
     static std::string randomString(const std::string &alphabet, int length);
 };
 
-std::string normalizeFilePath(const std::string &path);
+std::string normalize_filepath(const std::string &path);
 
 } // namespace wsjcpp
 

@@ -57,7 +57,7 @@ int main() {
   for (it = map_paths.begin(); it != map_paths.end(); it++) {
     std::string _source = it->first;
     std::string _expected = it->second;
-    std::string _got = wsjcpp::normalizeFilePath(_source);
+    std::string _got = wsjcpp::normalize_filepath(_source);
     if (_got != _expected) {
         found_errors++;
         std::cerr << "ERROR: Expected '" << _expected << "', but got '" << _got << "' from '" << _source << "'" << std::endl;

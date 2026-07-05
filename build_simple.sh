@@ -26,6 +26,7 @@ cmake --build tmp/release --config Release
 check_ret $? "make"
 
 cd ./tmp/release && ctest --output-on-failure
+check_ret $? "ctest failed"
 
 cd ../../unit-tests.wsjcpp
 
