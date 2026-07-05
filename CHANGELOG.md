@@ -6,6 +6,7 @@
 - Removed `WsjcppCore::doNormalizePath`
 - Fixed code-formatting
 - Renamed `WsjcppCore::extractURLProtocol` to `wsjcpp::extract_url_protocol`
+- Fixed #38: Added test for extract_url_protocol
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 
