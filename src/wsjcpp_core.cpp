@@ -374,15 +374,6 @@ std::string WsjcppCore::formatTimeUTC(int nTimeInSec) {
   return std::string(buf);
 }
 
-bool WsjcppCore::fileExists(const std::string &sFilename) {
-  struct stat st;
-  bool bExists = (stat(sFilename.c_str(), &st) == 0);
-  if (bExists) {
-    return (st.st_mode & S_IFDIR) == 0;
-  }
-  return false;
-}
-
 std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname) {
   std::vector<std::string> vFiles;
   if (!wsjcpp::dir_exists(sDirname)) {
@@ -505,11 +496,11 @@ bool WsjcppCore::removeFile(const std::string &sFilename) {
 }
 
 bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename) {
-  if (!WsjcppCore::fileExists(sSourceFilename)) {
+  if (!wsjcpp::file_exists(sSourceFilename)) {
     WsjcppLog::err("copyFile", "File '" + sSourceFilename + "' did not exists");
     return false;
   }
-  if (WsjcppCore::fileExists(sTargetFilename)) {
+  if (wsjcpp::file_exists(sTargetFilename)) {
     WsjcppLog::err("copyFile", "File '" + sTargetFilename + "' already exists");
     return false;
   }
@@ -528,7 +519,7 @@ bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string 
 }
 
 bool WsjcppCore::createEmptyFile(const std::string &sFilename) {
-  if (WsjcppCore::fileExists(sFilename)) {
+  if (wsjcpp::file_exists(sFilename)) {
     return false;
   }
   std::ofstream f(sFilename, std::ios::out | std::ios::binary);
@@ -742,7 +733,7 @@ bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFi
 }
 
 bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError) {
-  if (!WsjcppCore::fileExists(sFilePath)) {
+  if (!wsjcpp::file_exists(sFilePath)) {
     sError = "File '" + sFilePath + "' - not found";
     return false;
   }
@@ -1285,12 +1276,20 @@ std::string to_snake_case(const std::string &name) {
 
 bool dir_exists(const std::string &dir_path) {
   struct stat st;
-  bool bExists = (stat(dir_path.c_str(), &st) == 0);
-  if (bExists) {
+  bool exists = (stat(dir_path.c_str(), &st) == 0);
+  if (exists) {
     return (st.st_mode & S_IFDIR) != 0;
   }
   return false;
 }
 
+bool file_exists(const std::string &file_path) {
+  struct stat st;
+  bool exists = (stat(file_path.c_str(), &st) == 0);
+  if (exists) {
+    return (st.st_mode & S_IFDIR) == 0;
+  }
+  return false;
+}
 
 } // namespace wsjcpp

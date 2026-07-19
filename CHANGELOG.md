@@ -3,6 +3,7 @@
 ## [v0.2.7] - 2026-07-05 (2026 July 19)
 
 - Fixed #43: Renamed `WsjcppCore::dirExists` to `wsjcpp::dir_exists`
+- Fixed #44: Renamed `WsjcppCore::fileExists` to `wsjcpp::file_exists`
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 

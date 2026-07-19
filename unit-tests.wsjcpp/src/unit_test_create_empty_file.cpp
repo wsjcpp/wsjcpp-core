@@ -20,13 +20,13 @@ bool UnitTestCreateEmptyFile::doBeforeTest() {
 void UnitTestCreateEmptyFile::executeTest() {
     compare("./data/", wsjcpp::dir_exists("./data/"), true);
     std::string sFilename = "./data/empty.txt";
-    if (WsjcppCore::fileExists(sFilename)) {
+    if (wsjcpp::file_exists(sFilename)) {
         WsjcppCore::removeFile(sFilename);
     }
-    compare("fileExists 1: " + sFilename, WsjcppCore::fileExists(sFilename), false);
+    compare("fileExists 1: " + sFilename, wsjcpp::file_exists(sFilename), false);
     compare("createEmptyFile 1: " + sFilename, WsjcppCore::createEmptyFile(sFilename), true);
     compare("createEmptyFile 2: " + sFilename, WsjcppCore::createEmptyFile(sFilename), false);
-    compare("fileExists 2: " + sFilename, WsjcppCore::fileExists(sFilename), true);
+    compare("fileExists 2: " + sFilename, wsjcpp::file_exists(sFilename), true);
 }
 
 // ---------------------------------------------------------------------
