@@ -280,7 +280,7 @@ std::string WsjcppCore::extractFilename(const std::string &sPath) {
 }
 
 std::string WsjcppCore::extractDirpath(const std::string &sFullPath) {
-  std::vector<std::string> vDirs = WsjcppCore::split(sFullPath, "/");
+  std::vector<std::string> vDirs = wsjcpp::split(sFullPath, "/");
   vDirs.pop_back();
   return WsjcppCore::join(vDirs, "/");
 }
@@ -409,7 +409,7 @@ bool WsjcppCore::makeDir(const std::string &sDirname) {
 
 bool WsjcppCore::makeDirsPath(const std::string &dirpath) {
   std::string sDirpath = wsjcpp::normalize_filepath(dirpath);
-  std::vector<std::string> vDirs = WsjcppCore::split(sDirpath, "/");
+  std::vector<std::string> vDirs = wsjcpp::split(sDirpath, "/");
   std::string sDirpath2 = "";
   if (sDirpath.length() > 0 && sDirpath[0] == '/') {
     sDirpath2 = "/";
@@ -572,29 +572,6 @@ void WsjcppCore::replaceAll(std::string& str, const std::string& sFrom, const st
     str.replace(start_pos, sFrom.length(), sTo);
     start_pos += sTo.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
   }
-}
-
-std::vector<std::string> WsjcppCore::split(const std::string& sWhat, const std::string& sDelim) {
-  std::vector<std::string> vRet;
-  size_t nPos = 0;
-  size_t nLen = sWhat.length();
-  size_t nDelimLen = sDelim.length();
-  while (nPos < nLen) {
-    std::size_t nFoundPos = sWhat.find(sDelim, nPos);
-    if (nFoundPos != std::string::npos) {
-      std::string sToken = sWhat.substr(nPos, nFoundPos - nPos);
-      vRet.push_back(sToken);
-      nPos = nFoundPos + nDelimLen;
-      if (nFoundPos + nDelimLen == nLen) { // last delimiter
-        vRet.push_back("");
-      }
-    } else {
-      std::string sToken = sWhat.substr(nPos, nLen - nPos);
-      vRet.push_back(sToken);
-      break;
-    }
-  }
-  return vRet;
 }
 
 std::string WsjcppCore::join(const std::vector<std::string> &vWhat, const std::string& sDelim) {
@@ -1290,6 +1267,29 @@ bool file_exists(const std::string &file_path) {
     return (st.st_mode & S_IFDIR) == 0;
   }
   return false;
+}
+
+std::vector<std::string> split(const std::string &source, const std::string &delimiter) {
+  std::vector<std::string> ret;
+  size_t pos = 0;
+  size_t len = source.length();
+  size_t delimiter_len = delimiter.length();
+  while (pos < len) {
+    std::size_t next_pos = source.find(delimiter, pos);
+    if (next_pos != std::string::npos) {
+      std::string token = source.substr(pos, next_pos - pos);
+      ret.push_back(token);
+      pos = next_pos + delimiter_len;
+      if (next_pos + delimiter_len == len) { // last delimiter
+        ret.push_back("");
+      }
+    } else {
+      std::string token = source.substr(pos, len - pos);
+      ret.push_back(token);
+      break;
+    }
+  }
+  return ret;
 }
 
 } // namespace wsjcpp

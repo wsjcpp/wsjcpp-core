@@ -83,7 +83,7 @@ Example output
 | `wsjcpp::to_snake_case` | Normalize input string to snake case | [Code-Example](#wsjcppto_snake_case) |
 | `wsjcpp::dir_exists` | Test for directory exists | [Code-Example](#wsjcppdir_exists) |
 | `wsjcpp::file_exists` | Test for file exists | [Code-Example](#wsjcppfile_exists) |
-
+| `wsjcpp::split` | split string by delimiter | [Code-Example](#wsjcppsplit) |
 
 ### wsjcpp::normalize_filepath
 
@@ -171,18 +171,6 @@ static std::string formatTimeForFilename(long nTimeInSec);
 
 ```
 static std::string formatTimeUTC(int nTimeInSec);
-```
-
-### wsjcpp::dir_exists
-
-```
-bool wsjcpp::dir_exists(const std::string &dir_path);
-```
-
-### wsjcpp::file_exists
-
-```
-bool wsjcpp::file_exists(const std::string &file_path);
 ```
 
 ### makeDir
@@ -288,26 +276,6 @@ Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alph
 
 ```
 WsjcppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
-```
-
-### split
-
-```
-std::string sWhat = "|1a|2b|3c|4d|";
-std::vector<std::string> vSplitted = WsjcppCore::split(sWhat, "|");
-for (int i = 0; i < vSplitted.size(); i++) {
-    std::cout << vSplitted[i] << std::endl;
-}
-```
-
-Example output:
-```
-
-1a
-2b
-3c
-4d
-
 ```
 
 ### join
@@ -509,3 +477,34 @@ std::string name3 = wsjcpp::to_snake_case("SomeClass");
 // name3 will be contains 'some_class'
 ```
 
+### wsjcpp::dir_exists
+
+```
+bool wsjcpp::dir_exists(const std::string &dir_path);
+```
+
+### wsjcpp::file_exists
+
+```
+bool wsjcpp::file_exists(const std::string &file_path);
+```
+
+### wsjcpp::split
+
+```
+std::string source = "|1a|2b|3c|4d|";
+std::vector<std::string> tokens = wsjcpp::split(source, "|");
+for (int i = 0; i < tokens.size(); i++) {
+    std::cout << tokens[i] << std::endl;
+}
+```
+
+Example output:
+```
+
+1a
+2b
+3c
+4d
+
+```

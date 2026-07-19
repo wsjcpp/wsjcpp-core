@@ -131,7 +131,6 @@ public:
   static std::string toLower(const std::string &str);
   static std::string toUpper(const std::string& str);
   static void replaceAll(std::string& str, const std::string& from, const std::string& to);
-  static std::vector<std::string> split(const std::string& sWhat, const std::string& sDelim);
   static std::string join(const std::vector<std::string> &vWhat, const std::string& sDelim);
 
   static void initRandom();
@@ -267,6 +266,7 @@ std::string parent_dirpath(const std::string &filepath);
 std::string to_snake_case(const std::string &name);
 bool dir_exists(const std::string &dir_path);
 bool file_exists(const std::string &file_path);
+std::vector<std::string> split(const std::string &source, const std::string &delimiter);
 
 } // namespace wsjcpp
 
