@@ -81,6 +81,9 @@ Example output
 | `wsjcpp::generate_uuid` | Generate uuid, but you need to call `WsjcppCore::initRandom();` before it (for example in main() function) | [Code-Example](#wsjcppgenerate_uuid) |
 | `wsjcpp::parent_dirpath` | Extract dirpath from filepath | [Code-Example](#wsjcppparent_dirpath) |
 | `wsjcpp::to_snake_case` | Normalize input string to snake case | [Code-Example](#wsjcppto_snake_case) |
+| `wsjcpp::dir_exists` | Test for directory exists | [Code-Example](#wsjcppdir_exists) |
+| `wsjcpp::file_exists` | Test for file exists | [Code-Example](#wsjcppfile_exists) |
+
 
 ### wsjcpp::normalize_filepath
 
@@ -170,16 +173,16 @@ static std::string formatTimeForFilename(long nTimeInSec);
 static std::string formatTimeUTC(int nTimeInSec);
 ```
 
-### dirExists
+### wsjcpp::dir_exists
 
 ```
-static bool dirExists(const std::string &sFilename);
+bool wsjcpp::dir_exists(const std::string &dir_path);
 ```
 
-### fileExists
+### wsjcpp::file_exists
 
 ```
-static bool fileExists(const std::string &sFilename);
+bool wsjcpp::file_exists(const std::string &file_path);
 ```
 
 ### makeDir
