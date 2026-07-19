@@ -253,32 +253,6 @@ bool WsjcppCore::init(
   return true;
 }
 
-std::string WsjcppCore::extractFilename(const std::string &sPath) {
-  // split path by /
-  std::vector<std::string> vNames;
-  std::string s = "";
-  size_t nStrLen = sPath.length();
-  for (size_t i = 0; i < sPath.length(); i++) {
-    if (sPath[i] == '/') {
-      vNames.push_back(s);
-      s = "";
-      if (i == nStrLen-1) {
-        vNames.push_back("");
-      }
-    } else {
-      s += sPath[i];
-    }
-  }
-  if (s != "") {
-    vNames.push_back(s);
-  }
-  std::string sRet;
-  if (vNames.size() > 0) {
-    sRet = vNames[vNames.size()-1];
-  }
-  return sRet;
-}
-
 std::string WsjcppCore::extractDirpath(const std::string &sFullPath) {
   std::vector<std::string> vDirs = wsjcpp::split(sFullPath, "/");
   vDirs.pop_back();
@@ -1168,7 +1142,7 @@ std::string parent_dirpath(const std::string &filepath) {
   if (_filepath.size() > 0 && _filepath[_filepath.size()-1] == '/') {
     _filepath = _filepath.substr(0, _filepath.size()-1);
   }
-  std::string filename = WsjcppCore::extractFilename(_filepath);
+  std::string filename = wsjcpp::extract_filename(_filepath);
   std::string _ret = _filepath.substr(0, _filepath.length() - filename.length());
   if (_ret.size() > 0 && _ret[_ret.size()-1] == '/') {
     _ret = _ret.substr(0, _ret.size()-1);
@@ -1290,6 +1264,32 @@ bool create_empty_file(const std::string &filepath) {
   }
   f.close();
   return true;
+}
+
+std::string extract_filename(const std::string &filepath) {
+  // split path by /
+  std::vector<std::string> names;
+  std::string s = "";
+  size_t nStrLen = filepath.length();
+  for (size_t i = 0; i < filepath.length(); i++) {
+    if (filepath[i] == '/') {
+      names.push_back(s);
+      s = "";
+      if (i == nStrLen-1) {
+        names.push_back("");
+      }
+    } else {
+      s += filepath[i];
+    }
+  }
+  if (s != "") {
+    names.push_back(s);
+  }
+  std::string ret;
+  if (names.size() > 0) {
+    ret = names[names.size()-1];
+  }
+  return ret;
 }
 
 } // namespace wsjcpp

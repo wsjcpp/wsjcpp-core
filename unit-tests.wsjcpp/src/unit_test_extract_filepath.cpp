@@ -46,8 +46,8 @@ void UnitTestExtractFilepath::executeTest() {
     for (int i = 0; i < tests.size(); i++) {
         LTest t = tests[i];
         std::string sTestId = "test" + std::to_string(i);
-        
-        compare(sTestId, WsjcppCore::extractFilename(t.sFullpath), t.sFilename);
+
+        compare(sTestId, wsjcpp::extract_filename(t.sFullpath), t.sFilename);
     }
 }
 

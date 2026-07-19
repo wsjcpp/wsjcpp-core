@@ -87,6 +87,7 @@ Example output
 | `wsjcpp::join` | Join vector to string by delimiter | [Code-Example](#wsjcppjoin) |
 | `wsjcpp::replace_all_in` | Replace all substrings in target | [Code-Example](#wsjcppreplace_all_in) |
 | `wsjcpp::create_empty_file` | Creating empty file. Will return true if file not exists and do created | [Code-Example](#wsjcppcreate_empty_file) |
+| `wsjcpp::extract_filename` | Extract base filename from filepath. | [Code-Example](#wsjcppextract_filename) |
 
 
 ### wsjcpp::normalize_filepath
@@ -96,16 +97,6 @@ Normalize paths. For example: ".//../bin/some/../" -> "./../bin/"
 ```
 std::string _path = wsjcpp::normalize_filepath(".//../bin/some/../");
 ```
-
-### extractFilename
-
-Extract base filename from fullpath.
-
-```
-std::string sFilename = WsjcppCore::extractFilename(".//../bin/some/../file.txt");
-```
-
-Variable `sFilename` will has value `file.txt`
 
 ### extractDirpath
 
@@ -519,3 +510,13 @@ if (wsjcpp::create_empty_file("./file.txt")) {
     std::cout << "Empty file created" << std::endl;
 }
 ```
+
+### wsjcpp::extract_filename
+
+Extract base filename from filepath.
+
+```
+std::string filename = wsjcpp::extract_filename(".//../bin/some/../file.txt");
+```
+
+Variable `filename` will has value `file.txt`

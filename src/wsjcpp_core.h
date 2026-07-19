@@ -100,7 +100,6 @@ public:
     const std::string &sLibraryNameForExports
   );
 
-  static std::string extractFilename(const std::string &sPath);
   static std::string extractDirpath(const std::string &sFullPath);
   static std::string getCurrentDirectory();
 
@@ -267,6 +266,7 @@ std::vector<std::string> split(const std::string &source, const std::string &del
 std::string join(const std::vector<std::string> &source, const std::string &delimiter);
 void replace_all_in(std::string &target, const std::string &from, const std::string &to);
 bool create_empty_file(const std::string &filepath);
+std::string extract_filename(const std::string &filepath);
 
 } // namespace wsjcpp
 

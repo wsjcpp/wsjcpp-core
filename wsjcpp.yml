@@ -42,8 +42,6 @@ distribution:
 
 unit-tests:
   cases:
-    - name: CoreExtractFilename
-      description: Check function extract filenane from path
     - name: "ToUpper"
       description: "String to upper"
     - name: "GetEnv"
