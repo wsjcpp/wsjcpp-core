@@ -563,17 +563,6 @@ std::string WsjcppCore::toUpper(const std::string& str) {
   return sRet;
 }
 
-void WsjcppCore::replaceAll(std::string& str, const std::string& sFrom, const std::string& sTo) {
-  if (sFrom.empty()) {
-    return;
-  }
-  size_t start_pos = 0;
-  while ((start_pos = str.find(sFrom, start_pos)) != std::string::npos) {
-    str.replace(start_pos, sFrom.length(), sTo);
-    start_pos += sTo.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
-  }
-}
-
 void WsjcppCore::initRandom() {
   time_t t = std::time(0);
   std::srand((unsigned int)t);
@@ -1290,6 +1279,17 @@ std::string join(const std::vector<std::string> &source, const std::string &deli
     ret += source[i];
   }
   return ret;
+}
+
+void replace_all_in(std::string &target, const std::string &from, const std::string &to) {
+  if (from.empty()) {
+    return;
+  }
+  size_t start_pos = 0;
+  while ((start_pos = target.find(from, start_pos)) != std::string::npos) {
+    target.replace(start_pos, from.length(), to);
+    start_pos += to.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
+  }
 }
 
 } // namespace wsjcpp

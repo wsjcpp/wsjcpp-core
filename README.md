@@ -84,7 +84,9 @@ Example output
 | `wsjcpp::dir_exists` | Test for directory exists | [Code-Example](#wsjcppdir_exists) |
 | `wsjcpp::file_exists` | Test for file exists | [Code-Example](#wsjcppfile_exists) |
 | `wsjcpp::split` | split string by delimiter | [Code-Example](#wsjcppsplit) |
-| `wsjcpp::join` | split string by delimiter | [Code-Example](#wsjcppjoin) |
+| `wsjcpp::join` | Join vector to string by delimiter | [Code-Example](#wsjcppjoin) |
+| `wsjcpp::replace_all_in` | replace all substrings in target | [Code-Example](#wsjcppreplace_all_in) |
+
 
 ### wsjcpp::normalize_filepath
 
@@ -263,7 +265,7 @@ static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\
 static std::string toLower(const std::string& str);
 ```
 
-Convert text to lower charaters, like "ABc" -> "abc". Worked only with latin alphabet.
+Convert text to lower characters, like "ABc" -> "abc". Worked only with latin alphabet.
 
 ### toUpper
 
@@ -271,13 +273,7 @@ Convert text to lower charaters, like "ABc" -> "abc". Worked only with latin alp
 static std::string toUpper(const std::string& str);
 ```
 
-Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alphabet.
-
-### replaceAll
-
-```
-WsjcppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
-```
+Convert text to upper characters like "abC" -> "ABC". Worked only with latin alphabet.
 
 ### wsjcpp::generate_uuid
 
@@ -508,4 +504,17 @@ std::cout << result << std::endl;
 Example output:
 ```
 1a,2b,3c,4d
+```
+
+### wsjcpp::replace_all_in
+
+```cpp
+std::string target = "some1some2";
+wsjcpp::replace_all_in(target, "some", "new");
+std::cout << target << std::endl;
+```
+
+Example output:
+```
+new1new2
 ```

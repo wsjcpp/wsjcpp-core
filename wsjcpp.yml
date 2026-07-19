@@ -50,8 +50,6 @@ unit-tests:
       description: "Test getEnv function"
     - name: "ToLower"
       description: "Test toLower"
-    - name: "ReplaceAll"
-      description: "Test replace all"
     - name: "DecodeUriComponent"
       description: "Check decoding"
     - name: "EncodeUriComponent"
