@@ -518,19 +518,6 @@ bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string 
   return true;
 }
 
-bool WsjcppCore::createEmptyFile(const std::string &sFilename) {
-  if (wsjcpp::file_exists(sFilename)) {
-    return false;
-  }
-  std::ofstream f(sFilename, std::ios::out | std::ios::binary);
-  if (!f) {
-    std::cout << "FAILED could not create file to write " << sFilename << std::endl;
-    return false;
-  }
-  f.close();
-  return true;
-}
-
 std::string& WsjcppCore::ltrim(std::string& str, const std::string& chars) {
   str.erase(0, str.find_first_not_of(chars));
   return str;
@@ -1290,6 +1277,19 @@ void replace_all_in(std::string &target, const std::string &from, const std::str
     target.replace(start_pos, from.length(), to);
     start_pos += to.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
   }
+}
+
+bool create_empty_file(const std::string &filepath) {
+  if (wsjcpp::file_exists(filepath)) {
+    return false;
+  }
+  std::ofstream f(filepath, std::ios::out | std::ios::binary);
+  if (!f) {
+    std::cerr << "FAILED could not create file to write " << filepath << std::endl;
+    return false;
+  }
+  f.close();
+  return true;
 }
 
 } // namespace wsjcpp

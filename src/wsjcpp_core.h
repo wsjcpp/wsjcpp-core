@@ -123,8 +123,6 @@ public:
   static bool removeFile(const std::string &sFilename);
   static bool copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename);
 
-  static bool createEmptyFile(const std::string &sFilename);
-
   static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
   static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
   static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
@@ -268,6 +266,7 @@ bool file_exists(const std::string &file_path);
 std::vector<std::string> split(const std::string &source, const std::string &delimiter);
 std::string join(const std::vector<std::string> &source, const std::string &delimiter);
 void replace_all_in(std::string &target, const std::string &from, const std::string &to);
+bool create_empty_file(const std::string &filepath);
 
 } // namespace wsjcpp
 

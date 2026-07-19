@@ -6,7 +6,8 @@
 - Fixed #44: Renamed `WsjcppCore::fileExists` to `wsjcpp::file_exists`
 - Fixed #46: Renamed `WsjcppCore::split` to `wsjcpp::split`
 - Renamed `WsjcppCore::join` to `wsjcpp::join`
-- Fixed #47: Rename `WsjcppCore::replaceAll` to `wsjcpp::replace_all`
+- Fixed #47: Renamed `WsjcppCore::replaceAll` to `wsjcpp::replace_all_in`
+- Fixed #45: Renamed `WsjcppCore::createEmptyFile` to `wsjcpp::create_empty_file`
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 
@@ -27,7 +28,6 @@
 - Removed `.travis.yml` and `ci/travis`
 - Fixed #24: Added `wsjcpp::to_snake_case`
 - Renamed and redesign `WsjcppCore::recoursiveCopyFiles` to `wsjcpp::recursive_copy_files`
-
 
 ## [v0.2.5] - 2026-05-19 (2026 May 19)
 

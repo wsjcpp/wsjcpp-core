@@ -85,7 +85,8 @@ Example output
 | `wsjcpp::file_exists` | Test for file exists | [Code-Example](#wsjcppfile_exists) |
 | `wsjcpp::split` | split string by delimiter | [Code-Example](#wsjcppsplit) |
 | `wsjcpp::join` | Join vector to string by delimiter | [Code-Example](#wsjcppjoin) |
-| `wsjcpp::replace_all_in` | replace all substrings in target | [Code-Example](#wsjcppreplace_all_in) |
+| `wsjcpp::replace_all_in` | Replace all substrings in target | [Code-Example](#wsjcppreplace_all_in) |
+| `wsjcpp::create_empty_file` | Creating empty file. Will return true if file not exists and do created | [Code-Example](#wsjcppcreate_empty_file) |
 
 
 ### wsjcpp::normalize_filepath
@@ -238,16 +239,6 @@ if (WsjcppCore::removeFile("./file.txt")) {
 ```
 if (WsjcppCore::copyFile("./file.txt", "./file1.txt")) {
     std::cout << "File copied!" << std::endl;
-}
-```
-
-### createEmptyFile
-
-Creating empty file. Will return true if file not exists and do created
-
-```
-if (WsjcppCore::createEmptyFile("./file.txt")) {
-    std::cout << "Empty file created" << std::endl;
 }
 ```
 
@@ -517,4 +508,14 @@ std::cout << target << std::endl;
 Example output:
 ```
 new1new2
+```
+
+### wsjcpp::create_empty_file
+
+Creating empty file. Will return true if file not exists and do created
+
+```cpp
+if (wsjcpp::create_empty_file("./file.txt")) {
+    std::cout << "Empty file created" << std::endl;
+}
 ```

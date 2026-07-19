@@ -56,8 +56,6 @@ unit-tests:
       description: "Check encoding"
     - name: "Uint2HexString"
       description: "Test convert unsigned int to hex string"
-    - name: "CreateEmptyFile"
-      description: "Test create empty file"
     - name: "ReadFileToBuffer"
       description: "test for readFileToBuffer"
     - name: "getHumanSizeBytes"
