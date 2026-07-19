@@ -84,6 +84,7 @@ Example output
 | `wsjcpp::dir_exists` | Test for directory exists | [Code-Example](#wsjcppdir_exists) |
 | `wsjcpp::file_exists` | Test for file exists | [Code-Example](#wsjcppfile_exists) |
 | `wsjcpp::split` | split string by delimiter | [Code-Example](#wsjcppsplit) |
+| `wsjcpp::join` | split string by delimiter | [Code-Example](#wsjcppjoin) |
 
 ### wsjcpp::normalize_filepath
 
@@ -276,23 +277,6 @@ Convert text to upper charaters like "abC" -> "ABC". Worked only with latin alph
 
 ```
 WsjcppCore::replaceAll(std::string& str, const std::string& from, const std::string& to);
-```
-
-### join
-
-```
-std::vector<std::string> vWhat;
-vJoin.push("1a");
-vJoin.push("2b");
-vJoin.push("3c");
-vJoin.push("4d");
-std::string sJoined = WsjcppCore::join(vWhat, ",");
-std::cout << sJoined << std::endl;
-```
-
-Example output:
-```
-1a,2b,3c,4d
 ```
 
 ### wsjcpp::generate_uuid
@@ -491,7 +475,7 @@ bool wsjcpp::file_exists(const std::string &file_path);
 
 ### wsjcpp::split
 
-```
+```cpp
 std::string source = "|1a|2b|3c|4d|";
 std::vector<std::string> tokens = wsjcpp::split(source, "|");
 for (int i = 0; i < tokens.size(); i++) {
@@ -507,4 +491,21 @@ Example output:
 3c
 4d
 
+```
+
+### wsjcpp::join
+
+```cpp
+std::vector<std::string> source;
+source.push("1a");
+source.push("2b");
+source.push("3c");
+source.push("4d");
+std::string result = wsjcpp::join(source, ",");
+std::cout << result << std::endl;
+```
+
+Example output:
+```
+1a,2b,3c,4d
 ```

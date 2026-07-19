@@ -282,7 +282,7 @@ std::string WsjcppCore::extractFilename(const std::string &sPath) {
 std::string WsjcppCore::extractDirpath(const std::string &sFullPath) {
   std::vector<std::string> vDirs = wsjcpp::split(sFullPath, "/");
   vDirs.pop_back();
-  return WsjcppCore::join(vDirs, "/");
+  return wsjcpp::join(vDirs, "/");
 }
 
 std::string WsjcppCore::getCurrentDirectory() {
@@ -572,17 +572,6 @@ void WsjcppCore::replaceAll(std::string& str, const std::string& sFrom, const st
     str.replace(start_pos, sFrom.length(), sTo);
     start_pos += sTo.length(); // In case 'to' contains 'sFrom', like replacing 'x' with 'yx'
   }
-}
-
-std::string WsjcppCore::join(const std::vector<std::string> &vWhat, const std::string& sDelim) {
-  std::string sRet;
-  for (int i = 0; i < vWhat.size(); i++) {
-    if (i != 0) {
-      sRet += sDelim;
-    }
-    sRet += vWhat[i];
-  }
-  return sRet;
 }
 
 void WsjcppCore::initRandom() {
@@ -1288,6 +1277,17 @@ std::vector<std::string> split(const std::string &source, const std::string &del
       ret.push_back(token);
       break;
     }
+  }
+  return ret;
+}
+
+std::string join(const std::vector<std::string> &source, const std::string &delimiter) {
+  std::string ret;
+  for (int i = 0; i < source.size(); i++) {
+    if (i != 0) {
+      ret += delimiter;
+    }
+    ret += source[i];
   }
   return ret;
 }

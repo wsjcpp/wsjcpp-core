@@ -33,37 +33,26 @@ int main() {
 
   struct LTest {
     LTest(
-      const std::string &source,
+      const std::vector<std::string> &source,
       const std::string &delimeter,
-      const std::vector<std::string> &expected
+      const std::string &expected
     ) : source(source), delimeter(delimeter), expected(expected) {
     };
-    std::string source;
+    std::vector<std::string> source;
     std::string delimeter;
-    std::vector<std::string> expected;
+    std::string expected;
   };
+
   std::vector<LTest> tests;
-  tests.push_back(LTest("1 2 3 4 5", " ", {"1", "2", "3", "4", "5"}));
-  tests.push_back(LTest("|1f|2п|3%^|44354|5kdasjfdre|2", "|", {"", "1f", "2п", "3%^", "44354", "5kdasjfdre", "2"}));
-  tests.push_back(LTest("|1f|2п|3%^|44354|5kdasjfdre|", "|", {"", "1f", "2п", "3%^", "44354", "5kdasjfdre", ""}));
-  tests.push_back(LTest("some1 => some2 => some3", "=>", {"some1 ", " some2 ", " some3"}));
-  tests.push_back(LTest("some1 => some2 => some3 =>", "=>", {"some1 ", " some2 ", " some3 ", ""}));
-  tests.push_back(LTest("./export-cli", "/", {".", "export-cli"}));
-  tests.push_back(LTest("./export-cli/", "/", {".", "export-cli", ""}));
+  tests.push_back(LTest({"", "1", "2", "abc"}, ", ", ", 1, 2, abc"));
 
   for (int i = 0; i < tests.size(); i++) {
     LTest test = tests[i];
-    std::vector<std::string> tokens = wsjcpp::split(test.source, test.delimeter);
-    if (tokens.size() != test.expected.size()) {
+    std::string result = wsjcpp::join(test.source, test.delimeter);
+    if (result != test.expected) {
       found_errors++;
-      std::cerr << "Expected size " << test.expected.size() << ", but got " << tokens.size() << " for '" << test.source << "'" << std::endl;
+      std::cerr << "Expected '" << test.expected << "', but got '" << result << "' " << std::endl;
       continue;
-    }
-    for (int n = 0; n < test.expected.size(); ++n) {
-      if (tokens[n] != test.expected[n]) {
-        found_errors++;
-        std::cerr << "Expected []" << n << "] '" << test.expected[n] << "', but got '" << tokens[n] << "' for '" << test.source << "'" << std::endl;
-      }
     }
   }
 

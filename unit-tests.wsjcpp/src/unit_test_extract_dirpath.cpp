@@ -42,11 +42,12 @@ void UnitTestExtractDirpath::executeTest() {
     };
     std::vector<LTest> tests;
     tests.push_back(LTest(".//../bin/some/../file.txt", ".//../bin/some/.."));
+    // TODO
+    // tests.push_back(LTest(".\\..\\\\bin\\some\\..\\file.txt", ".//../bin/some/.."));
 
     for (int i = 0; i < tests.size(); i++) {
         LTest t = tests[i];
         std::string sTestId = "test" + std::to_string(i);
-        
         compare(sTestId, WsjcppCore::extractDirpath(t.sFullpath), t.sDirpath);
     }
 }

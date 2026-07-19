@@ -4,7 +4,8 @@
 
 - Fixed #43: Renamed `WsjcppCore::dirExists` to `wsjcpp::dir_exists`
 - Fixed #44: Renamed `WsjcppCore::fileExists` to `wsjcpp::file_exists`
-- Fixed #46: Rename `WsjcppCore::split` to `wsjcpp::split`
+- Fixed #46: Renamed `WsjcppCore::split` to `wsjcpp::split`
+- Renamed `WsjcppCore::join` to `wsjcpp::join`
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 
