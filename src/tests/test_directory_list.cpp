@@ -30,7 +30,7 @@
 #include <wsjcpp_core.h>
 
 std::vector<std::string> prepare_expected_dirs(int &found_errors, std::vector<std::string> expected_dirs) {
-  if (WsjcppCore::dirExists("./data/list_of_dirs")) {
+  if (wsjcpp::dir_exists("./data/list_of_dirs")) {
     std::string error;
     if (!wsjcpp::recursive_remove_dir("./data/list_of_dirs", error)) {
       found_errors++;

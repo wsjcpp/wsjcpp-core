@@ -18,7 +18,7 @@ bool UnitTestCreateEmptyFile::doBeforeTest() {
 // ---------------------------------------------------------------------
 
 void UnitTestCreateEmptyFile::executeTest() {
-    compare("./data/", WsjcppCore::dirExists("./data/"), true);
+    compare("./data/", wsjcpp::dir_exists("./data/"), true);
     std::string sFilename = "./data/empty.txt";
     if (WsjcppCore::fileExists(sFilename)) {
         WsjcppCore::removeFile(sFilename);

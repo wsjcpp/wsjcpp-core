@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
         ""
     );
     std::string error;
-    if (WsjcppCore::dirExists("./tmp2")) {
+    if (wsjcpp::dir_exists("./tmp2")) {
         if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
             std::cerr << "recursive_remove_dir error: " << error << std::endl;
         }

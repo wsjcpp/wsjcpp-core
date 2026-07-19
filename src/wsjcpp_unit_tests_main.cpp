@@ -44,11 +44,11 @@ int main(int argc, char** argv) {
   std::string TAG = "UnitTests";
   WsjcppLog::setPrefixLogFile("unit-tests");
   std::string sLogDir = "./logs"; 
-  if (!WsjcppCore::dirExists(sLogDir)) {
+  if (!wsjcpp::dir_exists(sLogDir)) {
     WsjcppCore::makeDir(sLogDir);
   }
   WsjcppLog::setLogDirectory(sLogDir);
-  if (!WsjcppCore::dirExists(sLogDir)) {
+  if (!wsjcpp::dir_exists(sLogDir)) {
     WsjcppLog::err(TAG, "Directory '" + sLogDir + "' did'not exists");
     return -1;
   }

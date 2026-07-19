@@ -113,7 +113,6 @@ public:
   static std::string formatTimeForFilename(long nTimeInSec);
   static std::string formatTimeUTC(int nTimeInSec);
 
-  static bool dirExists(const std::string &sFilename);
   static bool fileExists(const std::string &sFilename);
   static std::vector<std::string> getListOfFiles(const std::string &sDirname);
   static bool makeDir(const std::string &sDirname);
@@ -267,6 +266,7 @@ std::vector<std::string> directory_list(const std::string &dirpath);
 std::string generate_uuid();
 std::string parent_dirpath(const std::string &filepath);
 std::string to_snake_case(const std::string &name);
+bool dir_exists(const std::string &dir_path);
 
 } // namespace wsjcpp
 

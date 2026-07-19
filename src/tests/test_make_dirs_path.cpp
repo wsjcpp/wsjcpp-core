@@ -33,7 +33,7 @@ int main() {
   int found_errors = 0;
   std::string error;
 
-  if (WsjcppCore::dirExists("./data/makedirpaths")) {
+  if (wsjcpp::dir_exists("./data/makedirpaths")) {
     if (!wsjcpp::recursive_remove_dir("./data/makedirpaths", error)) {
       found_errors++;
       std::cerr << "recursive_remove_dir error (before): '" << error << "'" << std::endl;
@@ -80,7 +80,7 @@ int main() {
     } else {
       std::vector<std::string> sub_paths = tests[i].sub_paths;
       for (int x = 0; x < sub_paths.size(); x++) {
-        if (!WsjcppCore::dirExists(sub_paths[x])) {
+        if (!wsjcpp::dir_exists(sub_paths[x])) {
           std::cerr << "Dirpath: '" << dirpath << "', but directory not exists: '" << sub_paths[x] << "'" << std::endl;
           found_errors++;
         }

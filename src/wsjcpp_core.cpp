@@ -383,18 +383,9 @@ bool WsjcppCore::fileExists(const std::string &sFilename) {
   return false;
 }
 
-bool WsjcppCore::dirExists(const std::string &sDirname) {
-  struct stat st;
-  bool bExists = (stat(sDirname.c_str(), &st) == 0);
-  if (bExists) {
-    return (st.st_mode & S_IFDIR) != 0;
-  }
-  return false;
-}
-
 std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname) {
   std::vector<std::string> vFiles;
-  if (!WsjcppCore::dirExists(sDirname)) {
+  if (!wsjcpp::dir_exists(sDirname)) {
     return vFiles;
   }
   for (auto& entry: std::filesystem::directory_iterator(sDirname)) {
@@ -437,7 +428,7 @@ bool WsjcppCore::makeDirsPath(const std::string &dirpath) {
       continue;
     }
     sDirpath2 += vDirs[i] + "/";
-    if (WsjcppCore::dirExists(sDirpath2)) {
+    if (wsjcpp::dir_exists(sDirpath2)) {
       continue;
     } else {
       if (!WsjcppCore::makeDir(sDirpath2)) {
@@ -865,7 +856,7 @@ std::vector<std::string> WsjcppLog::getLastLogMessages() {
 
 void WsjcppLog::setLogDirectory(const std::string &sDirectoryPath) {
   WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logDir = sDirectoryPath;
-  if (!WsjcppCore::dirExists(sDirectoryPath)) {
+  if (!wsjcpp::dir_exists(sDirectoryPath)) {
     if (!WsjcppCore::makeDir(sDirectoryPath)) {
       WsjcppLog::err("setLogDirectory", "Could not create log directory '" + sDirectoryPath + "'");
     }
@@ -1129,12 +1120,12 @@ std::string extract_url_protocol(const std::string &value) {
 }
 
 bool recursive_copy_files(const std::string& source_dir, const std::string& target_dir, std::string &error) {
-  if (!WsjcppCore::dirExists(source_dir)) {
+  if (!wsjcpp::dir_exists(source_dir)) {
     WsjcppLog::err("recursive_copy_files", "Source Dir '" + source_dir + "' did not exists");
     return false;
   }
 
-  if (!WsjcppCore::dirExists(target_dir)) {
+  if (!wsjcpp::dir_exists(target_dir)) {
     if (!WsjcppCore::makeDir(target_dir)) {
       WsjcppLog::err("recursive_copy_files", "Could not create target dir '" + target_dir + "'");
       return false;
@@ -1155,7 +1146,7 @@ bool recursive_copy_files(const std::string& source_dir, const std::string& targ
   for (int i = 0; i < found_dirs.size(); i++) {
     std::string next_source_dir = source_dir + "/" + found_dirs[i];
     std::string next_target_dir = target_dir + "/" + found_dirs[i];
-    if (!WsjcppCore::dirExists(next_target_dir)) {
+    if (!wsjcpp::dir_exists(next_target_dir)) {
       if (!WsjcppCore::makeDir(next_target_dir)) {
         error = "Could not create target subdir '" + next_target_dir + "'";
         return false;
@@ -1170,7 +1161,7 @@ bool recursive_copy_files(const std::string& source_dir, const std::string& targ
 }
 
 bool recursive_remove_dir(const std::string &dirpath, std::string &error) {
-  if (!WsjcppCore::dirExists(dirpath)) {
+  if (!wsjcpp::dir_exists(dirpath)) {
     error = "Dir '" + dirpath + "' did not exists";
     return false;
   }
@@ -1214,7 +1205,7 @@ std::vector<std::string> directory_list(const std::string &dirpath) {
   if (_dirpath.size() > 0 && _dirpath[_dirpath.size()-1] == '/') {
     _dirpath = _dirpath.substr(0, _dirpath.size()-1);
   }
-  if (!WsjcppCore::dirExists(_dirpath)) {
+  if (!wsjcpp::dir_exists(_dirpath)) {
     return ret;
   }
   for (auto& entry : std::filesystem::directory_iterator(_dirpath)) {
@@ -1290,6 +1281,15 @@ std::string to_snake_case(const std::string &name) {
     ret = ret.substr(0, ret.size() - 1);
   }
   return ret;
+}
+
+bool dir_exists(const std::string &dir_path) {
+  struct stat st;
+  bool bExists = (stat(dir_path.c_str(), &st) == 0);
+  if (bExists) {
+    return (st.st_mode & S_IFDIR) != 0;
+  }
+  return false;
 }
 
 
