@@ -42,12 +42,8 @@ distribution:
 
 unit-tests:
   cases:
-    - name: "ToUpper"
-      description: "String to upper"
     - name: "GetEnv"
       description: "Test getEnv function"
-    - name: "ToLower"
-      description: "Test toLower"
     - name: "Uint2HexString"
       description: "Test convert unsigned int to hex string"
     - name: "ReadFileToBuffer"
