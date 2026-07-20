@@ -30,12 +30,9 @@ list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../src/wsjcpp_unit_tests_main.c
 # unit-tests
 list (APPEND WSJCPP_INCLUDE_DIRS "src")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_get_env.cpp")
-list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_uint2_hex_string.cpp")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_read_file_to_buffer.cpp")
-list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_get_human_size_bytes.cpp")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_test_resources.cpp")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_file_permissions.cpp")
-list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_string_padding.cpp")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_extract_dirpath.cpp")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_extract_filepath.cpp")
 

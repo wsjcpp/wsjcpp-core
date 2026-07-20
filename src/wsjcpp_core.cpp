@@ -683,22 +683,26 @@ bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePerm
   return true;
 }
 
-std::string WsjcppCore::doPadLeft(const std::string& sIn, char cWhat, size_t nLength) {
-  std::string sRet;
-  size_t nPadLen = nLength - sIn.length();
-  for (size_t i = 0; i < nPadLen; i++) {
-    sRet += cWhat;
+std::string WsjcppCore::doPadLeft(const std::string &sIn, char cWhat, size_t nLength) {
+  std::string ret;
+  if (nLength > sIn.length()) {
+    size_t nPadLen = nLength - sIn.length();
+    for (size_t i = 0; i < nPadLen; i++) {
+      ret += cWhat;
+    }
   }
-  return sRet + sIn;
+  return ret + sIn;
 }
 
-std::string WsjcppCore::doPadRight(const std::string& sIn, char cWhat, size_t nLength) {
-  std::string sRet;
-  size_t nPadLen = nLength - sIn.length();
-  for (size_t i = 0; i < nPadLen; i++) {
-    sRet += cWhat;
+std::string WsjcppCore::doPadRight(const std::string &sIn, char cWhat, size_t nLength) {
+  std::string ret;
+  if (nLength > sIn.length()) {
+    size_t nPadLen = nLength - sIn.length();
+    for (size_t i = 0; i < nPadLen; i++) {
+      ret += cWhat;
+    }
   }
-  return sIn + sRet;
+  return sIn + ret;
 }
 
 // ---------------------------------------------------------------------
