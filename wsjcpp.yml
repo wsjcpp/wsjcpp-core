@@ -52,8 +52,4 @@ unit-tests:
       description: ""
     - name: "DateTimeFormat"
       description: ""
-    - name: "ExtractDirpath"
-      description: ""
-    - name: "ExtractFilepath"
-      description: ""
 
