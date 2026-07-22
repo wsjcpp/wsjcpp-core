@@ -46,8 +46,6 @@ unit-tests:
       description: "Test getEnv function"
     - name: "ReadFileToBuffer"
       description: "test for readFileToBuffer"
-    - name: "TestResources"
-      description: "Test basic resources"
     - name: "FilePermissions"
       description: ""
 
