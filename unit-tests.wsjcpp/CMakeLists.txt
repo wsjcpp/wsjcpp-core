@@ -27,6 +27,10 @@ list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../src/wsjcpp_unit_tests.cpp")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../src/wsjcpp_unit_tests.h")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../src/wsjcpp_unit_tests_main.cpp")
 
+# resources.wsjcpp
+list (APPEND WSJCPP_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/../src/resources.wsjcpp/")
+list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../src/resources.wsjcpp/__src_resources_html_images_favicon_svg_pathc6e5e4.cpp")
+
 # unit-tests
 list (APPEND WSJCPP_INCLUDE_DIRS "src")
 list (APPEND WSJCPP_SOURCES "${CMAKE_SOURCE_DIR}/../unit-tests.wsjcpp/src/unit_test_get_env.cpp")

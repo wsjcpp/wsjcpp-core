@@ -50,6 +50,13 @@ unit-tests:
       description: "Test basic resources"
     - name: "FilePermissions"
       description: ""
-    - name: "DateTimeFormat"
-      description: ""
+
+resources:
+  output-generation-dir: src/resources.wsjcpp
+  files:
+    - filepath: "./src/resources/html/images/favicon.svg"
+      size: 10014
+      pack-as: "text"
+      modified: 1600318923
+      sha1: "a3393af3be6713c1268d38066e54087422b99c09"
 
