@@ -52,7 +52,6 @@ int main() {
     if (result != test.expected) {
       found_errors++;
       std::cerr << "Expected '" << test.expected << "', but got '" << result << "' " << std::endl;
-      continue;
     }
   }
 

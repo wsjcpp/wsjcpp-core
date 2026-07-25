@@ -267,6 +267,8 @@ std::string join(const std::vector<std::string> &source, const std::string &deli
 void replace_all_in(std::string &target, const std::string &from, const std::string &to);
 bool create_empty_file(const std::string &filepath);
 std::string extract_filename(const std::string &filepath);
+int levenshtein_distance(const std::string &str1, const std::string &str2);
+
 
 } // namespace wsjcpp
 

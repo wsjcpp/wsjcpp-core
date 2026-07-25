@@ -9,6 +9,7 @@
 - Fixed #47: Renamed `WsjcppCore::replaceAll` to `wsjcpp::replace_all_in`
 - Fixed #45: Renamed `WsjcppCore::createEmptyFile` to `wsjcpp::create_empty_file`
 - Fixed #48: Renamed `WsjcppCore::extractFilename` to `wsjcpp::extract_filename`
+- Fixed #53: Added `wsjcpp::levenshtein_distance`
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 

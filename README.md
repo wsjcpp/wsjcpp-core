@@ -88,7 +88,7 @@ Example output
 | `wsjcpp::replace_all_in` | Replace all substrings in target | [Code-Example](#wsjcppreplace_all_in) |
 | `wsjcpp::create_empty_file` | Creating empty file. Will return true if file not exists and do created | [Code-Example](#wsjcppcreate_empty_file) |
 | `wsjcpp::extract_filename` | Extract base filename from filepath. | [Code-Example](#wsjcppextract_filename) |
-
+| `wsjcpp::levenshtein_distance` | Calculation Of Levenshtein Distance. | [Code-Example](#wsjcpplevenshtein_distance) |
 
 ### wsjcpp::normalize_filepath
 
@@ -520,3 +520,13 @@ std::string filename = wsjcpp::extract_filename(".//../bin/some/../file.txt");
 ```
 
 Variable `filename` will has value `file.txt`
+
+### wsjcpp::levenshtein_distance
+
+Calculation Of Levenshtein Distance.
+
+```
+int dist = wsjcpp::levenshtein_distance("taf", "t0");
+```
+
+Variable `dist` will has value `2`
