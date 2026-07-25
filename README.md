@@ -94,7 +94,7 @@ Example output
 | `wsjcpp::operation_system_platform` | Return OS from enum. | [Code-Example](#wsjcppoperation_system_platform) |
 | `wsjcpp::is_linux` | return true if current platform is linux. | [Code-Example](#wsjcppis_linux) |
 | `wsjcpp::is_windows` | return true if current platform is windows. | [Code-Example](#wsjcppis_windows) |
-
+| `wsjcpp::padding_right` | Padding string right. | [Code-Example](#wsjcpppadding_right) |
 
 ### wsjcpp::normalize_filepath
 
@@ -576,3 +576,13 @@ return true if current platform is linux
 ### wsjcpp::is_windows
 
 return true if current platform m is linux
+
+### wsjcpp::padding_right
+
+Padding string right.
+
+```cpp
+std::string str = wsjcpp::padding_right("123", '-', 5);
+```
+
+Variable `str` will contains string `123--`

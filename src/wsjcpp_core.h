@@ -144,7 +144,6 @@ public:
   static bool getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError);
 
   static std::string doPadLeft(const std::string& sIn, char cWhat, size_t nLength);
-  static std::string doPadRight(const std::string& sIn, char cWhat, size_t nLength);
 };
 
 enum WsjcppColorCode { // deprecated, see https://github.com/sea5kg/sea5kg-logger
@@ -278,7 +277,7 @@ enum class operation_system {
 operation_system operation_system_platform();
 bool is_linux();
 bool is_windows();
-
+std::string padding_right(const std::string &source, char pad_char, size_t length);
 
 } // namespace wsjcpp
 

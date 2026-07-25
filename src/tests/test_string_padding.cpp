@@ -64,10 +64,10 @@ int main() {
       found_errors++;
       std::cerr << "(pad_left) Expected '" << test.expected_pad_left << "', but got '" << got_pad_left << "' from '" << test.source << "'" << std::endl;
     }
-    std::string got_pad_right = WsjcppCore::doPadRight(test.source, test.pad_char, test.pad_right);
+    std::string got_pad_right = wsjcpp::padding_right(test.source, test.pad_char, test.pad_right);
     if (test.expected_pad_right != got_pad_right) {
       found_errors++;
-      std::cerr << "(pad_right) Expected '" << test.expected_pad_right << "', but got '" << got_pad_right << "' from '" << test.source << "'" << std::endl;
+      std::cerr << "(padding_right) Expected '" << test.expected_pad_right << "', but got '" << got_pad_right << "' from '" << test.source << "'" << std::endl;
     }
   }
 

@@ -694,17 +694,6 @@ std::string WsjcppCore::doPadLeft(const std::string &sIn, char cWhat, size_t nLe
   return ret + sIn;
 }
 
-std::string WsjcppCore::doPadRight(const std::string &sIn, char cWhat, size_t nLength) {
-  std::string ret;
-  if (nLength > sIn.length()) {
-    size_t nPadLen = nLength - sIn.length();
-    for (size_t i = 0; i < nPadLen; i++) {
-      ret += cWhat;
-    }
-  }
-  return sIn + ret;
-}
-
 // ---------------------------------------------------------------------
 // WsjcppLog
 
@@ -1364,5 +1353,16 @@ bool is_windows() {
   return operation_system_platform() == operation_system::WINDOWS;
 }
 
+std::string padding_right(const std::string &source, char pad_char, size_t length) {
+  std::string ret;
+  if (length > source.length()) {
+    size_t pad_len = length - source.length();
+    ret.reserve(pad_len);
+    for (size_t i = 0; i < pad_len; i++) {
+      ret += pad_char;
+    }
+  }
+  return source + ret;
+}
 
 } // namespace wsjcpp
