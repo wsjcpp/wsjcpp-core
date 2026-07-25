@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.2.7] - 2026-07-05 (2026 July 19)
+## [v0.2.7] - 2026-??-?? (2026 ?? ??)
 
 - Fixed #43: Renamed `WsjcppCore::dirExists` to `wsjcpp::dir_exists`
 - Fixed #44: Renamed `WsjcppCore::fileExists` to `wsjcpp::file_exists`
@@ -10,6 +10,7 @@
 - Fixed #45: Renamed `WsjcppCore::createEmptyFile` to `wsjcpp::create_empty_file`
 - Fixed #48: Renamed `WsjcppCore::extractFilename` to `wsjcpp::extract_filename`
 - Fixed #53: Added `wsjcpp::levenshtein_distance`
+- Fixed #42: Redesigned unit-tests to ctest
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 
