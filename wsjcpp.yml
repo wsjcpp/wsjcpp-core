@@ -42,8 +42,6 @@ distribution:
 
 unit-tests:
   cases:
-    - name: "ReadFileToBuffer"
-      description: "test for readFileToBuffer"
     - name: "FilePermissions"
       description: ""
 

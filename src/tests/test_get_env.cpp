@@ -64,27 +64,6 @@ int main() {
     }
   }
 
-//   std::vector<std::string> uuids;
-//   for (int i = 0; i < 100; i++) {
-//     std::string _uuid = wsjcpp::generate_uuid();
-//     // if (i < 3) {
-//     //   WsjcppLog::info(TAG, "sUuid: " + sUuid);
-//     // }
-//     uuids.push_back(_uuid);
-//   }
-//   for (int x = 0; x < 100; x++) {
-//     std::string left_val = uuids[x];
-//     for (int y = 0; y < 100; y++) {
-//       std::string right_val = uuids[y];
-//       if (x != y) {
-//         if (left_val == right_val) {
-//           found_errors++;
-//           std::cerr << "Wrong generation random uuids: '" << left_val + "' by positions left=" << std::to_string(x) << ", right=" + std::to_string(y) << std::endl;
-//         }
-//       }
-//     }
-//   }
-
   if (found_errors > 0) {
     return 1;
   }
