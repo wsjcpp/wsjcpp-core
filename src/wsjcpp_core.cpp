@@ -1343,4 +1343,26 @@ bool change_current_process_privileges(int user_id, std::string &error) {
   return true;
 }
 
+operation_system operation_system_platform() {
+  #ifdef _WIN32
+    return operation_system::WINDOWS;
+  #endif
+  #if defined (_MSC_VER)
+    return operation_system::WINDOWS;
+  #endif
+  #ifdef __unix__
+    return operation_system::LINUX;
+  #endif
+  return operation_system::UNKNOWN;
+}
+
+bool is_linux() {
+  return operation_system_platform() == operation_system::LINUX;
+}
+
+bool is_windows() {
+  return operation_system_platform() == operation_system::WINDOWS;
+}
+
+
 } // namespace wsjcpp

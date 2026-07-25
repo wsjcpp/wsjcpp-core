@@ -270,6 +270,15 @@ std::string extract_filename(const std::string &filepath);
 int levenshtein_distance(const std::string &str1, const std::string &str2);
 bool user_is_root();
 bool change_current_process_privileges(int user_id, std::string &error);
+enum class operation_system {
+  UNKNOWN,
+  LINUX,
+  WINDOWS
+};
+operation_system operation_system_platform();
+bool is_linux();
+bool is_windows();
+
 
 } // namespace wsjcpp
 

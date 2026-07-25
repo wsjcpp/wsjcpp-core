@@ -91,6 +91,9 @@ Example output
 | `wsjcpp::levenshtein_distance` | Calculation Of Levenshtein Distance. | [Code-Example](#wsjcpplevenshtein_distance) |
 | `wsjcpp::user_is_root` | For a linux system. Return true if current user is root | [Code-Example](#wsjcppuser_is_root) |
 | `wsjcpp::change_current_process_privileges` | For a linux system. Try change (or downgrade) for current process privileges. | [Code-Example](#wsjcppchange_current_process_privileges) |
+| `wsjcpp::operation_system_platform` | Return OS from enum. | [Code-Example](#wsjcppoperation_system_platform) |
+| `wsjcpp::is_linux` | return true if current platform is linux. | [Code-Example](#wsjcppis_linux) |
+| `wsjcpp::is_windows` | return true if current platform is windows. | [Code-Example](#wsjcppis_windows) |
 
 
 ### wsjcpp::normalize_filepath
@@ -554,5 +557,22 @@ int user_id = 1001;
 if (!wsjcpp::change_current_process_privileges(1001, error)) {
   std::cerr << "FAILED: " << error << std::endl;
 }
-
 ```
+
+### wsjcpp::operation_system_platform
+
+Return OS from enum
+
+```cpp
+if (wsjcpp::operation_system_platform() wsjcpp::operation_system::LINUX) {
+  std::cout << "is a linux " << std::endl;
+}
+```
+
+### wsjcpp::is_linux
+
+return true if current platform is linux
+
+### wsjcpp::is_windows
+
+return true if current platform m is linux

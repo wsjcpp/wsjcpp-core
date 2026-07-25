@@ -12,6 +12,7 @@
 - Fixed #53: Added `wsjcpp::levenshtein_distance`
 - Fixed #42: Redesigned unit-tests to ctest
 - Fixed #54: Added `wsjcpp::change_current_process_privileges` (for linux), also added `wsjcpp::user_is_root` (for linux)
+- Fixed #51: Detect os platform (added `wsjcpp::operation_system_platform`, `wsjcpp::is_linux`, `wsjcpp::is_windows`)
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 
