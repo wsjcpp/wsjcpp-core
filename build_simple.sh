@@ -31,14 +31,3 @@ export "TEST_ENV_VALUE3"="932749387"
 
 cd ./tmp/release && ctest --output-on-failure
 check_ret $? "ctest failed"
-
-cd ../../unit-tests.wsjcpp
-
-cmake -H. -Btmp/release -DCMAKE_BUILD_TYPE=Release
-check_ret $? "configure"
-
-cmake --build tmp/release --config Release
-check_ret $? "make"
-
-./run_unit-tests.sh
-check_ret $? "unit-tests"

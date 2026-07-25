@@ -40,11 +40,6 @@ distribution:
     target-file: "generate.Class.wsjcpp-script"
     type: "safe-scripting-generate"
 
-unit-tests:
-  cases:
-    - name: "FilePermissions"
-      description: ""
-
 resources:
   output-generation-dir: src/resources.wsjcpp
   files:

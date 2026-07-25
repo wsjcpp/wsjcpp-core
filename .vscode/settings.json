@@ -3,6 +3,12 @@
         "cout",
         "ctest",
         "endl",
-        "nullptr"
+        "nullptr",
+        "rwxr",
+        "rwxrw",
+        "rwxrwx",
+        "rwxrwxr",
+        "rwxrwxrw",
+        "rwxrwxrwx"
     ]
 }
