@@ -11,6 +11,7 @@
 - Fixed #48: Renamed `WsjcppCore::extractFilename` to `wsjcpp::extract_filename`
 - Fixed #53: Added `wsjcpp::levenshtein_distance`
 - Fixed #42: Redesigned unit-tests to ctest
+- Fixed #54: Added `wsjcpp::change_current_process_privileges` (for linux), also added `wsjcpp::user_is_root` (for linux)
 
 ## [v0.2.6] - 2026-07-05 (2026 July 5)
 

@@ -1,9 +1,12 @@
 {
     "cSpell.words": [
+        "cerr",
         "cout",
         "ctest",
         "endl",
+        "ltrim",
         "nullptr",
+        "rtrim",
         "rwxr",
         "rwxrw",
         "rwxrwx",

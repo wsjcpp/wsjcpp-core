@@ -268,7 +268,8 @@ void replace_all_in(std::string &target, const std::string &from, const std::str
 bool create_empty_file(const std::string &filepath);
 std::string extract_filename(const std::string &filepath);
 int levenshtein_distance(const std::string &str1, const std::string &str2);
-
+bool user_is_root();
+bool change_current_process_privileges(int user_id, std::string &error);
 
 } // namespace wsjcpp
 

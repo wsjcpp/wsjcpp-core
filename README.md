@@ -89,6 +89,9 @@ Example output
 | `wsjcpp::create_empty_file` | Creating empty file. Will return true if file not exists and do created | [Code-Example](#wsjcppcreate_empty_file) |
 | `wsjcpp::extract_filename` | Extract base filename from filepath. | [Code-Example](#wsjcppextract_filename) |
 | `wsjcpp::levenshtein_distance` | Calculation Of Levenshtein Distance. | [Code-Example](#wsjcpplevenshtein_distance) |
+| `wsjcpp::user_is_root` | For a linux system. Return true if current user is root | [Code-Example](#wsjcppuser_is_root) |
+| `wsjcpp::change_current_process_privileges` | For a linux system. Try change (or downgrade) for current process privileges. | [Code-Example](#wsjcppchange_current_process_privileges) |
+
 
 ### wsjcpp::normalize_filepath
 
@@ -530,3 +533,26 @@ int dist = wsjcpp::levenshtein_distance("taf", "t0");
 ```
 
 Variable `dist` will has value `2`
+
+### wsjcpp::user_is_root
+
+For a linux system.
+
+Return true if current user is root.
+
+### wsjcpp::change_current_process_privileges
+
+For a linux system.
+
+Try change (or downgrade) for current process privileges.
+
+Return true if success or false if not. See more in error.
+
+```cpp
+std::string error;
+int user_id = 1001;
+if (!wsjcpp::change_current_process_privileges(1001, error)) {
+  std::cerr << "FAILED: " << error << std::endl;
+}
+
+```

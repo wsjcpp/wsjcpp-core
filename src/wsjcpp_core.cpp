@@ -1317,4 +1317,30 @@ int levenshtein_distance(const std::string &str1, const std::string &str2) {
   return d[len1][len2];
 }
 
+bool user_is_root() {
+  // Root always has an Effective User ID (EUID) of 0
+  return geteuid() == 0;
+}
+
+bool change_current_process_privileges(int user_id, std::string &error) {
+  if (setgid(user_id) != 0) {
+    error = "Failed to set GID";
+    return false;
+  }
+  if (setuid(user_id) != 0) {
+    error = "Failed to set UID";
+    return false;
+  }
+  if (setuid(0) == 0) {
+    error = "Security Risk: Privileges were not permanently dropped!";
+    return false;
+  }
+  if (getuid() != user_id) {
+    error = "NOT CHANGED";
+    return false;
+  }
+  // Successful changed privileges.
+  return true;
+}
+
 } // namespace wsjcpp
