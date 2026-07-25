@@ -95,6 +95,7 @@ Example output
 | `wsjcpp::is_linux` | return true if current platform is linux. | [Code-Example](#wsjcppis_linux) |
 | `wsjcpp::is_windows` | return true if current platform is windows. | [Code-Example](#wsjcppis_windows) |
 | `wsjcpp::padding_right` | Padding string right. | [Code-Example](#wsjcpppadding_right) |
+| `wsjcpp::padding_left` | Padding string left. | [Code-Example](#wsjcpppadding_left) |
 
 ### wsjcpp::normalize_filepath
 
@@ -586,3 +587,13 @@ std::string str = wsjcpp::padding_right("123", '-', 5);
 ```
 
 Variable `str` will contains string `123--`
+
+### wsjcpp::padding_left
+
+Padding string left.
+
+```cpp
+std::string str = wsjcpp::padding_left("123", '-', 5);
+```
+
+Variable `str` will contains string `--123`

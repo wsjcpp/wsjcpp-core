@@ -683,17 +683,6 @@ bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePerm
   return true;
 }
 
-std::string WsjcppCore::doPadLeft(const std::string &sIn, char cWhat, size_t nLength) {
-  std::string ret;
-  if (nLength > sIn.length()) {
-    size_t nPadLen = nLength - sIn.length();
-    for (size_t i = 0; i < nPadLen; i++) {
-      ret += cWhat;
-    }
-  }
-  return ret + sIn;
-}
-
 // ---------------------------------------------------------------------
 // WsjcppLog
 
@@ -1363,6 +1352,18 @@ std::string padding_right(const std::string &source, char pad_char, size_t lengt
     }
   }
   return source + ret;
+}
+
+std::string padding_left(const std::string &source, char pad_char, size_t length) {
+  std::string ret;
+  if (length > source.length()) {
+    size_t pad_len = length - source.length();
+    ret.reserve(pad_len);
+    for (size_t i = 0; i < pad_len; i++) {
+      ret += pad_char;
+    }
+  }
+  return ret + source;
 }
 
 } // namespace wsjcpp

@@ -59,7 +59,7 @@ int main() {
 
   for (int i = 0; i < tests.size(); i++) {
     LTest test = tests[i];
-    std::string got_pad_left = WsjcppCore::doPadLeft(test.source, test.pad_char, test.pad_left);
+    std::string got_pad_left = wsjcpp::padding_left(test.source, test.pad_char, test.pad_left);
     if (test.expected_pad_left != got_pad_left) {
       found_errors++;
       std::cerr << "(pad_left) Expected '" << test.expected_pad_left << "', but got '" << got_pad_left << "' from '" << test.source << "'" << std::endl;
