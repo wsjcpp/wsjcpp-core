@@ -25,6 +25,10 @@ check_ret $? "configure"
 cmake --build tmp/release --config Release
 check_ret $? "make"
 
+export TESTENVVALUE1="testvalue1"
+export TEST_ENV_VALUE2="test some value2"
+export "TEST_ENV_VALUE3"="932749387"
+
 cd ./tmp/release && ctest --output-on-failure
 check_ret $? "ctest failed"
 

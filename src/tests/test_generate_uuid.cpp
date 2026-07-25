@@ -48,7 +48,7 @@ int main() {
       if (x != y) {
         if (left_val == right_val) {
           found_errors++;
-          std::cerr << "Wrong generation random uuids: '" << left_val + "' by positions left=" << std::to_string(x) << ", right=" + std::to_string(y) << std::endl;
+          std::cerr << "Wrong generation random uuids: '" << left_val << "' by positions left=" << std::to_string(x) << ", right=" << std::to_string(y) << std::endl;
         }
       }
     }
