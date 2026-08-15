@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.3.0] - 2026-07-25 (2026 Aug 15)
+
+- Relocate distribute files wsjcpp* to src/wsjcpp_core/ folder
+
 ## [v0.2.7] - 2026-07-25 (2026 July 25)
 
 - Fixed #43: Renamed `WsjcppCore::dirExists` to `wsjcpp::dir_exists`

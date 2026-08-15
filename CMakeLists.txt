@@ -38,9 +38,10 @@ set(EXECUTABLE_OUTPUT_PATH ${wsjcpp-core_SOURCE_DIR})
 
 # include header dirs
 list (APPEND WSJCPP_INCLUDE_DIRS "src")
+list (APPEND WSJCPP_INCLUDE_DIRS "src/wsjcpp_core")
 
-list (APPEND WSJCPP_SOURCES "src/wsjcpp_core.h")
-list (APPEND WSJCPP_SOURCES "src/wsjcpp_core.cpp")
+list (APPEND WSJCPP_SOURCES "src/wsjcpp_core/wsjcpp_core.cpp")
+list (APPEND WSJCPP_SOURCES "src/wsjcpp_core/wsjcpp_unit_tests.cpp")
 
 list (APPEND WSJCPP_SOURCES "src/main.cpp")
 

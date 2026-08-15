@@ -18,25 +18,25 @@ authors:
     email: mrseakg@gmail.com
 
 distribution:
-  - source-file: src/wsjcpp_core.cpp
+  - source-file: src/wsjcpp_core/wsjcpp_core.cpp
     target-file: wsjcpp_core.cpp
     type: "source-code"
-  - source-file: src/wsjcpp_core.h
+  - source-file: src/wsjcpp_core/wsjcpp_core.h
     target-file: wsjcpp_core.h
     type: "source-code" # todo must be header-file
-  - source-file: "src/wsjcpp_unit_tests.cpp"
+  - source-file: "src/wsjcpp_core/wsjcpp_unit_tests.cpp"
     target-file: "wsjcpp_unit_tests.cpp"
     type: "unit-tests"
-  - source-file: "src/wsjcpp_unit_tests.h"
+  - source-file: "src/wsjcpp_core/wsjcpp_unit_tests.h"
     target-file: "wsjcpp_unit_tests.h"
     type: "unit-tests"
-  - source-file: "src/wsjcpp_unit_tests_main.cpp"
+  - source-file: "src/wsjcpp_core/wsjcpp_unit_tests_main.cpp"
     target-file: "wsjcpp_unit_tests_main.cpp"
     type: "unit-tests"
-  - source-file: "scripts.wsjcpp/generate.WsjcppUnitTest.wsjcpp-script"
+  - source-file: "src/wsjcpp_core/generate.WsjcppUnitTest.wsjcpp-script"
     target-file: "generate.WsjcppUnitTest.wsjcpp-script"
     type: "safe-scripting-generate"
-  - source-file: "scripts.wsjcpp/generate.Class.wsjcpp-script"
+  - source-file: "src/wsjcpp_core/generate.Class.wsjcpp-script"
     target-file: "generate.Class.wsjcpp-script"
     type: "safe-scripting-generate"
 

@@ -29,7 +29,7 @@ file(GLOB ALL_TESTS
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY tests)
 
 list (APPEND TEST_WSJCPP_CORE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../")
-list (APPEND TEST_WSJCPP_CORE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../wsjcpp_core.cpp")
+list (APPEND TEST_WSJCPP_CORE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../wsjcpp_core/wsjcpp_core.cpp")
 list (APPEND TEST_WSJCPP_CORE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../resources.wsjcpp/__src_resources_html_images_favicon_svg_pathc6e5e4.cpp")
 
 

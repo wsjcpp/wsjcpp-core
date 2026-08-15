@@ -20,8 +20,8 @@ $ wsjcpp install https://github.com/wsjcpp/wsjcpp-core:master
 
 Or include files:
 
-* `src/wsjcpp_core.h`
-* `src/wsjcpp_core.cpp`
+* `src/wsjcpp_core/wsjcpp_core.h`
+* `src/wsjcpp_core/wsjcpp_core.cpp`
 
 ## Logger (WsjcppLog)
 
