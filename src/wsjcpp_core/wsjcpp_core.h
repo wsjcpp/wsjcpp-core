@@ -28,8 +28,8 @@
 #define WSJCPP_CORE_H
 
 #define WSJCPP_CORE_VER_0
-#define WSJCPP_CORE_VER_0_2
-#define WSJCPP_CORE_VER_0_2_7
+#define WSJCPP_CORE_VER_0_3
+#define WSJCPP_CORE_VER_0_3_0
 
 #include <deque>
 #include <iostream>
