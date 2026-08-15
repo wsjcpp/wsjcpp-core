@@ -96,6 +96,8 @@ Example output
 | `wsjcpp::is_windows` | return true if current platform is windows. | [Code-Example](#wsjcppis_windows) |
 | `wsjcpp::padding_right` | Padding string right. | [Code-Example](#wsjcpppadding_right) |
 | `wsjcpp::padding_left` | Padding string left. | [Code-Example](#wsjcpppadding_left) |
+| `wsjcpp::is_valid_ip4` | check string contains valid IPv4 format. | [Code-Example](#wsjcppis_valid_ip4) |
+| `wsjcpp::is_valid_ip6` | check string contains valid IPv6 format. | [Code-Example](#wsjcppis_valid_ip6) |
 
 ### wsjcpp::normalize_filepath
 
@@ -597,3 +599,25 @@ std::string str = wsjcpp::padding_left("123", '-', 5);
 ```
 
 Variable `str` will contains string `--123`
+
+### wsjcpp::is_valid_ip4
+
+Check string contains valid IPv4 format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_ip4("127.0.0.1", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_ip6
+
+Check string contains valid IPv6 format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_ip6("2607:f8b0:4002:c08:0:0:0:8b", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```

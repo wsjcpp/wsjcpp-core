@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.3.1] - 2026-??-?? (2026 ?? ??)
+
+- Added `wsjcpp::is_valid_ip4`
+- Added `wsjcpp::is_valid_ip6`
+
 ## [v0.3.0] - 2026-07-25 (2026 Aug 15)
 
 - Relocate distribute files wsjcpp* to src/wsjcpp_core/ folder
