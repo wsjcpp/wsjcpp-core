@@ -1,21 +1,7 @@
 {
     "C_Cpp.clang_format_style": "file",
     "cSpell.words": [
-        "cerr",
-        "cout",
         "ctest",
-        "endl",
-        "Evgenii",
-        "ltrim",
-        "nullptr",
-        "rtrim",
-        "rwxr",
-        "rwxrw",
-        "rwxrwx",
-        "rwxrwxr",
-        "rwxrwxrw",
-        "rwxrwxrwx",
-        "Sopov",
-        "Wsjcpp"
+        "wsjcpp"
     ]
 }
