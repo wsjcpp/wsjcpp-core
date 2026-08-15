@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -40,7 +40,7 @@ std::string WsjcppUnitTestBase::getName() {
 
 void WsjcppUnitTestBase::ok(const std::string &sSuccessMessage) {
   // print only success message
-  WsjcppLog::ok(TAG,  sSuccessMessage);
+  WsjcppLog::ok(TAG, sSuccessMessage);
 }
 
 void WsjcppUnitTestBase::fail(const std::string &sFailedMessage) {
@@ -55,13 +55,12 @@ bool WsjcppUnitTestBase::runTest() {
     fail("Problem with before unit-test");
     return false;
   }
-  WsjcppLog::info(TAG,  "Execute unit-test");
+  WsjcppLog::info(TAG, "Execute unit-test");
   try {
     executeTest();
-  } catch(const std::exception& e) {
+  } catch (const std::exception &e) {
     fail(e.what());
-  } catch(...) {
-
+  } catch (...) {
   }
   if (m_bTestResult) {
     ok("Test passed.");
@@ -70,7 +69,7 @@ bool WsjcppUnitTestBase::runTest() {
   }
   WsjcppLog::info(TAG, "Do after unit-test");
   if (!doAfterTest()) {
-      fail("Problem with after unit-test");
+    fail("Problem with after unit-test");
   }
   WsjcppLog::info(TAG, "End unit-test");
   return m_bTestResult;
@@ -84,20 +83,20 @@ bool WsjcppUnitTestBase::compareD(const std::string &sMark, double nValue, doubl
   return true;
 }
 
-std::vector<WsjcppUnitTestBase*> *g_pWsjcppUnitTests = nullptr;
+std::vector<WsjcppUnitTestBase *> *g_pWsjcppUnitTests = nullptr;
 
 void WsjcppUnitTests::initGlobalVariables() {
   if (g_pWsjcppUnitTests == nullptr) {
     // WsjcppLog::info(std::string(), "Create handlers map");
-    g_pWsjcppUnitTests = new std::vector<WsjcppUnitTestBase*>();
+    g_pWsjcppUnitTests = new std::vector<WsjcppUnitTestBase *>();
   }
 }
 
-void WsjcppUnitTests::addUnitTest(const std::string &sTestName, WsjcppUnitTestBase* pUnitTest) {
+void WsjcppUnitTests::addUnitTest(const std::string &sTestName, WsjcppUnitTestBase *pUnitTest) {
   WsjcppUnitTests::initGlobalVariables();
   bool bFound = false;
   for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
-    WsjcppUnitTestBase* p = g_pWsjcppUnitTests->at(i);
+    WsjcppUnitTestBase *p = g_pWsjcppUnitTests->at(i);
     if (p->getName() == sTestName) {
       bFound = true;
     }

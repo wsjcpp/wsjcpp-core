@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -30,20 +30,24 @@
 
 void printHelp(const std::string &sProgramName) {
   std::string sOutput = "\nHelp:\n";
-  sOutput +=
-    " '" + sProgramName + "' - run all unit-tests\n"
-    " '" + sProgramName + " help' - print this help\n"
-    " '" + sProgramName + " list' - print list of unit-tests\n"
-    " '" + sProgramName + " run <TestName>' - run single unit-test\n"
-  ;
+  sOutput += " '" + sProgramName +
+             "' - run all unit-tests\n"
+             " '" +
+             sProgramName +
+             " help' - print this help\n"
+             " '" +
+             sProgramName +
+             " list' - print list of unit-tests\n"
+             " '" +
+             sProgramName + " run <TestName>' - run single unit-test\n";
   WsjcppLog::info("UnitTests", sOutput);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   WsjcppCore::initRandom();
   std::string TAG = "UnitTests";
   WsjcppLog::setPrefixLogFile("unit-tests");
-  std::string sLogDir = "./logs"; 
+  std::string sLogDir = "./logs";
   if (!wsjcpp::dir_exists(sLogDir)) {
     WsjcppCore::makeDir(sLogDir);
   }
@@ -58,10 +62,10 @@ int main(int argc, char** argv) {
 
   if (argc == 1) {
     int nAll = g_pWsjcppUnitTests->size();
-    WsjcppLog::info(TAG,  "All tests count " + std::to_string(nAll));
+    WsjcppLog::info(TAG, "All tests count " + std::to_string(nAll));
     int nSuccess = 0;
     for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
-      WsjcppUnitTestBase* pUnitTest = g_pWsjcppUnitTests->at(i);
+      WsjcppUnitTestBase *pUnitTest = g_pWsjcppUnitTests->at(i);
       if (pUnitTest->runTest()) {
         nSuccess++;
       }
@@ -80,10 +84,10 @@ int main(int argc, char** argv) {
     if (sArg2 == "list") {
       std::string sOutput = "\nList of unit-tests:\n";
       for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
-        WsjcppUnitTestBase* pUnitTest = g_pWsjcppUnitTests->at(i);
+        WsjcppUnitTestBase *pUnitTest = g_pWsjcppUnitTests->at(i);
         sOutput += "  - " + pUnitTest->getName() + "\n";
       }
-      WsjcppLog::info(TAG,  sOutput);
+      WsjcppLog::info(TAG, sOutput);
       return -1;
     } else if (sArg2 == "help") {
       printHelp(sProgramName);
@@ -96,7 +100,7 @@ int main(int argc, char** argv) {
       int nSuccess = 0;
       bool bTestFound = false;
       for (int i = 0; i < g_pWsjcppUnitTests->size(); i++) {
-        WsjcppUnitTestBase* pUnitTest = g_pWsjcppUnitTests->at(i);
+        WsjcppUnitTestBase *pUnitTest = g_pWsjcppUnitTests->at(i);
         if (pUnitTest->getName() == sArg3) {
           bTestFound = true;
           bool bResult = pUnitTest->runTest();
@@ -106,7 +110,7 @@ int main(int argc, char** argv) {
         }
       }
       if (!bTestFound) {
-        WsjcppLog::err(TAG,  "Test not found try help");
+        WsjcppLog::err(TAG, "Test not found try help");
       }
       return -1;
     }

@@ -20,41 +20,41 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
 #include "wsjcpp_core.h"
 
 #ifndef _MSC_VER
-    #include <dirent.h>
-    #include <sys/time.h>
-    #include <unistd.h>
-    #include <arpa/inet.h>
+#include <arpa/inet.h>
+#include <dirent.h>
+#include <sys/time.h>
+#include <unistd.h>
 #else
-    #include <direct.h>
-    #define PATH_MAX 256
+#include <direct.h>
+#define PATH_MAX 256
 #endif
 
+#include <algorithm>
+#include <chrono>
+#include <cstdint>
+#include <cstdlib>
+#include <ctime>
 #include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <math.h>
+#include <sstream>
+#include <streambuf>
+#include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <time.h>
-#include <ctime>
-#include <math.h>
-#include <chrono>
-#include <string>
-#include <algorithm>
-#include <cstdlib>
 #include <thread>
-#include <cstdint>
-#include <streambuf>
+#include <time.h>
 // #include <sys/socket.h>
-#include <random>
 #include <iomanip>
+#include <random>
 
 // ---------------------------------------------------------------------
 // WsjcppFilePermissions
@@ -72,11 +72,9 @@ WsjcppFilePermissions::WsjcppFilePermissions() {
   m_bOtherExecuteFlag = false;
 }
 
-WsjcppFilePermissions::WsjcppFilePermissions(
-  bool bOwnerReadFlag, bool bOwnerWriteFlag, bool bOwnerExecuteFlag,
-  bool bGroupReadFlag, bool bGroupWriteFlag, bool bGroupExecuteFlag,
-  bool bOtherReadFlag, bool bOtherWriteFlag, bool bOtherExecuteFlag
-) {
+WsjcppFilePermissions::WsjcppFilePermissions(bool bOwnerReadFlag, bool bOwnerWriteFlag, bool bOwnerExecuteFlag,
+                                             bool bGroupReadFlag, bool bGroupWriteFlag, bool bGroupExecuteFlag,
+                                             bool bOtherReadFlag, bool bOtherWriteFlag, bool bOtherExecuteFlag) {
   m_bOwnerReadFlag = bOwnerReadFlag;
   m_bOwnerWriteFlag = bOwnerWriteFlag;
   m_bOwnerExecuteFlag = bOwnerExecuteFlag;
@@ -240,13 +238,9 @@ uint16_t WsjcppFilePermissions::toUInt16() const {
 // ---------------------------------------------------------------------
 // WsjcppCore
 
-bool WsjcppCore::init(
-  int argc, char** argv,
-  const std::string &sApplicationName,
-  const std::string &sApplicationVersion,
-  const std::string &sApplicationAuthor,
-  const std::string &sLibraryNameForExports
-) {
+bool WsjcppCore::init(int argc, char **argv, const std::string &sApplicationName,
+                      const std::string &sApplicationVersion, const std::string &sApplicationAuthor,
+                      const std::string &sLibraryNameForExports) {
   // init random
   // std::srand(std::time(0));
   WsjcppCore::initRandom();
@@ -268,12 +262,15 @@ std::string WsjcppCore::getCurrentDirectory() {
 }
 
 long WsjcppCore::getCurrentTimeInMilliseconds() {
-  long nTimeStart = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+  long nTimeStart =
+      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch())
+          .count();
   return nTimeStart;
 }
 
 long WsjcppCore::getCurrentTimeInSeconds() {
-  long nTimeStart = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+  long nTimeStart =
+      std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
   return nTimeStart;
 }
 
@@ -295,13 +292,14 @@ std::string WsjcppCore::getCurrentTimeForLogFormat() {
   // for more information about date/time format
   char buf[80];
   strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tstruct);
-  return std::string(buf) + "." + std::string( 3 - sMilliseconds.length(), '0').append(sMilliseconds);
+  return std::string(buf) + "." + std::string(3 - sMilliseconds.length(), '0').append(sMilliseconds);
 }
 
 std::string WsjcppCore::getThreadId() {
-  static_assert(sizeof(std::thread::id)==sizeof(uint64_t),"this function only works if size of thead::id is equal to the size of uint_64");
+  static_assert(sizeof(std::thread::id) == sizeof(uint64_t),
+                "this function only works if size of thead::id is equal to the size of uint_64");
   std::thread::id this_id = std::this_thread::get_id();
-  uint64_t val = *((uint64_t*) &this_id);
+  uint64_t val = *((uint64_t *)&this_id);
   std::stringstream stream;
   stream << "0x" << std::setw(16) << std::setfill('0') << std::hex << val;
   return std::string(stream.str());
@@ -353,7 +351,7 @@ std::vector<std::string> WsjcppCore::getListOfFiles(const std::string &sDirname)
   if (!wsjcpp::dir_exists(sDirname)) {
     return vFiles;
   }
-  for (auto& entry: std::filesystem::directory_iterator(sDirname)) {
+  for (auto &entry : std::filesystem::directory_iterator(sDirname)) {
     if (!entry.is_directory()) {
       std::string sPath = entry.path();
       sPath.erase(0, sDirname.size() + 1);
@@ -422,10 +420,7 @@ bool WsjcppCore::readTextFile(const std::string &sFilename, std::string &sConten
     std::cout << "FAILED could not open file to read " << sFilename << std::endl;
     return false;
   }
-  sContent = std::string(
-    (std::istreambuf_iterator<char>(f)),
-    std::istreambuf_iterator<char>()
-  );
+  sContent = std::string((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
   return true;
 }
 
@@ -436,14 +431,14 @@ bool WsjcppCore::readFileToBuffer(const std::string &sFilename, char *pBuffer[],
   }
 
   // get length of file:
-  f.seekg (0, f.end);
+  f.seekg(0, f.end);
   nBufferSize = f.tellg();
-  f.seekg (0, f.beg);
+  f.seekg(0, f.beg);
 
-  *pBuffer = new char [nBufferSize];
+  *pBuffer = new char[nBufferSize];
 
   // read data as a block:
-  f.read (*pBuffer, nBufferSize);
+  f.read(*pBuffer, nBufferSize);
   if (!f) {
     WsjcppLog::err("WsjcppCore::readFileToBuffer", "Only " + std::to_string(f.gcount()) + " could be read");
     delete[] pBuffer;
@@ -492,24 +487,24 @@ bool WsjcppCore::copyFile(const std::string &sSourceFilename, const std::string 
   return true;
 }
 
-std::string& WsjcppCore::ltrim(std::string& str, const std::string& chars) {
+std::string &WsjcppCore::ltrim(std::string &str, const std::string &chars) {
   str.erase(0, str.find_first_not_of(chars));
   return str;
 }
 
-std::string& WsjcppCore::rtrim(std::string& str, const std::string& chars) {
+std::string &WsjcppCore::rtrim(std::string &str, const std::string &chars) {
   str.erase(str.find_last_not_of(chars) + 1);
   return str;
 }
 
-std::string& WsjcppCore::trim(std::string& str, const std::string& chars) {
-    return WsjcppCore::ltrim(WsjcppCore::rtrim(str, chars), chars);
+std::string &WsjcppCore::trim(std::string &str, const std::string &chars) {
+  return WsjcppCore::ltrim(WsjcppCore::rtrim(str, chars), chars);
 }
 
 // ---------------------------------------------------------------------
 // will worked only with latin
 
-std::string WsjcppCore::toLower(const std::string& str) {
+std::string WsjcppCore::toLower(const std::string &str) {
   std::string sRet = str;
   std::transform(sRet.begin(), sRet.end(), sRet.begin(), ::tolower);
   return sRet;
@@ -518,7 +513,7 @@ std::string WsjcppCore::toLower(const std::string& str) {
 // ---------------------------------------------------------------------
 // will worked only with latin
 
-std::string WsjcppCore::toUpper(const std::string& str) {
+std::string WsjcppCore::toUpper(const std::string &str) {
   std::string sRet = str;
   std::transform(sRet.begin(), sRet.end(), sRet.begin(), ::toupper);
   return sRet;
@@ -550,24 +545,20 @@ std::string WsjcppCore::getPointerAsHex(void *p) {
   return "0x" + std::string(stream.str());
 }
 
-bool WsjcppCore::getEnv(const std::string& sName, std::string& sValue) {
-  if (const char* env_p = std::getenv(sName.c_str())) {
+bool WsjcppCore::getEnv(const std::string &sName, std::string &sValue) {
+  if (const char *env_p = std::getenv(sName.c_str())) {
     sValue = std::string(env_p);
     return true;
   }
   return false;
 }
 
-std::string WsjcppCore::encodeUriComponent(const std::string& sValue) {
+std::string WsjcppCore::encodeUriComponent(const std::string &sValue) {
   std::stringstream ssRet;
   for (int i = 0; i < sValue.length(); i++) {
     char c = sValue[i];
-    if (
-      c == '-' || c == '_' || c == '.' || c == '!'
-      || c == '~' || c == '*' || c == '\''
-      || c == '(' || c == ')' || (c >= '0' && c <= '9')
-      || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-    ) {
+    if (c == '-' || c == '_' || c == '.' || c == '!' || c == '~' || c == '*' || c == '\'' || c == '(' || c == ')' ||
+        (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
       ssRet << c;
     } else {
       ssRet << '%' << std::uppercase << std::hex << (int)c;
@@ -576,19 +567,19 @@ std::string WsjcppCore::encodeUriComponent(const std::string& sValue) {
   return ssRet.str();
 }
 
-std::string WsjcppCore::decodeUriComponent(const std::string& sValue) {
+std::string WsjcppCore::decodeUriComponent(const std::string &sValue) {
   std::string sRet = "";
   std::string sHex = "";
   int nLen = sValue.length();
   for (int i = 0; i < sValue.length(); i++) {
     char c = sValue[i];
     if (c == '%') {
-      if (i+2 >= nLen) {
+      if (i + 2 >= nLen) {
         WsjcppLog::throw_err("WsjcppCore::decodeUriElement", "Wrong format of string");
       }
       sHex = "0x";
-      sHex += sValue[i+1];
-      sHex += sValue[i+2];
+      sHex += sValue[i + 1];
+      sHex += sValue[i + 2];
       i = i + 2;
       char c1 = std::stoul(sHex, nullptr, 16);
       sRet += c1;
@@ -608,7 +599,7 @@ std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
   long n1 = 0;
   for (int i = 0; i < 6; i++) {
     if (n0 >= 1 && n0 < 1000) {
-        return std::to_string(n0) + arrPrefix[i];
+      return std::to_string(n0) + arrPrefix[i];
     }
     n0 = nBytes / 1000;
     n1 = nBytes - n0 * 1000;
@@ -622,7 +613,8 @@ std::string WsjcppCore::getHumanSizeBytes(long nBytes) {
   return std::to_string(nBytes) + "PB";
 }
 
-bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError) {
+bool WsjcppCore::setFilePermissions(const std::string &sFilePath, const WsjcppFilePermissions &filePermissions,
+                                    std::string &sError) {
 
   mode_t m = 0x0;
 
@@ -648,7 +640,8 @@ bool WsjcppCore::setFilePermissions(const std::string& sFilePath, const WsjcppFi
   return true;
 }
 
-bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError) {
+bool WsjcppCore::getFilePermissions(const std::string &sFilePath, WsjcppFilePermissions &filePermissions,
+                                    std::string &sError) {
   if (!wsjcpp::file_exists(sFilePath)) {
     sError = "File '" + sFilePath + "' - not found";
     return false;
@@ -668,7 +661,6 @@ bool WsjcppCore::getFilePermissions(const std::string& sFilePath, WsjcppFilePerm
   filePermissions.setOwnerReadFlag(m & S_IRUSR);
   filePermissions.setOwnerWriteFlag(m & S_IWUSR);
   filePermissions.setOwnerExecuteFlag(m & S_IXUSR);
-
 
   // group
   filePermissions.setGroupReadFlag(m & S_IRGRP);
@@ -700,20 +692,18 @@ void WsjcppLogGlobalConf::doLogRotateUpdateFilename(bool bForce) {
   long nEverySeconds = logRotationPeriodInSeconds; // rotate log if started now or if time left more then 1 day
   if (logStartTime == 0 || t - logStartTime > nEverySeconds || bForce) {
     logStartTime = t;
-    logFile = logDir + "/"
-      + logPrefixFile + "_"
-      + WsjcppCore::formatTimeForFilename(logStartTime) + ".log";
+    logFile = logDir + "/" + logPrefixFile + "_" + WsjcppCore::formatTimeForFilename(logStartTime) + ".log";
   }
 }
 
 WsjcppLogGlobalConf WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF;
 
-void WsjcppLog::info(const std::string & sTag, const std::string &sMessage) {
+void WsjcppLog::info(const std::string &sTag, const std::string &sMessage) {
   WsjcppColorModifier def(WsjcppColorCode::FG_DEFAULT);
   WsjcppLog::add(def, "INFO", sTag, sMessage);
 }
 
-void WsjcppLog::err(const std::string & sTag, const std::string &sMessage) {
+void WsjcppLog::err(const std::string &sTag, const std::string &sMessage) {
   WsjcppColorModifier red(WsjcppColorCode::FG_RED);
   WsjcppLog::add(red, "ERR", sTag, sMessage);
 }
@@ -724,9 +714,9 @@ void WsjcppLog::throw_err(const std::string &sTag, const std::string &sMessage) 
   throw std::runtime_error(sMessage);
 }
 
-void WsjcppLog::warn(const std::string & sTag, const std::string &sMessage) {
+void WsjcppLog::warn(const std::string &sTag, const std::string &sMessage) {
   WsjcppColorModifier yellow(WsjcppColorCode::FG_YELLOW);
-  WsjcppLog::add(yellow, "WARN",sTag, sMessage);
+  WsjcppLog::add(yellow, "WARN", sTag, sMessage);
 }
 
 void WsjcppLog::ok(const std::string &sTag, const std::string &sMessage) {
@@ -766,14 +756,15 @@ void WsjcppLog::setRotationPeriodInSec(long nRotationPeriodInSec) {
   WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logRotationPeriodInSeconds = nRotationPeriodInSec;
 }
 
-void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage) {
+void WsjcppLog::add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag,
+                    const std::string &sMessage) {
   WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.doLogRotateUpdateFilename();
 
   std::lock_guard<std::mutex> lock(WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logMutex);
   WsjcppColorModifier def(WsjcppColorCode::FG_DEFAULT);
 
-  std::string sLogMessage = WsjcppCore::getCurrentTimeForLogFormat() + ", " + WsjcppCore::getThreadId()
-    + " [" + sType + "] " + sTag + ": " + sMessage;
+  std::string sLogMessage = WsjcppCore::getCurrentTimeForLogFormat() + ", " + WsjcppCore::getThreadId() + " [" + sType +
+                            "] " + sTag + ": " + sMessage;
   std::cout << clr << sLogMessage << def << std::endl;
 
   WsjcppLog::g_WSJCPP_LOG_GLOBAL_CONF.logLastMessages.push_front(sLogMessage);
@@ -805,15 +796,15 @@ WsjcppResourceFile::WsjcppResourceFile() {
 // ---------------------------------------------------------------------
 // WsjcppResourcesManager
 
-std::vector<WsjcppResourceFile*> *g_pWsjcppResourceFiles = nullptr;
+std::vector<WsjcppResourceFile *> *g_pWsjcppResourceFiles = nullptr;
 
 void WsjcppResourcesManager::initGlobalVariables() {
   if (g_pWsjcppResourceFiles == nullptr) {
-    g_pWsjcppResourceFiles = new std::vector<WsjcppResourceFile*>();
+    g_pWsjcppResourceFiles = new std::vector<WsjcppResourceFile *>();
   }
 }
 
-void WsjcppResourcesManager::add(WsjcppResourceFile* pStorage) {
+void WsjcppResourcesManager::add(WsjcppResourceFile *pStorage) {
   WsjcppResourcesManager::initGlobalVariables();
   g_pWsjcppResourceFiles->push_back(pStorage);
 }
@@ -828,7 +819,7 @@ bool WsjcppResourcesManager::has(const std::string &sFilename) {
   return false;
 }
 
-WsjcppResourceFile* WsjcppResourcesManager::get(const std::string &sFilename) {
+WsjcppResourceFile *WsjcppResourcesManager::get(const std::string &sFilename) {
   WsjcppResourcesManager::initGlobalVariables();
   for (int i = 0; i < WsjcppResourcesManager::list().size(); i++) {
     if (WsjcppResourcesManager::list()[i]->getFilename() == sFilename) {
@@ -838,10 +829,9 @@ WsjcppResourceFile* WsjcppResourcesManager::get(const std::string &sFilename) {
   return nullptr;
 }
 
-const std::vector<WsjcppResourceFile*> &WsjcppResourcesManager::list() {
+const std::vector<WsjcppResourceFile *> &WsjcppResourcesManager::list() {
   return *g_pWsjcppResourceFiles;
 }
-
 
 /*
 bool WsjcppResourcesManager::make(const std::string &sWorkspace) {
@@ -944,7 +934,7 @@ std::string normalize_filepath(const std::string &path) {
           has_root = true;
         }
         fname = "";
-        if (i == nStrLen-1) {
+        if (i == nStrLen - 1) {
           vNames.push_back("");
         }
       } else {
@@ -952,7 +942,7 @@ std::string normalize_filepath(const std::string &path) {
       }
     }
     if (fname != "") {
-        vNames.push_back(fname);
+      vNames.push_back(fname);
     }
   }
 
@@ -961,7 +951,7 @@ std::string normalize_filepath(const std::string &path) {
   std::vector<std::string> result;
   for (size_t i = 0; i < nLen; i++) {
     std::string cur = vNames[i];
-    if (cur == "" && i == nLen-1) {
+    if (cur == "" && i == nLen - 1) {
       result.push_back(cur);
       continue;
     }
@@ -972,7 +962,7 @@ std::string normalize_filepath(const std::string &path) {
       continue;
     }
     if (cur == ".." && result.size() > 0) {
-      std::string sPrev = result[result.size()-1];
+      std::string sPrev = result[result.size() - 1];
       if (sPrev == "") {
         result.pop_back();
         result.push_back(cur);
@@ -988,7 +978,7 @@ std::string normalize_filepath(const std::string &path) {
 
   std::string ret = "";
   size_t nNewLen = result.size();
-  size_t nLastNew = nNewLen-1;
+  size_t nLastNew = nNewLen - 1;
   for (size_t i = 0; i < nNewLen; i++) {
     ret += result[i];
     if (i != nLastNew) {
@@ -1008,7 +998,7 @@ std::string extract_url_protocol(const std::string &value) {
   return ret;
 }
 
-bool recursive_copy_files(const std::string& source_dir, const std::string& target_dir, std::string &error) {
+bool recursive_copy_files(const std::string &source_dir, const std::string &target_dir, std::string &error) {
   if (!wsjcpp::dir_exists(source_dir)) {
     WsjcppLog::err("recursive_copy_files", "Source Dir '" + source_dir + "' did not exists");
     return false;
@@ -1091,13 +1081,13 @@ bool ends_with(const std::string &str, const std::string &end_str) {
 std::vector<std::string> directory_list(const std::string &dirpath) {
   std::vector<std::string> ret;
   std::string _dirpath = wsjcpp::normalize_filepath(dirpath);
-  if (_dirpath.size() > 0 && _dirpath[_dirpath.size()-1] == '/') {
-    _dirpath = _dirpath.substr(0, _dirpath.size()-1);
+  if (_dirpath.size() > 0 && _dirpath[_dirpath.size() - 1] == '/') {
+    _dirpath = _dirpath.substr(0, _dirpath.size() - 1);
   }
   if (!wsjcpp::dir_exists(_dirpath)) {
     return ret;
   }
-  for (auto& entry : std::filesystem::directory_iterator(_dirpath)) {
+  for (auto &entry : std::filesystem::directory_iterator(_dirpath)) {
     if (entry.is_directory()) {
       std::string path = entry.path();
       path.erase(0, _dirpath.size() + 1);
@@ -1121,13 +1111,13 @@ std::string generate_uuid() {
 
 std::string parent_dirpath(const std::string &filepath) {
   std::string _filepath = wsjcpp::normalize_filepath(filepath);
-  if (_filepath.size() > 0 && _filepath[_filepath.size()-1] == '/') {
-    _filepath = _filepath.substr(0, _filepath.size()-1);
+  if (_filepath.size() > 0 && _filepath[_filepath.size() - 1] == '/') {
+    _filepath = _filepath.substr(0, _filepath.size() - 1);
   }
   std::string filename = wsjcpp::extract_filename(_filepath);
   std::string _ret = _filepath.substr(0, _filepath.length() - filename.length());
-  if (_ret.size() > 0 && _ret[_ret.size()-1] == '/') {
-    _ret = _ret.substr(0, _ret.size()-1);
+  if (_ret.size() > 0 && _ret[_ret.size() - 1] == '/') {
+    _ret = _ret.substr(0, _ret.size() - 1);
   }
   return _ret;
 }
@@ -1166,7 +1156,7 @@ std::string to_snake_case(const std::string &name) {
   if (ret.size() > 1 && ret[0] == '_' && (ret[1] < '0' || ret[1] > '9')) {
     ret = ret.substr(1, ret.size() - 1);
   }
-  if (ret.size() > 0 && ret[ret.size()-1] == '_') {
+  if (ret.size() > 0 && ret[ret.size() - 1] == '_') {
     ret = ret.substr(0, ret.size() - 1);
   }
   return ret;
@@ -1257,7 +1247,7 @@ std::string extract_filename(const std::string &filepath) {
     if (filepath[i] == '/') {
       names.push_back(s);
       s = "";
-      if (i == nStrLen-1) {
+      if (i == nStrLen - 1) {
         names.push_back("");
       }
     } else {
@@ -1269,7 +1259,7 @@ std::string extract_filename(const std::string &filepath) {
   }
   std::string ret;
   if (names.size() > 0) {
-    ret = names[names.size()-1];
+    ret = names[names.size() - 1];
   }
   return ret;
 }
@@ -1277,7 +1267,7 @@ std::string extract_filename(const std::string &filepath) {
 int levenshtein_distance(const std::string &str1, const std::string &str2) {
   const std::size_t len1 = str1.length();
   const std::size_t len2 = str2.length();
-  std::vector<std::vector<unsigned int> > d(len1 + 1, std::vector<unsigned int>(len2 + 1));
+  std::vector<std::vector<unsigned int>> d(len1 + 1, std::vector<unsigned int>(len2 + 1));
 
   d[0][0] = 0;
   for (unsigned int i = 1; i <= len1; ++i) {
@@ -1289,7 +1279,8 @@ int levenshtein_distance(const std::string &str1, const std::string &str2) {
 
   for (unsigned int i = 1; i <= len1; ++i) {
     for (unsigned int j = 1; j <= len2; ++j) {
-      d[i][j] = std::min(std::min(d[i - 1][j] + 1, d[i][j - 1] + 1), (d[i - 1][j - 1] + (str1[i - 1] == str2[j - 1] ? 0 : 1)));
+      d[i][j] = std::min(std::min(d[i - 1][j] + 1, d[i][j - 1] + 1),
+                         (d[i - 1][j - 1] + (str1[i - 1] == str2[j - 1] ? 0 : 1)));
     }
   }
   return d[len1][len2];
@@ -1322,15 +1313,15 @@ bool change_current_process_privileges(int user_id, std::string &error) {
 }
 
 operation_system operation_system_platform() {
-  #ifdef _WIN32
-    return operation_system::WINDOWS;
-  #endif
-  #if defined (_MSC_VER)
-    return operation_system::WINDOWS;
-  #endif
-  #ifdef __unix__
-    return operation_system::LINUX;
-  #endif
+#ifdef _WIN32
+  return operation_system::WINDOWS;
+#endif
+#if defined(_MSC_VER)
+  return operation_system::WINDOWS;
+#endif
+#ifdef __unix__
+  return operation_system::LINUX;
+#endif
   return operation_system::UNKNOWN;
 }
 

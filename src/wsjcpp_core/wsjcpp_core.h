@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -31,21 +31,19 @@
 #define WSJCPP_CORE_VER_0_2
 #define WSJCPP_CORE_VER_0_2_7
 
-#include <string>
-#include <vector>
-#include <map>
-#include <mutex>
 #include <deque>
 #include <iostream>
+#include <map>
+#include <mutex>
+#include <string>
+#include <vector>
 
 class WsjcppFilePermissions {
 public:
   WsjcppFilePermissions();
-  WsjcppFilePermissions(
-    bool bOwnerReadFlag, bool bOwnerWriteFlag, bool bOwnerExecuteFlag,
-    bool bGroupReadFlag, bool bGroupWriteFlag, bool bGroupExecuteFlag,
-    bool bOtherReadFlag, bool bOtherWriteFlag, bool bOtherExecuteFlag
-  );
+  WsjcppFilePermissions(bool bOwnerReadFlag, bool bOwnerWriteFlag, bool bOwnerExecuteFlag, bool bGroupReadFlag,
+                        bool bGroupWriteFlag, bool bGroupExecuteFlag, bool bOtherReadFlag, bool bOtherWriteFlag,
+                        bool bOtherExecuteFlag);
   WsjcppFilePermissions(uint16_t nFilePermission);
 
   // owner flags
@@ -92,13 +90,8 @@ private:
 
 class WsjcppCore {
 public:
-  static bool init(
-    int argc, char** argv,
-    const std::string &sApplicationName,
-    const std::string &sApplicationVersion,
-    const std::string &sApplicationAuthor,
-    const std::string &sLibraryNameForExports
-  );
+  static bool init(int argc, char **argv, const std::string &sApplicationName, const std::string &sApplicationVersion,
+                   const std::string &sApplicationAuthor, const std::string &sLibraryNameForExports);
 
   static std::string extractDirpath(const std::string &sFullPath);
   static std::string getCurrentDirectory();
@@ -122,46 +115,48 @@ public:
   static bool removeFile(const std::string &sFilename);
   static bool copyFile(const std::string &sSourceFilename, const std::string &sTargetFilename);
 
-  static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
-  static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
-  static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ");
+  static std::string &ltrim(std::string &str, const std::string &chars = "\t\n\v\f\r ");
+  static std::string &rtrim(std::string &str, const std::string &chars = "\t\n\v\f\r ");
+  static std::string &trim(std::string &str, const std::string &chars = "\t\n\v\f\r ");
   static std::string toLower(const std::string &str);
-  static std::string toUpper(const std::string& str);
-
+  static std::string toUpper(const std::string &str);
 
   static void initRandom();
   static std::string uint2hexString(unsigned int n);
   static unsigned long convertVoidToULong(void *p);
   static std::string getPointerAsHex(void *p);
-  static bool getEnv(const std::string& sName, std::string& sValue);
+  static bool getEnv(const std::string &sName, std::string &sValue);
 
-  static std::string encodeUriComponent(const std::string& sValue);
-  static std::string decodeUriComponent(const std::string& sValue);
+  static std::string encodeUriComponent(const std::string &sValue);
+  static std::string decodeUriComponent(const std::string &sValue);
 
   static std::string getHumanSizeBytes(long nBytes);
 
-  static bool setFilePermissions(const std::string& sFilePath, const WsjcppFilePermissions &filePermissions, std::string& sError);
-  static bool getFilePermissions(const std::string& sFilePath, WsjcppFilePermissions &filePermissions, std::string& sError);
+  static bool setFilePermissions(const std::string &sFilePath, const WsjcppFilePermissions &filePermissions,
+                                 std::string &sError);
+  static bool getFilePermissions(const std::string &sFilePath, WsjcppFilePermissions &filePermissions,
+                                 std::string &sError);
 };
 
 enum WsjcppColorCode { // deprecated, see https://github.com/sea5kg/sea5kg-logger
-  FG_RED      = 31,
-  FG_GREEN    = 32,
-  FG_YELLOW   = 93,
-  FG_BLUE     = 34,
-  FG_DEFAULT  = 39,
-  BG_RED      = 41,
-  BG_GREEN    = 42,
-  BG_BLUE     = 44,
-  BG_DEFAULT  = 49
+  FG_RED = 31,
+  FG_GREEN = 32,
+  FG_YELLOW = 93,
+  FG_BLUE = 34,
+  FG_DEFAULT = 39,
+  BG_RED = 41,
+  BG_GREEN = 42,
+  BG_BLUE = 44,
+  BG_DEFAULT = 49
 };
 
 class WsjcppColorModifier { // deprecated, see https://github.com/sea5kg/sea5kg-logger
-WsjcppColorCode code;
+  WsjcppColorCode code;
+
 public:
-  WsjcppColorModifier(WsjcppColorCode pCode) : code(pCode) {}
-  friend std::ostream&
-  operator<<(std::ostream& os, const WsjcppColorModifier& mod) {
+  WsjcppColorModifier(WsjcppColorCode pCode) : code(pCode) {
+  }
+  friend std::ostream &operator<<(std::ostream &os, const WsjcppColorModifier &mod) {
     return os << "\033[" << mod.code << "m";
   }
 };
@@ -198,7 +193,8 @@ public:
   static void setRotationPeriodInSec(long nRotationPeriodInSec);
 
 private:
-  static void add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag, const std::string &sMessage);
+  static void add(WsjcppColorModifier &clr, const std::string &sType, const std::string &sTag,
+                  const std::string &sMessage);
 };
 
 // ---------------------------------------------------------------------
@@ -213,19 +209,18 @@ public:
   virtual const char *getBuffer() const = 0;
 };
 
-
 // ---------------------------------------------------------------------
 // WsjcppResourcesManager
 
-extern std::vector<WsjcppResourceFile*> *g_pWsjcppResourceFiles;
+extern std::vector<WsjcppResourceFile *> *g_pWsjcppResourceFiles;
 
 class WsjcppResourcesManager {
 public:
   static void initGlobalVariables();
-  static void add(WsjcppResourceFile*);
-  static const std::vector<WsjcppResourceFile*> &list();
+  static void add(WsjcppResourceFile *);
+  static const std::vector<WsjcppResourceFile *> &list();
   static bool has(const std::string &sFilename);
-  static WsjcppResourceFile* get(const std::string &sFilename);
+  static WsjcppResourceFile *get(const std::string &sFilename);
   static bool make(const std::string &sWorkspace);
   // static bool createFolders(const std::string &sWorkspace);
   // static bool extractFiles(const std::string &sWorkspace);
@@ -233,8 +228,8 @@ public:
 
 // ---------------------------------------------------------------------
 // Registry WsjcppResourceFile
-#define REGISTRY_WSJCPP_RESOURCE_FILE( classname ) \
-  static classname * pRegistryWsjcppResourceFile ## classname = new classname(); \
+#define REGISTRY_WSJCPP_RESOURCE_FILE(classname)                                                                       \
+  static classname *pRegistryWsjcppResourceFile##classname = new classname();
 
 namespace wsjcpp {
 
@@ -248,7 +243,7 @@ public:
 };
 
 std::string normalize_filepath(const std::string &path);
-std::string extract_url_protocol(const std::string& sValue);
+std::string extract_url_protocol(const std::string &sValue);
 bool recursive_copy_files(const std::string &source_dir, const std::string &target_dir, std::string &error);
 bool recursive_remove_dir(const std::string &dirpath, std::string &error);
 bool starts_with(const std::string &str, const std::string &start_str);
@@ -267,11 +262,7 @@ std::string extract_filename(const std::string &filepath);
 int levenshtein_distance(const std::string &str1, const std::string &str2);
 bool user_is_root();
 bool change_current_process_privileges(int user_id, std::string &error);
-enum class operation_system {
-  UNKNOWN,
-  LINUX,
-  WINDOWS
-};
+enum class operation_system { UNKNOWN, LINUX, WINDOWS };
 operation_system operation_system_platform();
 bool is_linux();
 bool is_windows();

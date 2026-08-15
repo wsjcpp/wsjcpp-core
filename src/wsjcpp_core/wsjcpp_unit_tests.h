@@ -20,15 +20,15 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
 #ifndef WSJCPP_UNIT_TESTS_H
 #define WSJCPP_UNIT_TESTS_H
 
-#include <wsjcpp_core.h>
 #include <sstream>
+#include <wsjcpp_core.h>
 
 class WsjcppUnitTestBase { // deprecated
 public:
@@ -41,11 +41,12 @@ public:
   virtual bool doBeforeTest() = 0;
   virtual void executeTest() = 0;
   virtual bool doAfterTest() = 0;
+
 protected:
   std::string TAG;
 
   bool compareD(const std::string &sMark, double nValue, double nExpected);
-  template<typename T1, typename T2> bool compare(const std::string &sMark, T1 tGotValue, T2 tExpectedValue) {
+  template <typename T1, typename T2> bool compare(const std::string &sMark, T1 tGotValue, T2 tExpectedValue) {
     if (tGotValue != tExpectedValue) {
       std::stringstream ss;
       ss << " {mark: " << sMark << "} Expected '" << tExpectedValue << "', but got '" << tGotValue << "'";
@@ -54,22 +55,21 @@ protected:
     }
     return true;
   }
+
 private:
   bool m_bTestResult;
   std::string m_sTestName;
 };
 
-extern std::vector<WsjcppUnitTestBase*> *g_pWsjcppUnitTests;
+extern std::vector<WsjcppUnitTestBase *> *g_pWsjcppUnitTests;
 
 class WsjcppUnitTests {
 public:
   static void initGlobalVariables();
-  static void addUnitTest(const std::string &sTestName, WsjcppUnitTestBase* pUnitTest);
+  static void addUnitTest(const std::string &sTestName, WsjcppUnitTestBase *pUnitTest);
 };
 
 // RegistryCmdHandler
-#define REGISTRY_WSJCPP_UNIT_TEST( classname ) \
-  static classname * pRegistryWsjcppUnitTest ## classname = new classname(); \
-
+#define REGISTRY_WSJCPP_UNIT_TEST(classname) static classname *pRegistryWsjcppUnitTest##classname = new classname();
 
 #endif // WSJCPP_UNIT_TESTS_H
