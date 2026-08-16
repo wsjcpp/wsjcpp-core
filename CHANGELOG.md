@@ -4,6 +4,13 @@
 
 - Added `wsjcpp::is_valid_ip4`
 - Added `wsjcpp::is_valid_ip6`
+- Added `wsjcpp::is_valid_date`
+- Added `wsjcpp::is_valid_time24`
+- Added `wsjcpp::is_valid_url_protocol`
+- Added `wsjcpp::is_valid_domain_name`
+- Added `wsjcpp::is_valid_port`
+- Added `wsjcpp::is_valid_port`
+- Added `wsjcpp::is_valid_base64`
 
 ## [v0.3.0] - 2026-07-25 (2026 Aug 15)
 

@@ -96,8 +96,14 @@ Example output
 | `wsjcpp::is_windows` | return true if current platform is windows. | [Code-Example](#wsjcppis_windows) |
 | `wsjcpp::padding_right` | Padding string right. | [Code-Example](#wsjcpppadding_right) |
 | `wsjcpp::padding_left` | Padding string left. | [Code-Example](#wsjcpppadding_left) |
-| `wsjcpp::is_valid_ip4` | check string contains valid IPv4 format. | [Code-Example](#wsjcppis_valid_ip4) |
-| `wsjcpp::is_valid_ip6` | check string contains valid IPv6 format. | [Code-Example](#wsjcppis_valid_ip6) |
+| `wsjcpp::is_valid_ip4` | Check string contains valid IPv4 format. | [Code-Example](#wsjcppis_valid_ip4) |
+| `wsjcpp::is_valid_ip6` | Check string contains valid IPv6 format. | [Code-Example](#wsjcppis_valid_ip6) |
+| `wsjcpp::is_valid_date` | Check string contains valid Date format. | [Code-Example](#wsjcppis_valid_date) |
+| `wsjcpp::is_valid_time24` | Check string contains valid Time (H24) format. | [Code-Example](#wsjcppis_valid_time24) |
+| `wsjcpp::is_valid_url_protocol` | Check string contains valid URL Protocol. | [Code-Example](#wsjcppis_valid_url_protocol) |
+| `wsjcpp::is_valid_domain_name` | Check string contains valid Domain-Name format. | [Code-Example](#wsjcppis_valid_domain_name) |
+| `wsjcpp::is_valid_port` | Check string or int contains valid IP Port format. | [Code-Example](#wsjcppis_valid_port) |
+| `wsjcpp::is_valid_base64` | Check string contains valid base64 format. | [Code-Example](#wsjcppis_valid_port_int) |
 
 ### wsjcpp::normalize_filepath
 
@@ -618,6 +624,90 @@ Check string contains valid IPv6 format.
 ```cpp
 std::string error;
 if (wsjcpp::is_valid_ip6("2607:f8b0:4002:c08:0:0:0:8b", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_date
+
+Check string contains valid Date format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_date("2020-01-01", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_date
+
+Check string contains valid Date format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_date("2020-01-01", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_time24
+
+Check string contains valid time HH:MM:SS format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_time24("01:02:03", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_url_protocol
+
+Check string contains valid url protocol.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_url_protocol("http", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_domain_name
+
+Check string contains valid domain-name format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_domain_name("some.ru", error)) {
+  std::cout << "Valid" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_port
+
+Check string contains valid port ip format.
+
+```cpp
+std::string error;
+if (!wsjcpp::is_valid_port(111888, error)) {
+  std::cout << "Not valid port value" << std::endl;
+}
+```
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_port("8080", error)) {
+  std::cout << "Valid port" << std::endl;
+}
+```
+
+### wsjcpp::is_valid_base64
+
+Check string contains valid base64 format.
+
+```cpp
+std::string error;
+if (wsjcpp::is_valid_base64("O2Rrc2Y7YXNsa2RmMQ==", error)) {
   std::cout << "Valid" << std::endl;
 }
 ```
