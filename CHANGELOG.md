@@ -11,6 +11,7 @@
 - Added `wsjcpp::is_valid_port`
 - Added `wsjcpp::is_valid_port`
 - Added `wsjcpp::is_valid_base64`
+- Added `wsjcpp::validator` classes from wsjcpp-validators
 
 ## [v0.3.0] - 2026-07-25 (2026 Aug 15)
 

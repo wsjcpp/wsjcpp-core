@@ -20,24 +20,21 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-#include <vector>
 #include <wsjcpp_core.h>
+
+#include <vector>
 
 int main() {
   int found_errors = 0;
   std::string error;
 
   struct LTest {
-    LTest(
-      const std::vector<std::string> &source,
-      const std::string &delimeter,
-      const std::string &expected
-    ) : source(source), delimeter(delimeter), expected(expected) {
-    };
+    LTest(const std::vector<std::string> &source, const std::string &delimeter, const std::string &expected)
+        : source(source), delimeter(delimeter), expected(expected) {};
     std::vector<std::string> source;
     std::string delimeter;
     std::string expected;

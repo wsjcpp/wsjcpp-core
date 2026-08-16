@@ -20,34 +20,33 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
   std::map<std::string, std::string> map_paths;
-  map_paths.insert(std::pair<std::string, std::string>("",""));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/bin/some","/usr/local/bin/some"));
-  map_paths.insert(std::pair<std::string, std::string>("./bin/some","./bin/some"));
-  map_paths.insert(std::pair<std::string, std::string>(".//../bin/some","./../bin/some"));
-  map_paths.insert(std::pair<std::string, std::string>(".//../bin/some/../","./../bin/"));
-  map_paths.insert(std::pair<std::string, std::string>(".//../bin/some/..","./../bin"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/./bin/some","/usr/local/bin/some"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/../bin/some","/usr/bin/some"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some","/usr/bin/some"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some/","/usr/bin/some/"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/..//bin/./some/","/usr/bin/some/"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/../../bin/./some/","/bin/some/"));
-  map_paths.insert(std::pair<std::string, std::string>("/usr/local/../../../bin/./some/","/bin/some/"));
-  map_paths.insert(std::pair<std::string, std::string>(".//","./"));
+  map_paths.insert(std::pair<std::string, std::string>("", ""));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/bin/some", "/usr/local/bin/some"));
+  map_paths.insert(std::pair<std::string, std::string>("./bin/some", "./bin/some"));
+  map_paths.insert(std::pair<std::string, std::string>(".//../bin/some", "./../bin/some"));
+  map_paths.insert(std::pair<std::string, std::string>(".//../bin/some/../", "./../bin/"));
+  map_paths.insert(std::pair<std::string, std::string>(".//../bin/some/..", "./../bin"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/./bin/some", "/usr/local/bin/some"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/../bin/some", "/usr/bin/some"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some", "/usr/bin/some"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some/", "/usr/bin/some/"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/..//bin/./some/", "/usr/bin/some/"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/../../bin/./some/", "/bin/some/"));
+  map_paths.insert(std::pair<std::string, std::string>("/usr/local/../../../bin/./some/", "/bin/some/"));
+  map_paths.insert(std::pair<std::string, std::string>(".//", "./"));
   map_paths.insert(std::pair<std::string, std::string>("./wsjcpp.hold.yml", "./wsjcpp.hold.yml"));
-  map_paths.insert(std::pair<std::string, std::string>("/","/"));
-  map_paths.insert(std::pair<std::string, std::string>(" /"," /"));
+  map_paths.insert(std::pair<std::string, std::string>("/", "/"));
+  map_paths.insert(std::pair<std::string, std::string>(" /", " /"));
   map_paths.insert(std::pair<std::string, std::string>("/../db/flags_live.db", "/db/flags_live.db"));
   map_paths.insert(std::pair<std::string, std::string>("//../db/flags_live.db", "/db/flags_live.db"));
   map_paths.insert(std::pair<std::string, std::string>("//../../../etc/passwd", "/etc/passwd"));
@@ -60,8 +59,9 @@ int main() {
     std::string _expected = it->second;
     std::string _got = wsjcpp::normalize_filepath(_source);
     if (_got != _expected) {
-        found_errors++;
-        std::cerr << "ERROR: Expected '" << _expected << "', but got '" << _got << "' from '" << _source << "'" << std::endl;
+      found_errors++;
+      std::cerr << "ERROR: Expected '" << _expected << "', but got '" << _got << "' from '" << _source << "'"
+                << std::endl;
     }
   }
   if (found_errors > 0) {
