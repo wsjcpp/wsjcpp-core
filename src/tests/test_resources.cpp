@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -32,7 +32,7 @@ int main() {
   std::string error;
 
   // std::vector<ResourceFile*> &list();
-  WsjcppResourceFile* file = WsjcppResourcesManager::get("./src/resources/html/images/favicon.svg");
+  WsjcppResourceFile *file = WsjcppResourcesManager::get("./src/resources/html/images/favicon.svg");
 
   if (file == nullptr) {
     std::cerr << "Could not load file from resources" << std::endl;

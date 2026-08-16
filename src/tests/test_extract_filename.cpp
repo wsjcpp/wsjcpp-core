@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -32,21 +32,21 @@ int main() {
   std::string error;
 
   std::map<std::string, std::string> tests;
-  tests.insert(std::pair<std::string, std::string>("",""));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/bin/some","some"));
-  tests.insert(std::pair<std::string, std::string>("./bin/some","some"));
-  tests.insert(std::pair<std::string, std::string>(".//../bin/some","some"));
-  tests.insert(std::pair<std::string, std::string>(".//../bin/some/../",""));
-  tests.insert(std::pair<std::string, std::string>(".//../bin/some/..",".."));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/./bin/some","some"));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/../bin/some","some"));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some","some"));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some/.","."));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/..//bin/./some/",""));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/../../bin/./some/",""));
-  tests.insert(std::pair<std::string, std::string>("/usr/local/../../../bin/./some/",""));
-  tests.insert(std::pair<std::string, std::string>(".//",""));
-  for (auto it = tests.begin(); it != tests.end(); it++ ) {
+  tests.insert(std::pair<std::string, std::string>("", ""));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/bin/some", "some"));
+  tests.insert(std::pair<std::string, std::string>("./bin/some", "some"));
+  tests.insert(std::pair<std::string, std::string>(".//../bin/some", "some"));
+  tests.insert(std::pair<std::string, std::string>(".//../bin/some/../", ""));
+  tests.insert(std::pair<std::string, std::string>(".//../bin/some/..", ".."));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/./bin/some", "some"));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/../bin/some", "some"));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some", "some"));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/..//bin/some/.", "."));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/..//bin/./some/", ""));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/../../bin/./some/", ""));
+  tests.insert(std::pair<std::string, std::string>("/usr/local/../../../bin/./some/", ""));
+  tests.insert(std::pair<std::string, std::string>(".//", ""));
+  for (auto it = tests.begin(); it != tests.end(); it++) {
     std::string source = it->first;
     std::string expected = it->second;
     std::string got = wsjcpp::extract_filename(source);

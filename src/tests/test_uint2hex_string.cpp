@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -31,11 +31,7 @@ int main() {
   int found_errors = 0;
 
   struct LTest {
-    LTest(
-      unsigned int source,
-      const std::string &expected
-    ) : source(source), expected(expected) {
-    };
+    LTest(unsigned int source, const std::string &expected) : source(source), expected(expected) {};
     unsigned int source;
     std::string expected;
   };
@@ -45,12 +41,13 @@ int main() {
   tests.push_back(LTest(4123123123, "f5c1ddb3"));
 
   for (int i = 0; i < tests.size(); i++) {
-      LTest test = tests[i];
-      std::string got = WsjcppCore::uint2hexString(test.source);
-      if (test.expected != got) {
-        found_errors++;
-        std::cerr << "Expected '" << test.expected << "', but got '" << got << "' from '" << test.source << "'" << std::endl;
-      }
+    LTest test = tests[i];
+    std::string got = WsjcppCore::uint2hexString(test.source);
+    if (test.expected != got) {
+      found_errors++;
+      std::cerr << "Expected '" << test.expected << "', but got '" << got << "' from '" << test.source << "'"
+                << std::endl;
+    }
   }
 
   if (found_errors > 0) {

@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -41,10 +40,7 @@ int main() {
   }
 
   struct LTest {
-    LTest(
-      const std::string &dirpath,
-      const std::vector<std::string> &sub_paths
-    ) {
+    LTest(const std::string &dirpath, const std::vector<std::string> &sub_paths) {
       this->dirpath = dirpath;
       this->sub_paths = sub_paths;
     };
@@ -52,24 +48,12 @@ int main() {
     std::vector<std::string> sub_paths;
   };
   std::vector<LTest> tests;
-  tests.push_back(LTest("./data/makedirpaths/dir1/dir2", {
-    "./data",
-    "./data/makedirpaths",
-    "./data/makedirpaths/dir1",
-    "./data/makedirpaths/dir1/dir2"
-  }));
-  tests.push_back(LTest("./data/makedirpaths/dir1/dir3", {
-    "./data",
-    "./data/makedirpaths",
-    "./data/makedirpaths/dir1",
-    "./data/makedirpaths/dir1/dir3"
-  }));
-  tests.push_back(LTest("./data/makedirpaths/dir1/dir4/", {
-    "./data",
-    "./data/makedirpaths",
-    "./data/makedirpaths/dir1",
-    "./data/makedirpaths/dir1/dir4"
-  }));
+  tests.push_back(LTest("./data/makedirpaths/dir1/dir2", {"./data", "./data/makedirpaths", "./data/makedirpaths/dir1",
+                                                          "./data/makedirpaths/dir1/dir2"}));
+  tests.push_back(LTest("./data/makedirpaths/dir1/dir3", {"./data", "./data/makedirpaths", "./data/makedirpaths/dir1",
+                                                          "./data/makedirpaths/dir1/dir3"}));
+  tests.push_back(LTest("./data/makedirpaths/dir1/dir4/", {"./data", "./data/makedirpaths", "./data/makedirpaths/dir1",
+                                                           "./data/makedirpaths/dir1/dir4"}));
 
   for (int i = 0; i < tests.size(); i++) {
     std::string dirpath = tests[i].dirpath;

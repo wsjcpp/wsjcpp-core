@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -34,10 +33,7 @@ int main() {
   std::string error;
 
   struct LTest {
-    LTest(
-      const std::string &name,
-      const std::string &snake_name
-    ) {
+    LTest(const std::string &name, const std::string &snake_name) {
       this->name = name;
       this->snake_name = snake_name;
     };
@@ -57,7 +53,8 @@ int main() {
   tests.push_back(LTest("A____", "a"));
   tests.push_back(LTest("a", "a"));
   tests.push_back(LTest("//a/b/c/d/////", "a_b_c_d"));
-  tests.push_back(LTest("https://github.com/wsjcpp/wsjcpp-core/issues/24", "https_github_com_wsjcpp_wsjcpp_core_issues_24"));
+  tests.push_back(
+      LTest("https://github.com/wsjcpp/wsjcpp-core/issues/24", "https_github_com_wsjcpp_wsjcpp_core_issues_24"));
 
   for (int i = 0; i < tests.size(); i++) {
     LTest test = tests[i];

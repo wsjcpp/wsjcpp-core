@@ -35,9 +35,9 @@
 #include <iostream>
 #include <map>
 #include <mutex>
+#include <regex>
 #include <string>
 #include <vector>
-#include <regex>
 
 class WsjcppFilePermissions {
 public:
@@ -278,7 +278,6 @@ bool is_valid_domain_name(const std::string &value, std::string &error);
 bool is_valid_port(const std::string &value, std::string &error);
 bool is_valid_port(int nValue, std::string &error);
 bool is_valid_base64(const std::string &value, std::string &error);
-
 
 // helpful validators
 

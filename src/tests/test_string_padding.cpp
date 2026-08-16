@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -31,21 +31,10 @@ int main() {
   int found_errors = 0;
 
   struct LTest {
-    LTest(
-      const std::string &source,
-      char pad_char,
-      int pad_left,
-      const std::string &expected_pad_left,
-      int pad_right,
-      const std::string &expected_pad_right
-    ) :
-      source(source),
-      pad_char(pad_char),
-      pad_left(pad_left),
-      expected_pad_left(expected_pad_left),
-      pad_right(pad_right),
-      expected_pad_right(expected_pad_right) {
-    };
+    LTest(const std::string &source, char pad_char, int pad_left, const std::string &expected_pad_left, int pad_right,
+          const std::string &expected_pad_right)
+        : source(source), pad_char(pad_char), pad_left(pad_left), expected_pad_left(expected_pad_left),
+          pad_right(pad_right), expected_pad_right(expected_pad_right) {};
     std::string source;
     char pad_char;
     int pad_left;
@@ -62,12 +51,14 @@ int main() {
     std::string got_pad_left = wsjcpp::padding_left(test.source, test.pad_char, test.pad_left);
     if (test.expected_pad_left != got_pad_left) {
       found_errors++;
-      std::cerr << "(pad_left) Expected '" << test.expected_pad_left << "', but got '" << got_pad_left << "' from '" << test.source << "'" << std::endl;
+      std::cerr << "(pad_left) Expected '" << test.expected_pad_left << "', but got '" << got_pad_left << "' from '"
+                << test.source << "'" << std::endl;
     }
     std::string got_pad_right = wsjcpp::padding_right(test.source, test.pad_char, test.pad_right);
     if (test.expected_pad_right != got_pad_right) {
       found_errors++;
-      std::cerr << "(padding_right) Expected '" << test.expected_pad_right << "', but got '" << got_pad_right << "' from '" << test.source << "'" << std::endl;
+      std::cerr << "(padding_right) Expected '" << test.expected_pad_right << "', but got '" << got_pad_right
+                << "' from '" << test.source << "'" << std::endl;
     }
   }
 

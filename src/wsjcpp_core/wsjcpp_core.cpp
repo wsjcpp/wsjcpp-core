@@ -1357,7 +1357,6 @@ std::string padding_left(const std::string &source, char pad_char, size_t length
   return ret + source;
 }
 
-
 bool is_valid_ip4(const std::string &value, std::string &error) {
   int n = 0;
   std::string s[4] = {"", "", "", ""};
@@ -1401,7 +1400,6 @@ bool is_valid_ip6(const std::string &value, std::string &error) {
   }
   return isValid;
 }
-
 
 bool is_valid_date(const std::string &value, std::string &error) {
   int nSize = value.size();
@@ -1605,8 +1603,7 @@ bool is_valid_port(int nValue, std::string &error) {
 }
 
 bool is_valid_url_protocol(const std::string &value, std::string &error) {
-  if (value != "http" && value != "https" && value != "ws" && value != "wss" && value != "ftp" &&
-      value != "ssl") {
+  if (value != "http" && value != "https" && value != "ws" && value != "wss" && value != "ftp" && value != "ssl") {
     error = "Unexpected protocol '" + value + "'";
     return false;
   }
@@ -1656,8 +1653,7 @@ bool validator_date::is_valid(const std::string &value, std::string &error) {
   return wsjcpp::is_valid_date(value, error);
 }
 
-validator_regexp::validator_regexp(const std::string &name, const std::string &_regexp)
-    : validator<std::string>(name) {
+validator_regexp::validator_regexp(const std::string &name, const std::string &_regexp) : validator<std::string>(name) {
   m_sValidator = _regexp;
   m_rxValidator = std::regex(_regexp);
 }
@@ -1692,16 +1688,15 @@ bool validator_str_list::is_valid(const std::string &value, std::string &error) 
 
 validator_email::validator_email()
     : validator_regexp("email", "^[0-9a-zA-Z]{1}[0-9a-zA-Z-._]*[0-9a-zA-Z]{1}@[0-9a-zA-Z]{1}"
-                                            "[-.0-9a-zA-Z]*[0-9a-zA-Z]{1}\\.[a-zA-Z]{2,6}$") {
+                                "[-.0-9a-zA-Z]*[0-9a-zA-Z]{1}\\.[a-zA-Z]{2,6}$") {
 }
 
 validator_uuid::validator_uuid()
     : validator_regexp("uuid", "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-"
-                                           "f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$") {
+                               "f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$") {
 }
 
-validator_strlen::validator_strlen(int min_length, int max_length)
-    : validator<std::string>("string_length") {
+validator_strlen::validator_strlen(int min_length, int max_length) : validator<std::string>("string_length") {
   m_min_length = min_length;
   m_max_length = max_length;
 }
@@ -1719,8 +1714,7 @@ bool validator_strlen::is_valid(const std::string &value, std::string &error) {
   return true;
 }
 
-validator_jwt::validator_jwt()
-    : validator_regexp("jwt", "^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.?[A-Za-z0-9-_.+/=]*$") {
+validator_jwt::validator_jwt() : validator_regexp("jwt", "^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.?[A-Za-z0-9-_.+/=]*$") {
 }
 
 validator_time24::validator_time24() : validator<std::string>("time_h24") {

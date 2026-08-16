@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -56,11 +55,13 @@ int main() {
     std::string testBaseName = "test#" + std::to_string(i) + " (" + test.sName + ")";
     if (bResult != test.bExpectedResult) {
       found_errors++;
-      std::cerr << "FAILED " << testBaseName << "-result expected: '" << test.bExpectedResult << "', but got '" << bResult << "' " << std::endl;
+      std::cerr << "FAILED " << testBaseName << "-result expected: '" << test.bExpectedResult << "', but got '"
+                << bResult << "' " << std::endl;
     }
     if (sValue != test.sExpectedValue) {
       found_errors++;
-      std::cerr << "FAILED " << testBaseName << "-value expected: '" << test.sExpectedValue << "', but got '" << sValue << "' " << std::endl;
+      std::cerr << "FAILED " << testBaseName << "-value expected: '" << test.sExpectedValue << "', but got '" << sValue
+                << "' " << std::endl;
     }
   }
 

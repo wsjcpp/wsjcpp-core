@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -62,7 +61,8 @@ int main() {
   }
   if (nBufferSize != sExpected.length()) {
     found_errors++;
-    std::cerr << "FAILED Size of read expected: " << sExpected.length() << ", but got " << nBufferSize << " " << std::endl;
+    std::cerr << "FAILED Size of read expected: " << sExpected.length() << ", but got " << nBufferSize << " "
+              << std::endl;
   }
   int nMin = std::min(nBufferSize, (int)sExpected.length());
   for (int i = 0; i < nMin; i++) {
@@ -70,7 +70,8 @@ int main() {
     char c_expected = sExpected[i];
     if (c_expected != c_got) {
       found_errors++;
-      std::cerr << "FAILED Char of position " + std::to_string(i) + ", expected: '" << c_expected << "', but got '" << c_got << "' " << std::endl;
+      std::cerr << "FAILED Char of position " + std::to_string(i) + ", expected: '" << c_expected << "', but got '"
+                << c_got << "' " << std::endl;
     }
   }
 

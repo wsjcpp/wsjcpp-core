@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -31,8 +31,9 @@ int main() {
   int found_errors = 0;
   std::string error;
   struct LineTest {
-    LineTest(std::string s1, std::string s2, int nExpectedDistance) 
-        : s1(s1), s2(s2), nExpectedDistance(nExpectedDistance) {}
+    LineTest(std::string s1, std::string s2, int nExpectedDistance)
+        : s1(s1), s2(s2), nExpectedDistance(nExpectedDistance) {
+    }
     std::string s1;
     std::string s2;
     int nExpectedDistance;
@@ -51,7 +52,8 @@ int main() {
     int got_distance = wsjcpp::levenshtein_distance(test.s1, test.s2);
     if (got_distance != test.nExpectedDistance) {
       found_errors++;
-      std::cerr << "Expected " << test.nExpectedDistance << ", but got " << got_distance << " for '" << test.s1 << "' and '" << test.s2 << "'" << std::endl;
+      std::cerr << "Expected " << test.nExpectedDistance << ", but got " << got_distance << " for '" << test.s1
+                << "' and '" << test.s2 << "'" << std::endl;
     }
   }
 

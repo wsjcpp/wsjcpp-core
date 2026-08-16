@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -32,11 +32,7 @@ int main() {
   std::string error;
 
   struct LTest {
-    LTest(
-        const std::string &source,
-        const std::string &expected
-    ) : source(source), expected(expected) {
-    };
+    LTest(const std::string &source, const std::string &expected) : source(source), expected(expected) {};
     std::string source;
     std::string expected;
   };
@@ -50,7 +46,8 @@ int main() {
     std::string got = WsjcppCore::decodeUriComponent(test.source);
     if (test.expected != got) {
       found_errors++;
-      std::cerr << "Expected '" << test.expected << "', but got '" << got << "' from '" << test.source << "'" << std::endl;
+      std::cerr << "Expected '" << test.expected << "', but got '" << got << "' from '" << test.source << "'"
+                << std::endl;
     }
   }
 

@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -34,10 +33,7 @@ int main() {
   std::string error;
 
   struct LTest {
-    LTest(
-      const std::string &filepath,
-      const std::string &expected_parent_dirpath
-    ) {
+    LTest(const std::string &filepath, const std::string &expected_parent_dirpath) {
       this->filepath = filepath;
       this->expected_parent_dirpath = expected_parent_dirpath;
     };

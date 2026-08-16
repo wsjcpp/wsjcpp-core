@@ -20,48 +20,42 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-#include <string.h>
-#include <iostream>
-#include <algorithm>
 #include "wsjcpp_core.h"
+#include <algorithm>
+#include <iostream>
+#include <string.h>
 
-int main(int argc, char* argv[]) {
-    const std::string TAG = "MAIN";
-    std::string appName = "wsjcpp-core"; // std::string(WSJCPP_APP_NAME);
-    std::string appVersion = "..."; // std::string(WSJCPP_APP_VERSION);
+int main(int argc, char *argv[]) {
+  const std::string TAG = "MAIN";
+  std::string appName = "wsjcpp-core"; // std::string(WSJCPP_APP_NAME);
+  std::string appVersion = "...";      // std::string(WSJCPP_APP_VERSION);
 
-    // WsjcppLog::setEnableLogFile(false);
-    WsjcppLog::setLogDirectory(".logs");
-    WsjcppLog::setPrefixLogFile("wsjcpp_core");
+  // WsjcppLog::setEnableLogFile(false);
+  WsjcppLog::setLogDirectory(".logs");
+  WsjcppLog::setPrefixLogFile("wsjcpp_core");
 
-    WsjcppLog::info(TAG, "Hello info");
-    WsjcppLog::err(TAG, "Hello err");
-    WsjcppLog::warn(TAG, "Hello warn");
-    WsjcppLog::ok(TAG, "Hello ok");
+  WsjcppLog::info(TAG, "Hello info");
+  WsjcppLog::err(TAG, "Hello err");
+  WsjcppLog::warn(TAG, "Hello warn");
+  WsjcppLog::ok(TAG, "Hello ok");
 
-    WsjcppCore::init(
-        argc, argv,
-        std::string(appName),
-        std::string(appVersion),
-        "Evgenii Sopov",
-        ""
-    );
-    std::string error;
-    if (wsjcpp::dir_exists("./tmp2")) {
-        if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
-            std::cerr << "recursive_remove_dir error: " << error << std::endl;
-        }
-    }
-    if (!wsjcpp::recursive_copy_files("./tmp", "./tmp2", error)) {
-        std::cerr << "recursive_copy_files error: " << error << std::endl;
-    }
+  WsjcppCore::init(argc, argv, std::string(appName), std::string(appVersion), "Evgenii Sopov", "");
+  std::string error;
+  if (wsjcpp::dir_exists("./tmp2")) {
     if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
-        std::cerr << "recursive_remove_dir error: " << error << std::endl;
+      std::cerr << "recursive_remove_dir error: " << error << std::endl;
     }
-    WsjcppCore::getThreadId();
-    return 0;
+  }
+  if (!wsjcpp::recursive_copy_files("./tmp", "./tmp2", error)) {
+    std::cerr << "recursive_copy_files error: " << error << std::endl;
+  }
+  if (!wsjcpp::recursive_remove_dir("./tmp2", error)) {
+    std::cerr << "recursive_remove_dir error: " << error << std::endl;
+  }
+  WsjcppCore::getThreadId();
+  return 0;
 }

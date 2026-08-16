@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -35,14 +34,8 @@ int main() {
   std::string root_dir = wsjcpp::normalize_filepath(WsjcppCore::getCurrentDirectory() + "/../../../../");
 
   struct LTest {
-    LTest(
-      const std::string &test_name,
-      const std::string &expected_str,
-      uint16_t expected_int16
-    ) : test_name(test_name),
-      expected_str(expected_str),
-      expected_int16(expected_int16)
-    {
+    LTest(const std::string &test_name, const std::string &expected_str, uint16_t expected_int16)
+        : test_name(test_name), expected_str(expected_str), expected_int16(expected_int16) {
       if (expected_str.length() != 10) {
         throw std::runtime_error("expected_str.length() != 9");
       }
@@ -57,10 +50,11 @@ int main() {
       other_write_flag = expected_str[8] == 'w';
       other_execute_flag = expected_str[9] == 'x';
     };
-    void check (WsjcppFilePermissions &perm, int &found_errors) {
+    void check(WsjcppFilePermissions &perm, int &found_errors) {
       if (perm.toString() != expected_str) {
         found_errors++;
-        std::cerr << "FAILED permission (" << test_name << ") toString, expected '" << expected_str << "', but got '" << perm.toString() << "'" << std::endl;
+        std::cerr << "FAILED permission (" << test_name << ") toString, expected '" << expected_str << "', but got '"
+                  << perm.toString() << "'" << std::endl;
       }
       if (perm.toUInt16() != expected_int16) {
         found_errors++;
@@ -186,11 +180,7 @@ int main() {
   }
   fp1.setOtherWriteFlag(false);
 
-  WsjcppFilePermissions fp2(
-    true, true, true,
-    true, true, true,
-    true, true, true
-  );
+  WsjcppFilePermissions fp2(true, true, true, true, true, true, true, true, true);
   {
     LTest test("fp2", "-rwxrwxrwx", 0x0777);
     test.check(fp2, found_errors);
@@ -231,7 +221,8 @@ int main() {
 
     if (WsjcppCore::getFilePermissions(filepath, fp5, error)) {
       found_errors++;
-      std::cerr << "FAILED must be non set permission 0x0604 to file " << filepath << " (ERROR: " << error << ")" << std::endl;
+      std::cerr << "FAILED must be non set permission 0x0604 to file " << filepath << " (ERROR: " << error << ")"
+                << std::endl;
     }
     LTest test("fp5", "----------", 0x0);
     test.check(fp5, found_errors);

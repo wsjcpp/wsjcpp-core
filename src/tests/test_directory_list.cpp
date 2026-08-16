@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 std::vector<std::string> prepare_expected_dirs(int &found_errors, std::vector<std::string> expected_dirs) {
@@ -48,7 +47,8 @@ void test_dir_list(int &found_errors, const std::string &path, std::vector<std::
   int dirs_size = dirs.size();
   if (dirs_size != expected_dirs.size()) {
     found_errors++;
-    std::cerr << "Expected dirs " << std::to_string(expected_dirs.size()) << " but got " << std::to_string(dirs_size) << std::endl;
+    std::cerr << "Expected dirs " << std::to_string(expected_dirs.size()) << " but got " << std::to_string(dirs_size)
+              << std::endl;
   }
 
   for (int i = 0; i < expected_dirs.size(); ++i) {
@@ -67,28 +67,28 @@ int main() {
   std::string error;
 
   std::vector<std::string> expected_dirs = prepare_expected_dirs(found_errors, {
-    "a1",
-    "b2",
-    "c3",
-    "d4",
-  });
+                                                                                   "a1",
+                                                                                   "b2",
+                                                                                   "c3",
+                                                                                   "d4",
+                                                                               });
 
   test_dir_list(found_errors, "./data/list_of_dirs", expected_dirs);
 
   expected_dirs = prepare_expected_dirs(found_errors, {
-    "a11",
-    "b22",
-    "c33",
-    "d44",
-    "e50",
-  });
+                                                          "a11",
+                                                          "b22",
+                                                          "c33",
+                                                          "d44",
+                                                          "e50",
+                                                      });
 
   test_dir_list(found_errors, "./data/list_of_dirs", expected_dirs);
 
   expected_dirs = prepare_expected_dirs(found_errors, {
-    "dir1",
-    "dir2",
-  });
+                                                          "dir1",
+                                                          "dir2",
+                                                      });
 
   test_dir_list(found_errors, "./data/list_of_dirs/", expected_dirs);
 

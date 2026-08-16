@@ -20,13 +20,13 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
+#include <regex>
 #include <vector>
 #include <wsjcpp_core.h>
-#include <regex>
 
 int main() {
   int found_errors = 0;
@@ -116,8 +116,8 @@ int main() {
       // std::cout << sTime << std::endl;
       // std::string sRegexp = "^(Sun|Mon|Tue|Wed|Thu|Fri|Sat){1}, \\d{1,2} .* \\d{1,4} GMT$";
       std::string sRegexp = "^(Sun|Mon|Tue|Wed|Thu|Fri|Sat){1}, \\d{2} "
-        "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) "
-        "\\d{1,4} \\d{2}:\\d{2}:\\d{2} GMT$";
+                            "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) "
+                            "\\d{1,4} \\d{2}:\\d{2}:\\d{2} GMT$";
       std::regex rx(sRegexp);
       if (!std::regex_match(sTime, rx)) {
         found_errors++;
@@ -141,7 +141,6 @@ int main() {
       std::cerr << "now for time utc: " << sNow << ", regexp: " << sRegexp << std::endl;
     }
   }
-
 
   if (found_errors > 0) {
     return 1;

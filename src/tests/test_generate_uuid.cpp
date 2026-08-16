@@ -20,13 +20,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
-
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <wsjcpp_core.h>
 
 int main() {
@@ -48,7 +47,8 @@ int main() {
       if (x != y) {
         if (left_val == right_val) {
           found_errors++;
-          std::cerr << "Wrong generation random uuids: '" << left_val << "' by positions left=" << std::to_string(x) << ", right=" << std::to_string(y) << std::endl;
+          std::cerr << "Wrong generation random uuids: '" << left_val << "' by positions left=" << std::to_string(x)
+                    << ", right=" << std::to_string(y) << std::endl;
         }
       }
     }

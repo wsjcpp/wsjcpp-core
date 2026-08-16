@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/wsjcpp/wsjcpp-core
 
@@ -32,12 +32,8 @@ int main() {
   std::string error;
 
   struct LTest {
-    LTest(
-      const std::string &source,
-      const std::string &delimeter,
-      const std::vector<std::string> &expected
-    ) : source(source), delimeter(delimeter), expected(expected) {
-    };
+    LTest(const std::string &source, const std::string &delimeter, const std::vector<std::string> &expected)
+        : source(source), delimeter(delimeter), expected(expected) {};
     std::string source;
     std::string delimeter;
     std::vector<std::string> expected;
@@ -56,13 +52,15 @@ int main() {
     std::vector<std::string> tokens = wsjcpp::split(test.source, test.delimeter);
     if (tokens.size() != test.expected.size()) {
       found_errors++;
-      std::cerr << "Expected size " << test.expected.size() << ", but got " << tokens.size() << " for '" << test.source << "'" << std::endl;
+      std::cerr << "Expected size " << test.expected.size() << ", but got " << tokens.size() << " for '" << test.source
+                << "'" << std::endl;
       continue;
     }
     for (int n = 0; n < test.expected.size(); ++n) {
       if (tokens[n] != test.expected[n]) {
         found_errors++;
-        std::cerr << "Expected []" << n << "] '" << test.expected[n] << "', but got '" << tokens[n] << "' for '" << test.source << "'" << std::endl;
+        std::cerr << "Expected []" << n << "] '" << test.expected[n] << "', but got '" << tokens[n] << "' for '"
+                  << test.source << "'" << std::endl;
       }
     }
   }
